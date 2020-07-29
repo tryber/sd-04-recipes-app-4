@@ -1,0 +1,27 @@
+language: node_js
+node_js:
+  - 10
+addons:
+  apt:
+    packages:
+      # Ubuntu 16+ does not install this dependency by default, so we need to install it ourselves
+      - libgconf-2-4
+cache:
+  # Caches $HOME/.npm when npm ci is default script command
+  # Caches node_modules in all other cases
+  npm: true
+  directories:
+    # we also need to cache folder with Cypress binary
+    - ~/.cache
+
+jobs:
+  include:
+    - stage: Unit testing
+      script: npm test -- --coverage --watchAll=false
+    - stage: End to end testing
+      install:
+        - npm ci
+        - npm install wait-on
+      script:
+        - npm start & wait-on http://localhost:3000
+        - $(npm bin)/cypress run

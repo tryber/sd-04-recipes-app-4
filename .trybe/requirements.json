@@ -1,0 +1,264 @@
+{
+  "requirements": [{
+    "description": "A cobertura de testes unitários deve ser de no mínimo 90%",
+    "bonus": false
+  }, {
+    "description": "Todos os elementos devem respeitar os atributos descritos no protótipo para a tela de login",
+    "bonus": false
+  }, {
+    "description": "A pessoa deve conseguir escrever seu email no input de email",
+    "bonus": false
+  }, {
+    "description": "A pessoa deve conseguir escrever sua senha no input de senha",
+    "bonus": false
+  }, {
+    "description": "O formulário só fica válido após um email válido e uma senha de mais de 6 caracteres serem preenchidos",
+    "bonus": false
+  }, {
+    "description": "Após a submissão, 2 tokens devem ser salvos em localStorage identificados pelas chaves mealsToken e cocktailsToken",
+    "bonus": false
+  }, {
+    "description": "Após a submissão, o e-mail de pessoa usuária deve ser salvo em localStorage na chave user",
+    "bonus": false
+  }, {
+    "description": "Após a submissão e validação com sucesso do login, o usuário deve ser redirecionado para a tela principal de receitas de comidas",
+    "bonus": false
+  }, {
+    "description": "Todos os elementos devem respeitar os atributos descritos no protótipo para o header",
+    "bonus": false
+  }, {
+    "description": "Deve apresentar um ícone para a tela de perfil, um título e um ícone para a busca (caso exista no protótipo)",
+    "bonus": false
+  }, {
+    "description": "Ao clicar no botão de perfil, deve-se ir para a tela de perfil",
+    "bonus": false
+  }, {
+    "description": "Ao clicar no botão de busca, a barra de busca deve aparecer. O mesmo serve para escondê-la",
+    "bonus": false
+  }, {
+    "description": "Todos os elementos devem respeitar os atributos descritos no protótipo para a barra de busca",
+    "bonus": false
+  }, {
+    "description": "A barra de busca deve ficar logo abaixo do header e deve possuir 3 radio buttons: Ingrediente, Nome e Primeira letra. Eles devem mudar a forma como serão filtradas as receitas",
+    "bonus": false
+  }, {
+    "description": "A busca deve ocorrer na API de comidas caso a pessoa esteja na página de comidas e na de bebidas caso esteja na de bebidas",
+    "bonus": false
+  }, {
+    "description": "Caso apenas uma receita seja encontrada, a rota deve mudar para a tela de detalhes da receita com o ID da mesma na URL",
+    "bonus": false
+  }, {
+    "description": "Caso mais de uma receita seja encontrada, mostrar as receitas em cards da mesma maneira que a tela principal de receitas",
+    "bonus": false
+  }, {
+    "description": "Caso nenhuma receita seja encontrada, um alert contendo o texto \"Sinto muito, não encontramos nenhuma receita para esses filtros.\" deve ser exibido",
+    "bonus": false
+  }, {
+    "description": "Todos os elementos devem respeitar os atributos descritos no protótipo para o menu inferior disponível na tela principal de receitas",
+    "bonus": false
+  }, {
+    "description": "Deve ser fixo e apresentar 3 ícones: um para comidas, um para bebidas e outro para exploração",
+    "bonus": false
+  }, {
+    "description": "O menu inferior só deve aparecer apenas nas telas indicadas pelo protótipo",
+    "bonus": false
+  }, {
+    "description": "Ao clicar no ícone de comidas, a pessoa deve ser redirecionada para uma lista de comidas",
+    "bonus": false
+  }, {
+    "description": "Ao clicar no ícone de bebidas, a pessoa deve ser redirecionada para uma lista de cocktails",
+    "bonus": false
+  }, {
+    "description": "Ao clicar no ícone de exploração, a rota deve mudar para a tela de explorar",
+    "bonus": false
+  }, {
+    "description": "Todos os elementos devem respeitar os atributos descritos no protótipo para a tela principal de receitas",
+    "bonus": false
+  }, {
+    "description": "Devem ser carregadas as 12 primeiras receitas de comidas ou bebidas, uma em cada card",
+    "bonus": false
+  }, {
+    "description": "A tela deve possuir botões de categoria para serem utilizados como filtro",
+    "bonus": false
+  }, {
+    "description": "Ao clicar no filtro de categoria, todas as receitas devem mudar para os dados filtrados da API",
+    "bonus": false
+  }, {
+    "description": "Caso o filtro selecionado no momento seja selecionado de novo, o app deve retornar as receitas sem nenhum filtro, como se fosse um toggle",
+    "bonus": false
+  }, {
+    "description": "Apenas um filtro de categoria deve poder ser selecionado por vez",
+    "bonus": false
+  }, {
+    "description": "No filtro de categorias deve existir a opção de filtrar por todas as categorias",
+    "bonus": false
+  }, {
+    "description": "Ao clicar no card, a rota deve mudar para a tela de detalhes da receita com o ID da mesma na URL",
+    "bonus": false
+  }, {
+    "description": "Todos os elementos devem respeitar os atributos descritos no protótipo para a tela de detalhes de uma receita",
+    "bonus": false
+  }, {
+    "description": "Uma request para a API deve ser feita passando o `id` da receita que deve estar disponível nos parâmetros da URL",
+    "bonus": false
+  }, {
+    "description": "Essa tela deve conter uma imagem da receita, o título, a categoria (ou se é ou não alcoólico), uma lista de ingredientes seguidos pelas quantidades, instruções, um vídeo do youtube \"embedado\" e recomendações",
+    "bonus": false
+  }, {
+    "description": "As recomendações para receitas de comida deverão ser bebidas e vice-versa",
+    "bonus": false
+  }, {
+    "description": "Deverão ser mostrados 6 cards de recomendação, onde apenas 2 são mostrados e o scroll é horizontal, similar a um `carousel`",
+    "bonus": false
+  }, {
+    "description": "Um botão de nome \"Iniciar Receita\" deve ficar fixo na parte de baixo da tela o tempo todo",
+    "bonus": false
+  }, {
+    "description": "Caso a receita já tenha sido feita, o botão \"Iniciar Receita\" deve sumir",
+    "bonus": false
+  }, {
+    "description": "Caso a receita tenha sido iniciada mas não finalizada, o texto do botão deve ser \"Continuar Receita\"",
+    "bonus": false
+  }, {
+    "description": "Quando o botão \"Iniciar Receita\" for clicado, a rota deve mudar para a tela de receita em processo",
+    "bonus": false
+  }, {
+    "description": "Um botão de compartilhar e um de favoritar a receita devem estar disponíveis",
+    "bonus": false
+  }, {
+    "description": "Ao clicar no botão de compartilhar, o link da receita dentro do app deve ser copiado para o clipboard e uma mensagem avisando que o link foi copiado deve aparecer",
+    "bonus": false
+  }, {
+    "description": "O ícone do coração (favorito) deve vir preenchido caso a receita esteja favoritada, e \"despreenchido\" caso contrário",
+    "bonus": false
+  }, {
+    "description": "Ao clicar no botão de favoritar, o ícone do coração deve mudar de seu estado atual, caso esteja preenchido deve mudar para \"despreenchido\" e vice-versa",
+    "bonus": false
+  }, {
+    "description": "As receitas favoritas devem ser salvas em `localStorage` na chave `favoriteRecipes`",
+    "bonus": false
+  }, {
+    "description": "Essa tela deve conter uma imagem da receita, seu titulo, sua categoria (ou se a bebida é alcoólica ou não) uma lista de ingredientes com suas respectivas quantidades, e suas instruções",
+    "bonus": false
+  }, {
+    "description": "A lista de ingredientes deve conter um checkbox para cada um dos items",
+    "bonus": false
+  }, {
+    "description": "Ao clicar no checkbox de um ingrediente, o nome dele deve ser \"riscado\" da lista",
+    "bonus": false
+  }, {
+    "description": "O estado do progresso deve ser mantido caso a pessoa atualize a pagina ou volte para a mesma receita",
+    "bonus": false
+  }, {
+    "description": "A mesma lógica de favoritar e compartilhar da tela de detalhes de uma receita se aplica aqui",
+    "bonus": false
+  }, {
+    "description": "O botão de finalizar receita só pode estar habilitado quando todos os ingredientes estiverem _\"checkados\"_ (marcados)",
+    "bonus": false
+  }, {
+    "description": "Após clicar no botão \"Finalizar receita\", a rota deve mudar para a página de receitas feitas, cuja rota deve ser `/receitas-feitas`",
+    "bonus": false
+  }, {
+    "description": "Todos os elementos devem respeitar os atributos descritos no protótipo para a tela de receitas feitas",
+    "bonus": false
+  }, {
+    "description": "Caso a receita do card seja uma comida, ela deve possuir: a foto da receita, o nome, a categoria, a area, a data em que a pessoa fez a receita, as 2 primeiras tags retornadas pela API e um botão de compartilhar",
+    "bonus": false
+  }, {
+    "description": "Caso a receita do card seja uma bebida, ela deve possuir: a foto da receita, o nome, se é alcoólica, a data em que a pessoa fez a receita e um botão de compartilhar",
+    "bonus": false
+  }, {
+    "description": "O botão de compartilhar deve copiar a URL da tela de detalhes da receita para o clipboard",
+    "bonus": false
+  }, {
+    "description": "Devem existir 2 botões que filtram as receitas por comida ou bebida e um terceiro que remove todos os filtros",
+    "bonus": false
+  }, {
+    "description": "Ao clicar na foto ou no nome da receita, a rota deve mudar para a tela de detalhes daquela receita",
+    "bonus": false
+  }, {
+    "description": "Todos os elementos devem respeitar os atributos descritos no protótipo para a tela de receitas favoritas",
+    "bonus": false
+  }, {
+    "description": "Caso a receita do card seja uma comida, ela deve possuir: a foto da receita, o nome, a categoria, a area, um botão de compartilhar e um de \"desfavoritar\"",
+    "bonus": false
+  }, {
+    "description": "Caso a receita do card seja uma bebida, ela deve possuir: a foto da receita, o nome, se é alcoólica ou não, um botão de compartilhar e um de \"desfavoritar\"",
+    "bonus": false
+  }, {
+    "description": "O botão de compartilhar deve copiar a URL da tela de detalhes da receita para o clipboard",
+    "bonus": false
+  }, {
+    "description": "O botão de \"desfavoritar\" deve remover a receita da lista de receitas favoritas do localStorage e da tela",
+    "bonus": false
+  }, {
+    "description": "Devem existir 2 botões que filtram as receitas por comida ou bebida e um terceiro que remove todos os filtros",
+    "bonus": false
+  }, {
+    "description": "Ao clicar na foto ou no nome da receita, a rota deve mudar para a tela de detalhes daquela receita",
+    "bonus": false
+  }, {
+    "description": "Todos os elementos devem respeitar os atributos descritos no protótipo para a tela de explorar",
+    "bonus": false
+  }, {
+    "description": "A tela deve ter dois botões: um para explorar comidas e o outro para explorar bebidas",
+    "bonus": false
+  }, {
+    "description": "Ao clicar em um dos botões, a rota deve mudar para a página de explorar comidas ou de explorar bebidas",
+    "bonus": false
+  }, {
+    "description": "Todos os elementos devem respeitar os atributos descritos no protótipo para a tela de explorar bebidas ou comidas",
+    "bonus": false
+  }, {
+    "description": "A tela deve ter três botões: um para explorar por ingrediente, um para explorar por local de origem e um para pegar uma receita aleatória",
+    "bonus": false
+  }, {
+    "description": "Ao clicar em \"Por Ingredientes\", a rota deve mudar para tela de explorar ingredientes",
+    "bonus": false
+  }, {
+    "description": "Ao clicar em \"Por Local de Origem\", a rota deve mudar para tela de explorar por local de origem",
+    "bonus": false
+  }, {
+    "description": "Ao clicar em \"Me Surpreenda!\", a rota deve mudar para a tela de detalhes de uma receita, que deve ser escolhida de forma aleatória",
+    "bonus": false
+  }, {
+    "description": "Todos os elementos devem respeitar os atributos descritos no protótipo para a tela de explorar ingredientes",
+    "bonus": false
+  }, {
+    "description": "A tela deve ter cards para os 12 primeiros ingredientes, de forma que cada card contêm: o nome do ingrediente e uma foto",
+    "bonus": false
+  }, {
+    "description": "Ao clicar no card do ingrediente a rota deve mudar para tela principal de receitas, mas mostrando apenas as receitas que contém o ingrediente escolhido",
+    "bonus": false
+  }, {
+    "description": "Todos os elementos devem respeitar os atributos descritos no protótipo para a tela de explorar por local de origem",
+    "bonus": false
+  }, {
+    "description": "A tela segue as mesmas especificações da tela de receitas principal, a única diferença é que os filtros de categoria são substituídos por um dropdown",
+    "bonus": false
+  }, {
+    "description": "No dropdown devem estar disponíveis todas as áreas retornadas da API, incluindo a opção \"All\"",
+    "bonus": false
+  }, {
+    "description": "A rota /explorar/bebidas/area não deve estar disponível",
+    "bonus": false
+  }, {
+    "description": "Todos os elementos devem respeitar os atributos descritos no protótipo para a tela de perfil",
+    "bonus": false
+  }, {
+    "description": "O e-mail da pessoa usuária deve estar visível",
+    "bonus": false
+  }, {
+    "description": "Essa tela deve conter 3 botões: um de nome \"Receitas Feitas\", um de nome \"Receitas Favoritas\" e um de nome \"Sair\"",
+    "bonus": false
+  }, {
+    "description": "Ao clicar no botão de \"Receitas Favoritas\", a rota deve mudar para a tela de receitas favoritas",
+    "bonus": false
+  }, {
+    "description": "Ao clicar no botão de \"Receitas Feitas\", a rota deve mudar para a tela de receitas feitas",
+    "bonus": false
+  }, {
+    "description": "Ao clicar no botão de \"Sair\", o `localStorage` deve ser limpo e a rota deve mudar para a tela de login",
+    "bonus": false
+  }]
+}
