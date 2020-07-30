@@ -12,11 +12,11 @@ function App() {
         <img src={Logo} alt="imageLogo" />
         <Login />
       </div>
-    <Switch>
-      <Route exact path="/" component={Login} />
-      <Route exact path="/comidas" component={Comidas} />
-      {/* <Route exact path="/bebidas" component={Bebidas} /> */}
-      {/* <Route exact path="/comidas/:id" component={Login} />
+      <Switch>
+        <Route exact path="/" component={Login} />
+        {/* <Route exact path="/comidas" component={Comidas} /> */}
+        {/* <Route exact path="/bebidas" component={Bebidas} /> */}
+        {/* <Route exact path="/comidas/:id" component={Login} />
       <Route exact path="/bebidas/:id" component={Login} />
       <Route exact path="/comidas/:id/in-progress" component={Login} />
       <Route exact path="/bebidas/:id/in-progress" component={Login} />
@@ -29,7 +29,7 @@ function App() {
       <Route exact path="/perfil" component={Login} />
       <Route exact path="/receitas-feitas" component={Login} />
       <Route exact path="/receitas-favoritas" component={Login} /> */}
-    </Switch>
+      </Switch>
     </BrowserRouter>
   );
 }
