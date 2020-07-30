@@ -1,6 +1,6 @@
 import React from 'react';
-import './App.css';
 import { BrowserRouter } from 'react-router-dom';
+import './App.css';
 import Login from './pages/Login';
 import Logo from './images/copo.svg';
 

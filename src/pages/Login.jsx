@@ -7,18 +7,13 @@ import { saveToLocalStorage } from '../service/localStorage';
 
 const renderForms = (setEmail, setSenha, handleLogin, disable) => (
   <form>
-    <label>
-      email:
-      <input type="email" data-testid="email-input" onChange={(e) => setEmail(e.target.value)} />
-    </label>
-    <label>
-      senha:
-      <input
-        type="password"
-        data-testid="password-input"
-        onChange={(e) => setSenha(e.target.value)}
-      />
-    </label>
+    <input type="email" data-testid="email-input" placeholder="E-mail" onChange={(e) => setEmail(e.target.value)} />
+    <input
+      type="password"
+      data-testid="password-input"
+      placeholder="Senha"
+      onChange={(e) => setSenha(e.target.value)}
+    />
     <Link to="/comidas">
       <button
         type="button"
@@ -33,7 +28,7 @@ const renderForms = (setEmail, setSenha, handleLogin, disable) => (
   </form>
 );
 
-const Login = (props) => {
+const Login = ({ sendUser }) => {
   const [disable, setDissable] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setSenha] = useState('');
@@ -42,7 +37,7 @@ const Login = (props) => {
     saveToLocalStorage('mealsToken', 1);
     saveToLocalStorage('cocktailsToken', 1);
     saveToLocalStorage('user', { email });
-    props.sendUser(email, password);
+    sendUser(email, password);
   };
 
   const validateEmail = (emailAdress) => {
@@ -62,12 +57,11 @@ const Login = (props) => {
   return <div>{renderForms(setEmail, setSenha, handleLogin, disable)}</div>;
 };
 
-Login.propTypes = {
-  sendUser: PropTypes.func.isRequired,
-};
-
 const mapDispatchToProps = (dispatch) => ({
   sendUser: (user, password) => dispatch(setLogin(user, password)),
 });
 
+Login.propTypes = {
+  sendUser: PropTypes.func.isRequired,
+};
 export default connect(null, mapDispatchToProps)(Login);
