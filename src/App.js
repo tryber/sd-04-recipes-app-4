@@ -1,8 +1,12 @@
 import React from 'react';
 import './App.css';
+import Login from './pages/Login';
+import { BrowserRouter } from 'react-router-dom';
+
 
 function App() {
   return (
+    <BrowserRouter>
     <div id="meals">
       <span>TRYBE</span>
       <svg xmlns="http://www.w3.org/2000/svg" id="rocksGlass" viewBox="-8.233 -8.233 122.466 122.466" height="300px">
@@ -24,7 +28,9 @@ function App() {
           <path d=" M 89.776 14.76 C 88.039 14.687 86.398 15.71 86.301 17.098 L 86.012 21.188 C 85.915 22.576 87.266 23.745 89.1 23.818 L 89.293 23.818 C 91.031 23.818 92.479 22.795 92.575 21.408 L 92.865 17.317 C 93.058 16.002 91.707 14.833 89.776 14.76 L 89.776 14.76 Z  M 88.714 29.077 C 86.88 29.004 85.336 30.027 85.239 31.415 L 80.703 91.24 L 23.56 91.24 C 21.726 91.24 20.181 92.335 20.181 93.796 C 20.181 95.257 21.629 96.353 23.56 96.353 L 83.888 96.353 C 85.625 96.353 87.073 95.33 87.17 93.942 L 91.9 31.707 C 91.996 30.392 90.548 29.15 88.714 29.077 L 88.714 29.077 Z " fill-rule="evenodd" fill="rgb(162,162,162)" />
         </g>
       </svg>
+      <Login />
     </div>
+    </BrowserRouter>
   );
 }
 
