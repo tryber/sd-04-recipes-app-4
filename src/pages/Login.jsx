@@ -7,7 +7,12 @@ import { saveToLocalStorage } from '../service/localStorage';
 
 const renderForms = (setEmail, setSenha, handleLogin, disable) => (
   <form>
-    <input type="email" data-testid="email-input" placeholder="E-mail" onChange={(e) => setEmail(e.target.value)} />
+    <input
+      type="email"
+      data-testid="email-input"
+      placeholder="E-mail"
+      onChange={(e) => setEmail(e.target.value)}
+    />
     <input
       type="password"
       data-testid="password-input"
