@@ -10,7 +10,6 @@ function App() {
       <div id="meals">
         <span>TRYBE</span>
         <img src={Logo} alt="imageLogo" />
-        <Login />
       </div>
       <Switch>
         <Route exact path="/" component={Login} />
