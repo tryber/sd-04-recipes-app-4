@@ -9,10 +9,6 @@ import NotFound from './pages/NotFound';
 function App() {
   return (
     <BrowserRouter>
-      {/* <div id="meals">
-        <span>TRYBE</span>
-        <img src={Logo} alt="imageLogo" />
-      </div> */}
       <Switch>
         <Route exact path="/" component={Login} />
         {/* <Route exact path="/comidas" component={Comidas} /> */}
@@ -32,7 +28,6 @@ function App() {
       <Route exact path="/receitas-favoritas" component={Login} /> */}
         <Route component={NotFound} />
       </Switch>
-      <BottomMenu />
     </BrowserRouter>
   );
 }
