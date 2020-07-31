@@ -2,8 +2,6 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Login from './pages/Login';
-import BottomMenu from './components/BottomMenu';
-import Logo from './images/copo.svg';
 import NotFound from './pages/NotFound';
 
 function App() {
