@@ -2,19 +2,16 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Login from './pages/Login';
-import Logo from './images/copo.svg';
+import Main from './pages/Main';
 
 function App() {
   return (
     <BrowserRouter>
-      <div id="meals">
-        <span>TRYBE</span>
-        <img src={Logo} alt="imageLogo" />
-      </div>
       <Switch>
         <Route exact path="/" component={Login} />
-        {/* <Route exact path="/comidas" component={Comidas} /> */}
-        {/* <Route exact path="/bebidas" component={Bebidas} /> */}
+        <Route exact path="/main" component={Main} />
+        {/* <Route exact path="/comidas" component={Main} /> */}
+        {/* <Route exact path="/bebidas" component={Main} /> */}
         {/* <Route exact path="/comidas/:id" component={Login} />
       <Route exact path="/bebidas/:id" component={Login} />
       <Route exact path="/comidas/:id/in-progress" component={Login} />
