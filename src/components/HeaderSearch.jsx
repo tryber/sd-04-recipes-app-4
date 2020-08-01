@@ -1,11 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getMealsByName, getMealsByFirstLetter, getMealsByIngredient } from '../service/fetchAPI';
 import { setDataAction, setFetchingAction } from '../actions';
-
-// [e.target.name]: e.target.value,
-const alertNoFound = 'Sinto muito, não encontramos nenhuma receita para esses filtros.';
+import { getFetchFoods, getFetchDrinks } from './functionsFetchHeader';
 
 const renderRadioInput = (htmlFor, value, dataTestId, label, handleChange) => (
   <label htmlFor={htmlFor}>
@@ -20,54 +17,7 @@ const renderRadioInput = (htmlFor, value, dataTestId, label, handleChange) => (
   </label>
 );
 
-const fetchByNameValue = (nameSearch, setData, setIsFetching) => {
-  getMealsByName(nameSearch).then((Meals) => {
-    if (Meals.meals === null) {
-      return alert(alertNoFound);
-    }
-    setData(Meals.meals);
-    return setIsFetching(false);
-  });
-};
-
-const fetchByFirstLetterValue = (nameSearch, setData, setIsFetching) => {
-  getMealsByFirstLetter(nameSearch).then((Meals) => {
-    if (Meals.meals === null) {
-      return alert(alertNoFound);
-    }
-    setData(Meals.meals);
-    return setIsFetching(false);
-  });
-};
-
-const fetchByIngredientsValue = (nameSearch, setData, setIsFetching) => {
-  getMealsByIngredient(nameSearch).then((Meals) => {
-    if (Meals.meals === null) {
-      return alert(alertNoFound);
-    }
-    setData(Meals.meals);
-    return setIsFetching(false);
-  });
-};
-
-const getFetch = (nameSearch, params, setData, setIsFetching) => {
-  if (params === 'firstLetter' && nameSearch.length > 1) {
-    return alert('Sua busca deve conter somente 1 (um) caracter');
-  }
-  setIsFetching(true);
-  if (params === 'name') {
-    fetchByNameValue(nameSearch, setData, setIsFetching);
-  }
-  if (params === 'firstLetter') {
-    fetchByFirstLetterValue(nameSearch, setData, setIsFetching);
-  }
-  if (params === 'ingredients') {
-    fetchByIngredientsValue(nameSearch, setData, setIsFetching);
-  }
-  return setIsFetching(false);
-};
-
-const HeaderSearchFoods = ({ sendDataReducer, sendFetchingReducer }) => {
+const HeaderSearch = ({ title, sendDataReducer, sendFetchingReducer }) => {
   const [nameSearch, setNameSearch] = useState('');
   const [params, setParams] = useState('name');
   const [data, setData] = useState([]);
@@ -116,7 +66,12 @@ const HeaderSearchFoods = ({ sendDataReducer, sendFetchingReducer }) => {
         type="button"
         name="search"
         data-testid="exec-search-btn"
-        onClick={() => getFetch(nameSearch, params, setData, setIsFetching)}
+        onClick={() => {
+          if (title === 'comida') {
+            getFetchFoods(nameSearch, params, setData, setIsFetching);
+          }
+          getFetchDrinks(nameSearch, params, setData, setIsFetching);
+        }}
       >
         Buscar
       </button>
@@ -124,16 +79,19 @@ const HeaderSearchFoods = ({ sendDataReducer, sendFetchingReducer }) => {
   );
 };
 
-HeaderSearchFoods.propTypes = {
+HeaderSearch.propTypes = {
   sendDataReducer: PropTypes.func.isRequired,
   sendFetchingReducer: PropTypes.func.isRequired,
+  title: PropTypes.string.isRequired,
 };
 
-// const mapStateToProps = (state) => ({});
+const mapStateToProps = (state) => ({
+  title: state.appReducers.location,
+});
 
 const mapDispatchToProps = (dispatch) => ({
   sendDataReducer: (data) => dispatch(setDataAction(data)),
   sendFetchingReducer: (data) => dispatch(setFetchingAction(data)),
 });
 
-export default connect(null, mapDispatchToProps)(HeaderSearchFoods);
+export default connect(mapStateToProps, mapDispatchToProps)(HeaderSearch);

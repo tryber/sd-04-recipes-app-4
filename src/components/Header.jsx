@@ -1,12 +1,13 @@
+import PropTypes from 'prop-types';
 import React, { useState } from 'react';
-// import { connect } from 'react-redux';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import profileIcon from '../images/profileIcon.svg';
 import searchIcon from '../images/searchIcon.svg';
-import HeaderSearchFoods from './HeaderSearchFoods';
+import HeaderSearchFoods from './HeaderSearch';
 import './header.css';
 
-const Header = () => {
+const Header = ({ title }) => {
   const [displayInputShow, setdisplayInputShow] = useState(false);
 
   const showInputSearch = () => {
@@ -19,7 +20,7 @@ const Header = () => {
         <Link to="/perfil">
           <img data-testid="profile-top-btn" src={profileIcon} alt="imageLogo" />
         </Link>
-        <h1 className="header-title">Comida</h1>
+        <h1 className="header-title">{title}</h1>
         <input
           type="image"
           src={searchIcon}
@@ -33,12 +34,11 @@ const Header = () => {
   );
 };
 
-// const mapStateToProps = (state) => ({
-//   // title: state.appReducers.location,
-// });
+const mapStateToProps = (state) => ({
+  title: state.appReducers.location,
+});
 
-// const mapDispatchToProps = {};
-
-// export default connect(mapStateToProps, mapDispatchToProps)(Header);
-
-export default Header;
+Header.propTypes = {
+  title: PropTypes.string.isRequired,
+};
+export default connect(mapStateToProps)(Header);

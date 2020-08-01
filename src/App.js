@@ -3,12 +3,10 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Login from './pages/Login';
 import Logo from './images/copo.svg';
-// import Header from './components/Header';
 
 function App() {
   return (
     <BrowserRouter>
-      {/* <Header /> */}
       <div id="meals">
         <span>TRYBE</span>
         <img src={Logo} alt="imageLogo" />
