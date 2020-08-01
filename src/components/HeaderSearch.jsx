@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+// import { Redirect } from 'react-router-dom';
 import { setDataAction, setFetchingAction } from '../actions';
 import { getFetchFoods, getFetchDrinks } from './functionsFetchHeader';
 
@@ -17,6 +18,17 @@ const renderRadioInput = (htmlFor, value, dataTestId, label, handleChange) => (
   </label>
 );
 
+// const redirectDetails = (data, title) => {
+//   if (title === 'comidas') {
+//     const id = data[0].idMeal;
+//     const linkTo = `/comidas/${id}`;
+//     console.log(linkTo);
+//     return <Redirect to={`/comidas/${id}`} />;
+//   }
+//   const id = data[0].idDrink;
+//   return console.log(`/bebidas/${id}`);
+// };
+
 const HeaderSearch = ({ title, sendDataReducer, sendFetchingReducer }) => {
   const [nameSearch, setNameSearch] = useState('');
   const [params, setParams] = useState('name');
@@ -29,11 +41,13 @@ const HeaderSearch = ({ title, sendDataReducer, sendFetchingReducer }) => {
 
   useEffect(() => {
     sendDataReducer(data);
+    // if (data.length === 1) redirectDetails(data, title);
   }, [data]);
 
   useEffect(() => {
     sendFetchingReducer(isFetching);
   }, [isFetching]);
+  console.log(title);
 
   return (
     <div className="container-inputs">
@@ -67,10 +81,10 @@ const HeaderSearch = ({ title, sendDataReducer, sendFetchingReducer }) => {
         name="search"
         data-testid="exec-search-btn"
         onClick={() => {
-          if (title === 'comida') {
-            getFetchFoods(nameSearch, params, setData, setIsFetching);
+          if (title === 'comidas') {
+            return getFetchFoods(nameSearch, params, setData, setIsFetching);
           }
-          getFetchDrinks(nameSearch, params, setData, setIsFetching);
+          return getFetchDrinks(nameSearch, params, setData, setIsFetching);
         }}
       >
         Buscar
