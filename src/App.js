@@ -2,15 +2,11 @@ import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Login from './pages/Login';
-import Logo from './images/copo.svg';
+import NotFound from './pages/NotFound';
 
 function App() {
   return (
     <BrowserRouter>
-      <div id="meals">
-        <span>TRYBE</span>
-        <img src={Logo} alt="imageLogo" />
-      </div>
       <Switch>
         <Route exact path="/" component={Login} />
         {/* <Route exact path="/comidas" component={Comidas} /> */}
@@ -28,6 +24,7 @@ function App() {
       <Route exact path="/perfil" component={Login} />
       <Route exact path="/receitas-feitas" component={Login} />
       <Route exact path="/receitas-favoritas" component={Login} /> */}
+        <Route component={NotFound} />
       </Switch>
     </BrowserRouter>
   );
