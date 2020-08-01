@@ -20,37 +20,49 @@ const renderRadioInput = (htmlFor, value, dataTestId, label, handleChange) => (
   </label>
 );
 
+const fetchByNameValue = (nameSearch, setData, setIsFetching) => {
+  getMealsByName(nameSearch).then((Meals) => {
+    if (Meals.meals === null) {
+      return alert(alertNoFound);
+    }
+    setData(Meals.meals);
+    return setIsFetching(false);
+  });
+};
+
+const fetchByFirstLetterValue = (nameSearch, setData, setIsFetching) => {
+  getMealsByFirstLetter(nameSearch).then((Meals) => {
+    if (Meals.meals === null) {
+      return alert(alertNoFound);
+    }
+    setData(Meals.meals);
+    return setIsFetching(false);
+  });
+};
+
+const fetchByIngredientsValue = (nameSearch, setData, setIsFetching) => {
+  getMealsByIngredient(nameSearch).then((Meals) => {
+    if (Meals.meals === null) {
+      return alert(alertNoFound);
+    }
+    setData(Meals.meals);
+    return setIsFetching(false);
+  });
+};
+
 const getFetch = (nameSearch, params, setData, setIsFetching) => {
   if (params === 'firstLetter' && nameSearch.length > 1) {
     return alert('Sua busca deve conter somente 1 (um) caracter');
   }
   setIsFetching(true);
   if (params === 'name') {
-    getMealsByName(nameSearch).then((Meals) => {
-      if (Meals.meals === null) {
-        return alert(alertNoFound);
-      }
-      setData(Meals.meals);
-      return setIsFetching(false);
-    });
+    fetchByNameValue(nameSearch, setData, setIsFetching);
   }
   if (params === 'firstLetter') {
-    getMealsByFirstLetter(nameSearch).then((Meals) => {
-      if (Meals.meals === null) {
-        return alert(alertNoFound);
-      }
-      setData(Meals.meals);
-      return setIsFetching(false);
-    });
+    fetchByFirstLetterValue(nameSearch, setData, setIsFetching);
   }
   if (params === 'ingredients') {
-    getMealsByIngredient(nameSearch).then((Meals) => {
-      if (Meals.meals === null) {
-        return alert(alertNoFound);
-      }
-      setData(Meals.meals);
-      return setIsFetching(false);
-    });
+    fetchByIngredientsValue(nameSearch, setData, setIsFetching);
   }
   return setIsFetching(false);
 };
