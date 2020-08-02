@@ -2,16 +2,16 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import profileIcon from '../images/profileIcon.svg';
-import searchIcon from '../images/searchIcon.svg';
+import profileIcon from '../../images/profileIcon.svg';
+import searchIcon from '../../images/searchIcon.svg';
 import HeaderSearch from './HeaderSearch';
 import './header.css';
 
 const Header = ({ title }) => {
-  const [displayInputShow, setdisplayInputShow] = useState(false);
+  const [displayInputShow, setDisplayInputShow] = useState(false);
 
   const showInputSearch = () => {
-    setdisplayInputShow(!displayInputShow);
+    setDisplayInputShow(!displayInputShow);
   };
 
   return (

@@ -1,7 +1,7 @@
 import { APP_LOCATION } from '../actions/appActions';
 
 const initialState = {
-  location: 'meals',
+  location: 'comidas',
 };
 
 export default (state = initialState, { type, location }) => {
