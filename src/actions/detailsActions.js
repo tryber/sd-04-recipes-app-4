@@ -26,8 +26,6 @@ const recipeFetchErrored = (error) => ({
  *
  */
 export const fetchRecipe = (id, type) => (dispatch) => {
-  dispatch(recipeFetch());
-
   const fetcher = type === 'comidas' ? getMealById : getDrinkById;
 
   fetcher(id)
