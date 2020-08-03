@@ -57,7 +57,7 @@ const HeaderSearch = ({ title, sendDataReducer, sendFetchingReducer }) => {
         name="search"
         data-testid="exec-search-btn"
         onClick={() => {
-          if (title === 'comidas') {
+          if (title === 'Comidas') {
             return getFetchFoods(nameSearch, params, sendDataReducer, sendFetchingReducer);
           }
           return getFetchDrinks(nameSearch, params, sendDataReducer, sendFetchingReducer);

@@ -20,7 +20,7 @@ const Header = ({ title }) => {
         <Link to="/perfil">
           <img data-testid="profile-top-btn" src={profileIcon} alt="imageLogo" />
         </Link>
-        <h1 className="header-title">{title}</h1>
+        <h1 className="header-title" data-testid="page-title">{title}</h1>
         <input
           type="image"
           src={searchIcon}
