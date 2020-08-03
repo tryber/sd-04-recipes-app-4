@@ -7,6 +7,8 @@ import searchIcon from '../../images/searchIcon.svg';
 import HeaderSearch from './HeaderSearch';
 import './header.css';
 
+const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
+
 const Header = ({ title }) => {
   const [displayInputShow, setDisplayInputShow] = useState(false);
 
@@ -20,7 +22,7 @@ const Header = ({ title }) => {
         <Link to="/perfil">
           <img data-testid="profile-top-btn" src={profileIcon} alt="imageLogo" />
         </Link>
-        <h1 className="header-title" data-testid="page-title">{title}</h1>
+        <h1 className="header-title" data-testid="page-title">{capitalizeFirstLetter(title)}</h1>
         <input
           type="image"
           src={searchIcon}
