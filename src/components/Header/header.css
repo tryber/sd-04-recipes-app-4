@@ -1,0 +1,17 @@
+.containerHeader {
+  align-items: center;
+  display: flex;
+  justify-content: space-around;
+}
+
+.header-title {
+  font-family: Roboto Condensed , Arial, Helvetica, sans-serif;
+  font-size: 30px;
+  margin: 0;
+  padding: 0;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
