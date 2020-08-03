@@ -3,14 +3,13 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Login from './pages/Login';
 import NotFound from './pages/NotFound';
-import Comidas from './pages/Comidas';
 
 function App() {
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={Login} />
-        <Route exact path="/comidas" component={Comidas} />
+        {/* <Route exact path="/comidas" component={Comidas} /> */}
         {/* <Route exact path="/bebidas" component={Bebidas} /> */}
         {/* <Route exact path="/comidas/:id" component={Login} />
       <Route exact path="/bebidas/:id" component={Login} />
