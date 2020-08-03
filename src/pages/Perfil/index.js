@@ -32,7 +32,7 @@ const Perfil = ({ sendLocation }) => {
             className="button-perfil"
             onClick={() => sendLocation('Receitas Favoritas')}
           >
-            Receitas Favortitas
+            Receitas Favoritas
           </button>
         </Link>
         <Link to="/">
