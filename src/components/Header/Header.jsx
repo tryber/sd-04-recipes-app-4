@@ -6,10 +6,11 @@ import profileIcon from '../../images/profileIcon.svg';
 import searchIcon from '../../images/searchIcon.svg';
 import HeaderSearch from './HeaderSearch';
 import './header.css';
+import { setAppLocation } from '../../actions/appActions';
 
 const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
 
-const Header = ({ title }) => {
+const Header = ({ title, sendLocation }) => {
   const [displayInputShow, setDisplayInputShow] = useState(false);
 
   const showInputSearch = () => {
@@ -35,7 +36,13 @@ const Header = ({ title }) => {
     <div className="container">
       <div className="containerHeader">
         <Link to="/perfil">
-          <img data-testid="profile-top-btn" src={profileIcon} alt="imageLogo" />
+          <input
+            type="image"
+            data-testid="profile-top-btn"
+            src={profileIcon}
+            alt="imageLogo"
+            onClick={() => sendLocation('Receitas Favoritas')}
+          />
         </Link>
         <h1 className="header-title" data-testid="page-title">
           {capitalizeFirstLetter(title)}
@@ -47,11 +54,17 @@ const Header = ({ title }) => {
   );
 };
 
+const mapDispatchToProps = (dispatch) => ({
+  sendLocation: (location) => dispatch(setAppLocation(location)),
+});
+
 const mapStateToProps = (state) => ({
   title: state.appReducers.location,
 });
 
 Header.propTypes = {
   title: PropTypes.string.isRequired,
+  sendLocation: PropTypes.func.isRequired,
 };
-export default connect(mapStateToProps)(Header);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
