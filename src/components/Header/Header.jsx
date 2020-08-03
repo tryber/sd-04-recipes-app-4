@@ -16,13 +16,9 @@ const Header = ({ title }) => {
     setDisplayInputShow(!displayInputShow);
   };
 
-  return (
-    <div className="container">
-      <div className="containerHeader">
-        <Link to="/perfil">
-          <img data-testid="profile-top-btn" src={profileIcon} alt="imageLogo" />
-        </Link>
-        <h1 className="header-title" data-testid="page-title">{capitalizeFirstLetter(title)}</h1>
+  const renderSearch = () => {
+    if (title === 'comidas' || title === 'bebidas') {
+      return (
         <input
           type="image"
           src={searchIcon}
@@ -30,6 +26,21 @@ const Header = ({ title }) => {
           data-testid="search-top-btn"
           alt="imageLogo"
         />
+      );
+    }
+    return null;
+  };
+
+  return (
+    <div className="container">
+      <div className="containerHeader">
+        <Link to="/perfil">
+          <img data-testid="profile-top-btn" src={profileIcon} alt="imageLogo" />
+        </Link>
+        <h1 className="header-title" data-testid="page-title">
+          {capitalizeFirstLetter(title)}
+        </h1>
+        {renderSearch()}
       </div>
       {displayInputShow && <HeaderSearch />}
     </div>

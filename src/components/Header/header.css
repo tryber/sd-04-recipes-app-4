@@ -2,6 +2,7 @@
   align-items: center;
   display: flex;
   justify-content: space-around;
+  background: #c4c4c4
 }
 
 .header-title {
