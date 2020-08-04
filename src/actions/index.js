@@ -1,5 +1,5 @@
 export const USER_LOGIN = 'USER_LOGIN';
-export const MEALS_DATA = 'MEALS_DATA';
+export const RECIPE_DATA = 'RECIPE_DATA';
 export const FETCHING = 'FETCHING';
 
 export const setLogin = (email, password) => ({
@@ -9,7 +9,7 @@ export const setLogin = (email, password) => ({
 });
 
 export const setDataAction = (data) => ({
-  type: MEALS_DATA,
+  type: RECIPE_DATA,
   data,
 });
 

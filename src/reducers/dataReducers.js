@@ -1,4 +1,4 @@
-import { MEALS_DATA, FETCHING } from '../actions';
+import { RECIPE_DATA, FETCHING } from '../actions';
 
 const INITIAL_STATE = {
   data: [],
@@ -7,7 +7,7 @@ const INITIAL_STATE = {
 
 const dataReducers = (state = INITIAL_STATE, action) => {
   switch (action.type) {
-    case MEALS_DATA:
+    case RECIPE_DATA:
       return { ...state, data: action.data };
     case FETCHING:
       return { ...state, isFetching: action.isFetching };
