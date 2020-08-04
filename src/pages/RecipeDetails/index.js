@@ -8,6 +8,22 @@ import SocialMenu from '../../components/SocialMenu';
  * Styled components
  */
 import { Recipe, RecipeImage, RecipeHeader, RecipeTitle, RecipeVideo } from './StyledComponents';
+import { setAppLocation } from '../../actions/appActions';
+
+/**
+ * Gambiarra necessária para passar nos testes =(
+ * Checa se a location na url é igual a do state appLocation
+ * @param {string} path               Actual Url path
+ * @param {object} appLocation        appLocation State
+ * @param {function} locationChanger  appLocation state set function
+ */
+const checkAppLocation = async (path, appLocation, locationChanger) => {
+  if (!path.includes(appLocation)) {
+    return appLocation === 'comidas' ? locationChanger('bebidas') : locationChanger('comidas');
+  }
+
+  return true;
+};
 
 /**
  * Render the recipe ingredients list
@@ -50,6 +66,7 @@ export const RecipeDetails = (props) => {
     recipe,
     recommendationsFetch,
     appLocation,
+    locationChanger,
   } = props;
   const { id } = match.params; // Recipe ID
   const {
@@ -68,9 +85,13 @@ export const RecipeDetails = (props) => {
    * Fetch recipe and recommendations on mount
    */
   useEffect(() => {
+    checkAppLocation(match.path, appLocation, locationChanger);
+  }, []);
+
+  useEffect(() => {
     recipeFetch(id, appLocation);
     recommendationsFetch(appLocation);
-  }, []);
+  }, [appLocation]);
 
   /**
    * Handle recipe start action
@@ -83,15 +104,18 @@ export const RecipeDetails = (props) => {
 
   return (
     <Recipe>
-      <RecipeImage imageSrc={appLocation === 'comida' ? strMealThumb : strDrinkThumb} />
+      <RecipeImage
+        data-testid="recipe-photo"
+        imageSrc={appLocation === 'comidas' ? strMealThumb : strDrinkThumb}
+      />
       <RecipeHeader>
         <RecipeTitle data-testid="recipe-title">
-          {appLocation === 'comida' ? strMeal : strDrink}
+          {appLocation === 'comidas' ? strMeal : strDrink}
         </RecipeTitle>
         <SocialMenu />
       </RecipeHeader>
       <span data-testid="recipe-category">
-        {appLocation === 'comida' ? strCategory : strAlcoholic}
+        {appLocation === 'comidas' ? strCategory : strAlcoholic}
       </span>
       {renderIngredientsList(ingredients)}
       <h2>Instruction</h2>
@@ -114,6 +138,7 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   recipeFetch: (id, type) => dispatch(fetchRecipe(id, type)),
   recommendationsFetch: (type) => dispatch(fetchRecommendations(type)),
+  locationChanger: (location) => dispatch(setAppLocation(location)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecipeDetails);
