@@ -15,14 +15,31 @@ import { Recipe, RecipeImage, RecipeHeader, RecipeTitle, RecipeVideo } from './S
  * @param {array} ingredients Array with ingredients - from redux datailsReducer.ingredients
  */
 const renderIngredientsList = (ingredients) => (
-  <ul>
-    {ingredients.map((data, index) => (
-      <li key={data.ingredient} data-testid={`${index}-ingredient-name-and-measure`}>
-        {`${data.ingredient} - ${data.measure}`}
-      </li>
-    ))}
-  </ul>
+  <section>
+    <h2>Ingredients</h2>
+    <ul>
+      {ingredients.map((data, index) => (
+        <li key={data.ingredient} data-testid={`${index}-ingredient-name-and-measure`}>
+          {`${data.ingredient} - ${data.measure}`}
+        </li>
+      ))}
+    </ul>
+  </section>
 );
+
+const renderVideo = (strYoutube) => {
+  return (
+    <section>
+      <h2>Videos</h2>
+      <RecipeVideo
+        title="ytplayer"
+        type="text/html"
+        src={`https://www.youtube.com/embed/${strYoutube.slice(-11)}`}
+        frameBorder="0"
+      />
+    </section>
+  );
+};
 
 export const RecipeDetails = (props) => {
   const {
@@ -35,7 +52,17 @@ export const RecipeDetails = (props) => {
     appLocation,
   } = props;
   const { id } = match.params; // Recipe ID
-  const { strMealThumb, strMeal, strCategory, strInstructions, strYoutube, ingredients } = recipe;
+  const {
+    strMealThumb,
+    strDrinkThumb,
+    strMeal,
+    strDrink,
+    strCategory,
+    strAlcoholic,
+    strInstructions,
+    strYoutube,
+    ingredients,
+  } = recipe;
 
   /**
    * Fetch recipe and recommendations on mount
@@ -56,24 +83,20 @@ export const RecipeDetails = (props) => {
 
   return (
     <Recipe>
-      <RecipeImage imageSrc={strMealThumb} />
+      <RecipeImage imageSrc={appLocation === 'comida' ? strMealThumb : strDrinkThumb} />
       <RecipeHeader>
-        <RecipeTitle data-testid="recipe-title">{strMeal}</RecipeTitle>
+        <RecipeTitle data-testid="recipe-title">
+          {appLocation === 'comida' ? strMeal : strDrink}
+        </RecipeTitle>
         <SocialMenu />
       </RecipeHeader>
-      <span data-testid="recipe-category">{strCategory}</span>
-      <h2>Ingredients</h2>
+      <span data-testid="recipe-category">
+        {appLocation === 'comida' ? strCategory : strAlcoholic}
+      </span>
       {renderIngredientsList(ingredients)}
       <h2>Instruction</h2>
       <p data-testid="instructions">{strInstructions}</p>
-      <h2>Videos</h2>
-      <RecipeVideo
-        title="ytplayer"
-        type="text/html"
-        src={`https://www.youtube.com/embed/${strYoutube.slice(-11)}`}
-        frameBorder="0"
-      />
-      <h2>Recomendadas</h2>
+      {strYoutube && renderVideo(strYoutube)}
       <RecipesRecommendations />
       <button type="button" data-testid="start-recipe-btn" onClick={() => startRecipe()}>
         Iniciar Receita

@@ -6,8 +6,9 @@ const RecipesRecommendations = ({ recommendations, recommendationsFetching }) =>
 
   return (
     <div>
+      <h2>Recomendadas</h2>
       {recommendations.map((recipe) => (
-        <span>{recipe.strTitle}</span>
+        <span>{recipe.strMeal}</span>
       ))}
     </div>
   );
