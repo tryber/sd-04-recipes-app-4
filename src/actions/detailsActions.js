@@ -3,9 +3,9 @@ import { getMealById, getDrinkById, getMealsByName, getDrinksByName } from '../s
 export const RECIPE_FETCH = 'RECIPE_FETCH';
 export const RECIPE_FETCH_SUCCESS = 'RECIPE_FETCH_SUCESS';
 export const RECIPE_FETCH_ERROR = 'RECIPE_FETCH_ERROR';
-export const RECOMMENDATIONS_FETCH = 'RECIPE_FETCH';
-export const RECOMMENDATIONS_FETCH_SUCCESS = 'RECIPE_FETCH_SUCESS';
-export const RECOMMENDATIONS_FETCH_ERROR = 'RECIPE_FETCH_ERROR';
+export const RECOMMENDATIONS_FETCH = 'RECOMMENDATIONS_FETCH';
+export const RECOMMENDATIONS_FETCH_SUCCESS = 'RECOMMENDATIONS_FETCH_SUCCESS';
+export const RECOMMENDATIONS_FETCH_ERROR = 'RECOMMENDATIONS_FETCH_ERROR';
 
 /**
  * Recipe fetch actions
@@ -43,8 +43,8 @@ export const fetchRecipe = (id, type) => (dispatch) => {
         dispatch(recipeFetchSuccess(recipe.drinks));
       }
     })
-    .then(() => dispatch(recipeFetch()));
-  // .catch((error) => dispatch(recipeFetchErrored(error)));
+    .then(() => dispatch(recipeFetch()))
+    .catch((error) => dispatch(recipeFetchErrored(error)));
 };
 
 /**
@@ -77,9 +77,9 @@ export const fetchRecommendations = (type) => (dispatch) => {
   fetcher('')
     .then((recipes) => {
       if (type === 'comidas') {
-        dispatch(recommendationsFetchSuccess(recipes.drinks));
+        dispatch(recommendationsFetchSuccess(recipes.drinks.slice(0, 6)));
       } else {
-        dispatch(recommendationsFetchSuccess(recipes.meals));
+        dispatch(recommendationsFetchSuccess(recipes.meals.slice(0, 6)));
       }
     })
     .then(() => dispatch(recommendationsFetch()))

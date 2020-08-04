@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { fetchRecipe, fetchRecommendations } from '../../actions/detailsActions';
+import RecipesRecommendations from '../../components/RecipesRecommendations';
 import SocialMenu from '../../components/SocialMenu';
 
 /**
@@ -37,7 +38,7 @@ export const RecipeDetails = (props) => {
   const { strMealThumb, strMeal, strCategory, strInstructions, strYoutube, ingredients } = recipe;
 
   /**
-   * Fetch recipe and recommendations on mout
+   * Fetch recipe and recommendations on mount
    */
   useEffect(() => {
     recipeFetch(id, appLocation);
@@ -73,6 +74,7 @@ export const RecipeDetails = (props) => {
         frameBorder="0"
       />
       <h2>Recomendadas</h2>
+      <RecipesRecommendations />
       <button type="button" data-testid="start-recipe-btn" onClick={() => startRecipe()}>
         Iniciar Receita
       </button>

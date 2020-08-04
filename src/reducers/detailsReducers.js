@@ -55,8 +55,7 @@ export const recommendationsReducer = (state = recommendationsInitialState, acti
       return { ...state, isFetching: !state.isFetching };
 
     case RECOMMENDATIONS_FETCH_SUCCESS:
-      console.log(action);
-      return { ...state, recommendations: { ...action.recommendations } };
+      return { ...state, recommendations: [...action.recommendations] };
 
     case RECOMMENDATIONS_FETCH_ERROR:
       return { ...state, hasErrored: true };
