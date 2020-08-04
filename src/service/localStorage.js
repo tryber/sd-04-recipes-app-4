@@ -9,11 +9,15 @@ export const saveToLocalStorage = (key, entry) => {
 };
 
 export const loadFromLocalStorage = (key) => {
-  if (key === 'ranking') return JSON.parse(localStorage.getItem(key));
+  if (key === 'user') return JSON.parse(localStorage.getItem(key));
 
   return localStorage.getItem(key);
 };
 
 export const deleteFromLocalStorage = (key) => {
   localStorage.removeItem(key);
+};
+
+export const clearLocalStorage = () => {
+  localStorage.clear();
 };
