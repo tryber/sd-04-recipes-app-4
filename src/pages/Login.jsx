@@ -20,7 +20,7 @@ const renderForms = (setEmail, setSenha, handleLogin, disable) => (
       placeholder="Senha"
       onChange={(e) => setSenha(e.target.value)}
     />
-    <Link to="/main">
+    <Link to="/comidas">
       <button
         type="button"
         data-testid="login-submit-btn"
