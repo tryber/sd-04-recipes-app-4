@@ -6,23 +6,20 @@ import profileIcon from '../../images/profileIcon.svg';
 import searchIcon from '../../images/searchIcon.svg';
 import HeaderSearch from './HeaderSearch';
 import './header.css';
+import { setAppLocation } from '../../actions/appActions';
 
 const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
 
-const Header = ({ title }) => {
+const Header = ({ title, sendLocation }) => {
   const [displayInputShow, setDisplayInputShow] = useState(false);
 
   const showInputSearch = () => {
     setDisplayInputShow(!displayInputShow);
   };
 
-  return (
-    <div className="container">
-      <div className="containerHeader">
-        <Link to="/perfil">
-          <img data-testid="profile-top-btn" src={profileIcon} alt="imageLogo" />
-        </Link>
-        <h1 className="header-title" data-testid="page-title">{capitalizeFirstLetter(title)}</h1>
+  const renderSearch = () => {
+    if (title === 'comidas' || title === 'bebidas') {
+      return (
         <input
           type="image"
           src={searchIcon}
@@ -30,11 +27,36 @@ const Header = ({ title }) => {
           data-testid="search-top-btn"
           alt="imageLogo"
         />
+      );
+    }
+    return null;
+  };
+
+  return (
+    <div className="container">
+      <div className="containerHeader">
+        <Link to="/perfil">
+          <input
+            type="image"
+            data-testid="profile-top-btn"
+            src={profileIcon}
+            alt="imageLogo"
+            onClick={() => sendLocation('Receitas Favoritas')}
+          />
+        </Link>
+        <h1 className="header-title" data-testid="page-title">
+          {capitalizeFirstLetter(title)}
+        </h1>
+        {renderSearch()}
       </div>
       {displayInputShow && <HeaderSearch />}
     </div>
   );
 };
+
+const mapDispatchToProps = (dispatch) => ({
+  sendLocation: (location) => dispatch(setAppLocation(location)),
+});
 
 const mapStateToProps = (state) => ({
   title: state.appReducers.location,
@@ -42,5 +64,7 @@ const mapStateToProps = (state) => ({
 
 Header.propTypes = {
   title: PropTypes.string.isRequired,
+  sendLocation: PropTypes.func.isRequired,
 };
-export default connect(mapStateToProps)(Header);
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);

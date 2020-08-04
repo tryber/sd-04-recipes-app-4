@@ -5,6 +5,7 @@ import Login from './pages/Login';
 import Meals from './pages/Meals';
 import Drinks from './pages/Drinks';
 import NotFound from './pages/NotFound';
+import Perfil from './pages/Perfil';
 
 function App() {
   return (
@@ -22,9 +23,9 @@ function App() {
       <Route exact path="/explorar/bebidas" component={Login} />
       <Route exact path="/explorar/comidas/ingredientes" component={Login} />
       <Route exact path="/explorar/bebidas/ingredientes" component={Login} />
-      <Route exact path="/explorar/comidas/area" component={Login} />
-      <Route exact path="/perfil" component={Login} />
-      <Route exact path="/receitas-feitas" component={Login} />
+      <Route exact path="/explorar/comidas/area" component={Login} /> */}
+        <Route exact path="/perfil" component={Perfil} />
+        {/* <Route exact path="/receitas-feitas" component={Login} />
       <Route exact path="/receitas-favoritas" component={Login} /> */}
         <Route component={NotFound} />
       </Switch>
