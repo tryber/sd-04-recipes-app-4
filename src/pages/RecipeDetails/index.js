@@ -7,7 +7,7 @@ import SocialMenu from '../../components/SocialMenu';
 /**
  * Styled components
  */
-import { Recipe, RecipeImage, RecipeHeader, RecipeTitle, RecipeVideo } from './StyledComponents';
+import { Recipe, RecipeImage, RecipeHeader, RecipeTitle, RecipeVideo, RecipeStartButtom } from './StyledComponents';
 import { setAppLocation } from '../../actions/appActions';
 
 /**
@@ -21,6 +21,7 @@ const checkAppLocation = (path, appLocation, locationChanger) => {
   if (path.includes(appLocation)) return true;
 
   appLocation === 'comidas' ? locationChanger('bebidas') : locationChanger('comidas');
+  return false;
 };
 
 /**
@@ -103,7 +104,7 @@ export const RecipeDetails = (props) => {
     <Recipe>
       <RecipeImage
         data-testid="recipe-photo"
-        imageSrc={appLocation === 'comidas' ? strMealThumb : strDrinkThumb}
+        src={appLocation === 'comidas' ? strMealThumb : strDrinkThumb}
       />
       <RecipeHeader>
         <RecipeTitle data-testid="recipe-title">
@@ -119,9 +120,9 @@ export const RecipeDetails = (props) => {
       <p data-testid="instructions">{strInstructions}</p>
       {strYoutube && renderVideo(strYoutube)}
       <RecipesRecommendations />
-      <button type="button" data-testid="start-recipe-btn" onClick={() => startRecipe()}>
+      <RecipeStartButtom type="button" data-testid="start-recipe-btn" onClick={() => startRecipe()}>
         Iniciar Receita
-      </button>
+      </RecipeStartButtom>
     </Recipe>
   );
 };

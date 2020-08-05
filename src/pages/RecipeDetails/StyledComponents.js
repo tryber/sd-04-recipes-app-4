@@ -8,14 +8,14 @@ export const Recipe = styled.div`
   flex-flow: column;
 `;
 
-export const RecipeImage = styled.div`
+export const RecipeImage = styled.img`
   height: 30vh;
-  background-image: url(${(props) => props.imageSrc});
+  ${'' /* background-image: url(${(props) => props.imageSrc}); */}
   border-radius: 10px;
   width: 100%;
-  background-position-x: center;
+  ${'' /* background-position-x: center;
   background-size: cover;
-  background-repeat: no-repeat;
+  background-repeat: no-repeat; */}
   box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12),
     0 2px 4px -1px rgba(0, 0, 0, 0.3);
 `;
@@ -38,4 +38,9 @@ export const RecipeVideo = styled.iframe`
   border-radius: 10px;
   box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12),
     0 2px 4px -1px rgba(0, 0, 0, 0.3);
+`;
+
+export const RecipeStartButtom = styled.button`
+  position: fixed;
+  bottom: 0;
 `;
