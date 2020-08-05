@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import profileIcon from '../../images/profileIcon.svg';
@@ -10,9 +10,17 @@ import { setAppLocation } from '../../actions/appActions';
 
 const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
 
+const checkAppLocation = (path, appLocation, locationChanger) => {
+  if (path.includes(appLocation)) return true;
+  
+  appLocation === 'comidas' ? locationChanger('bebidas') : locationChanger('comidas');
+};
+
 const Header = ({ title, sendLocation }) => {
   const [displayInputShow, setDisplayInputShow] = useState(false);
-
+  useEffect(() => {
+    checkAppLocation(window.location.href, title, sendLocation);
+  }, [title, sendLocation]);
   const showInputSearch = () => {
     setDisplayInputShow(!displayInputShow);
   };
