@@ -41,7 +41,7 @@ const Drinks = ({ getData, data, getCategories, categories }) => {
   const drinksCategories = categories.slice(0, 5).map(({ strCategory: categoryName }) => (
     <button type="button" key={categoryName} data-testid={`${categoryName}-category-filter`} onClick={() => handleCategory(categoryName, getData, setSelectedCategory, selectedCategory)}>{categoryName}</button>
   ));
-  return (data.length === 1) ? <Redirect to={`/bebidas/${data[0].idDrinks}`} /> :
+  return (data.length === 1) ? <Redirect to={`/bebidas/${data[0].idDrink}`} /> :
     (
       <div>
         <Header />
