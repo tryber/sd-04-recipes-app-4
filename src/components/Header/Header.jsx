@@ -12,14 +12,13 @@ const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + strin
 
 const checkAppLocation = (path, appLocation, locationChanger) => {
   if (path.includes(appLocation)) return true;
-  
-  appLocation === 'comidas' ? locationChanger('bebidas') : locationChanger('comidas');
+  locationChanger(path);
 };
 
 const Header = ({ title, sendLocation }) => {
   const [displayInputShow, setDisplayInputShow] = useState(false);
   useEffect(() => {
-    checkAppLocation(window.location.href, title, sendLocation);
+    checkAppLocation(window.location.pathname.replace('/', ''), title, sendLocation);
   }, [title, sendLocation]);
   const showInputSearch = () => {
     setDisplayInputShow(!displayInputShow);
@@ -49,7 +48,7 @@ const Header = ({ title, sendLocation }) => {
             data-testid="profile-top-btn"
             src={profileIcon}
             alt="imageLogo"
-            onClick={() => sendLocation('Receitas Favoritas')}
+            onClick={() => sendLocation('perfil')}
           />
         </Link>
         <h1 className="header-title" data-testid="page-title">
