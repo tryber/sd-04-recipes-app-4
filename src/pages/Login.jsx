@@ -60,12 +60,14 @@ const Login = ({ sendUser }) => {
     }
   }, [email, password]);
 
-  return <div>
-    <div id="meals">
-      <span>TRYBE</span>
-      <img src={Logo} alt="imageLogo" />
-    </div>
-    {renderForms(setEmail, setSenha, handleLogin, disable)}</div>;
+  return (
+    <div>
+      <div id="meals">
+        <span>TRYBE</span>
+        <img src={Logo} alt="imageLogo" />
+      </div>
+      {renderForms(setEmail, setSenha, handleLogin, disable)}</div>
+  );
 };
 
 const mapDispatchToProps = (dispatch) => ({

@@ -18,6 +18,7 @@ const handleCategory = (categoryName, getData, setSelectedCategory, selectedCate
     setSelectedCategory(categoryName);
     return getMealsByName('').then((Meals) => getData(Meals.meals));
   }
+  return false;
 };
 
 const Meals = ({ getData, data, getCategories, categories }) => {
@@ -37,7 +38,7 @@ const Meals = ({ getData, data, getCategories, categories }) => {
       </div>
     </Link>
   ));
-  const mealsCategories = categories.slice(0, 5).map(({ strCategory: categoryName }, index) => (
+  const mealsCategories = categories.slice(0, 5).map(({ strCategory: categoryName }) => (
     <button type="button" key={categoryName} data-testid={`${categoryName}-category-filter`} onClick={() => handleCategory(categoryName, getData, setSelectedCategory, selectedCategory)}>{categoryName}</button>
   ));
   return (data.length === 1 && selectedCategory !== 'Goat') ? <Redirect to={`/comidas/${data[0].idMeal}`} /> :
@@ -52,11 +53,13 @@ const Meals = ({ getData, data, getCategories, categories }) => {
         <BottomMenu />
       </div>
     );
-}
+};
 
 Meals.propTypes = {
   getData: PropTypes.func.isRequired,
   getCategories: PropTypes.func.isRequired,
+  data: PropTypes.arrayOf(PropTypes.string).isRequired,
+  categories: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 const mapStateToProps = (state) => ({

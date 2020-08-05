@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
-import PropTypes from 'prop-types';
+import PropTypes, { string } from 'prop-types';
 
 import Header from '../components/Header/Header.jsx';
 import BottomMenu from '../components/BottomMenu';
@@ -18,6 +18,7 @@ const handleCategory = (categoryName, getData, setSelectedCategory, selectedCate
     setSelectedCategory(categoryName);
     return getDrinksByName('').then((Drinks) => getData(Drinks.drinks));
   }
+  return false;
 };
 
 const Drinks = ({ getData, data, getCategories, categories }) => {
@@ -37,7 +38,7 @@ const Drinks = ({ getData, data, getCategories, categories }) => {
       </div>
     </Link>
   ));
-  const drinksCategories = categories.slice(0, 5).map(({ strCategory: categoryName }, index) => (
+  const drinksCategories = categories.slice(0, 5).map(({ strCategory: categoryName }) => (
     <button type="button" key={categoryName} data-testid={`${categoryName}-category-filter`} onClick={() => handleCategory(categoryName, getData, setSelectedCategory, selectedCategory)}>{categoryName}</button>
   ));
   return (data.length === 1) ? <Redirect to={`/bebidas/${data[0].idDrinks}`} /> :
@@ -52,17 +53,18 @@ const Drinks = ({ getData, data, getCategories, categories }) => {
         <BottomMenu />
       </div>
     );
-}
+};
 
 Drinks.propTypes = {
   getData: PropTypes.func.isRequired,
   getCategories: PropTypes.func.isRequired,
+  data: PropTypes.arrayOf(PropTypes.string).isRequired,
+  categories: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
 
 const mapStateToProps = (state) => ({
   data: state.dataReducers.data,
   categories: state.dataReducers.categories,
-
 });
 
 const mapDispatchToProps = (dispatch) => ({
