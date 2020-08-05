@@ -12,8 +12,8 @@ import { Social, SocialIcon } from './StyledComponents';
 const SocialMenu = () => {
   return (
     <Social>
-      <SocialIcon src={ShareIcon} />
-      <SocialIcon src={NotFavoriteIcon} />
+      <SocialIcon data-testid="share-btn" src={ShareIcon} />
+      <SocialIcon data-testid="favorite-btn" src={NotFavoriteIcon} />
     </Social>
   );
 };

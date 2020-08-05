@@ -4,7 +4,7 @@ const initialState = {
   location: 'comidas',
 };
 
-export default (state = initialState, { type, location }) => {
+const appReducers = (state = initialState, { type, location }) => {
   switch (type) {
     case APP_LOCATION:
       return { ...state, location };
@@ -13,3 +13,5 @@ export default (state = initialState, { type, location }) => {
       return state;
   }
 };
+
+export default appReducers;

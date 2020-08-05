@@ -17,12 +17,10 @@ import { setAppLocation } from '../../actions/appActions';
  * @param {object} appLocation        appLocation State
  * @param {function} locationChanger  appLocation state set function
  */
-const checkAppLocation = async (path, appLocation, locationChanger) => {
-  if (!path.includes(appLocation)) {
-    return appLocation === 'comidas' ? locationChanger('bebidas') : locationChanger('comidas');
-  }
+const checkAppLocation = (path, appLocation, locationChanger) => {
+  if (path.includes(appLocation)) return true;
 
-  return true;
+  appLocation === 'comidas' ? locationChanger('bebidas') : locationChanger('comidas');
 };
 
 /**
@@ -48,6 +46,7 @@ const renderVideo = (strYoutube) => {
     <section>
       <h2>Videos</h2>
       <RecipeVideo
+        data-testid="video"
         title="ytplayer"
         type="text/html"
         src={`https://www.youtube.com/embed/${strYoutube.slice(-11)}`}
@@ -82,15 +81,13 @@ export const RecipeDetails = (props) => {
   } = recipe;
 
   /**
-   * Fetch recipe and recommendations on mount
+   * Fetch recipe and recommendations on appLocation change
    */
   useEffect(() => {
-    checkAppLocation(match.path, appLocation, locationChanger);
-  }, []);
-
-  useEffect(() => {
-    recipeFetch(id, appLocation);
-    recommendationsFetch(appLocation);
+    if (checkAppLocation(match.path, appLocation, locationChanger)) {
+      recipeFetch(id, appLocation);
+      recommendationsFetch(appLocation);
+    }
   }, [appLocation]);
 
   /**
