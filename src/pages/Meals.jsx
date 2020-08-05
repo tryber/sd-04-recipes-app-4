@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
@@ -6,7 +6,6 @@ import Header from '../components/Header/Header.jsx';
 import BottomMenu from '../components/BottomMenu';
 import { getMealsByName, getMealsCategories, getMealsByCategory } from '../service/fetchAPI';
 import { setDataAction, getCategoryAction } from '../actions';
-import { useState } from 'react';
 
 const handleCategory = (categoryName, getData, setSelectedCategory, selectedCategory) => {
   // console.log(categoryName, getData);
