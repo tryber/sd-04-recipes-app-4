@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Redirect, Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import Header from '../components/Header/Header.jsx';
 import BottomMenu from '../components/BottomMenu';
@@ -52,6 +53,11 @@ const Meals = ({ getData, data, getCategories, categories }) => {
       </div>
     );
 }
+
+Meals.propTypes = {
+  getData: PropTypes.func.isRequired,
+  getCategories: PropTypes.func.isRequired,
+};
 
 const mapStateToProps = (state) => ({
   data: state.dataReducers.data,
