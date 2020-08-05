@@ -12,7 +12,7 @@ const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + strin
 
 const checkAppLocation = (path, appLocation, locationChanger) => {
   if (path.includes(appLocation)) return true;
-  locationChanger(path);
+  return locationChanger(path);
 };
 
 const Header = ({ title, sendLocation }) => {
