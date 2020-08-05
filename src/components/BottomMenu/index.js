@@ -20,17 +20,6 @@ import MealIcon from '../../images/mealIcon.svg';
  */
 import { Menu, MenuItem, MenuIcon } from './StyledComponents';
 
-/**
- *
- * Bottom Menus
- *
- */
-const menus = [
-  { location: 'comidas', icon: MealIcon },
-  { location: 'bebidas', icon: DrinkIcon },
-  { location: 'explorar', icon: ExploreIcon },
-];
-
 const BottomMenu = ({ changeAppLocation, appLocation }) => {
   const history = useHistory();
 
@@ -41,15 +30,30 @@ const BottomMenu = ({ changeAppLocation, appLocation }) => {
 
   return (
     <Menu data-testid="footer">
-      {menus.map((menu) => (
-        <MenuItem
-          isSelected={appLocation === menu.location && true}
-          onClick={() => handleLocationChange(menu.location)}
-        >
-          <MenuIcon src={menu.icon} />
-          <span>{menu.location}</span>
-        </MenuItem>
-      ))}
+      <MenuItem
+        data-testid="drinks-bottom-btn"
+        isSelected={appLocation === 'bebidas' && true}
+        onClick={() => handleLocationChange('bebidas')}
+      >
+        <MenuIcon src={DrinkIcon} />
+        <span>Bebidas</span>
+      </MenuItem>
+      <MenuItem
+        data-testid="explore-bottom-btn"
+        isSelected={appLocation === 'explorar' && true}
+        onClick={() => handleLocationChange('explorar')}
+      >
+        <MenuIcon src={ExploreIcon} />
+        <span>Explorar</span>
+      </MenuItem>
+      <MenuItem
+        data-testid="food-bottom-btn"
+        isSelected={appLocation === 'comidas' && true}
+        onClick={() => handleLocationChange('comidas')}
+      >
+        <MenuIcon src={MealIcon} />
+        <span>Comidas</span>
+      </MenuItem>
     </Menu>
   );
 };
