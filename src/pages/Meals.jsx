@@ -24,10 +24,10 @@ const handleCategory = (categoryName, getData, setSelectedCategory, selectedCate
 const Meals = ({ getData, data, getCategories, categories }) => {
   const [selectedCategory, setSelectedCategory] = useState('All');
   useEffect(() => {
-    getMealsByName('').then((Meals) => getData(Meals.meals));
+    getMealsByName('').then((recipes) => getData(recipes.meals));
   }, [getData]);
   useEffect(() => {
-    getMealsCategories().then((categories) => getCategories(categories.meals));
+    getMealsCategories().then((recipesCategories) => getCategories(recipesCategories.meals));
   }, [getCategories]);
 
   const mealsRecipe = data.slice(0, 12).map((recipe, index) => (

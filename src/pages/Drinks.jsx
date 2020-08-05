@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
-import PropTypes, { string } from 'prop-types';
+import PropTypes from 'prop-types';
 
 import Header from '../components/Header/Header.jsx';
 import BottomMenu from '../components/BottomMenu';
@@ -24,10 +24,10 @@ const handleCategory = (categoryName, getData, setSelectedCategory, selectedCate
 const Drinks = ({ getData, data, getCategories, categories }) => {
   const [selectedCategory, setSelectedCategory] = useState('All');
   useEffect(() => {
-    getDrinksByName('').then((Drinks) => getData(Drinks.drinks));
+    getDrinksByName('').then((recipes) => getData(recipes.drinks));
   }, [getData]);
   useEffect(() => {
-    getDrinksCategories().then((categories) => getCategories(categories.drinks));
+    getDrinksCategories().then((recipesCategories) => getCategories(recipesCategories.drinks));
   }, [getCategories]);
 
   const drinksRecipe = data.slice(0, 12).map((recipe, index) => (
