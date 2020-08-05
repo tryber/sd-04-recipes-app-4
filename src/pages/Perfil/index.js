@@ -8,13 +8,19 @@ import Header from '../../components/Header/Header';
 import { setAppLocation } from '../../actions/appActions';
 
 const Perfil = ({ sendLocation }) => {
-  const { email } = loadFromLocalStorage('user');
+  const emailverifyLocalStorage = () => {
+    if (localStorage.getItem('user')) {
+      const { email } = loadFromLocalStorage('user');
+      return email;
+    }
+    return '';
+  };
 
   return (
     <div>
       <Header />
       <div className="perfil-container">
-        <div data-testid="profile-email">{email}</div>
+        <div data-testid="profile-email">{emailverifyLocalStorage()}</div>
         <Link to="/receitas-feitas">
           <button
             type="button"

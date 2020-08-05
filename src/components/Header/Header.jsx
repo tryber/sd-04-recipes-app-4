@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import profileIcon from '../../images/profileIcon.svg';
@@ -10,9 +10,16 @@ import { setAppLocation } from '../../actions/appActions';
 
 const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
 
+const checkAppLocation = (path, appLocation, locationChanger) => {
+  if (path.includes(appLocation)) return true;
+  return locationChanger(path);
+};
+
 const Header = ({ title, sendLocation }) => {
   const [displayInputShow, setDisplayInputShow] = useState(false);
-
+  useEffect(() => {
+    checkAppLocation(window.location.pathname.replace('/', ''), title, sendLocation);
+  }, [title, sendLocation]);
   const showInputSearch = () => {
     setDisplayInputShow(!displayInputShow);
   };
@@ -41,7 +48,7 @@ const Header = ({ title, sendLocation }) => {
             data-testid="profile-top-btn"
             src={profileIcon}
             alt="imageLogo"
-            onClick={() => sendLocation('Receitas Favoritas')}
+            onClick={() => sendLocation('perfil')}
           />
         </Link>
         <h1 className="header-title" data-testid="page-title">
