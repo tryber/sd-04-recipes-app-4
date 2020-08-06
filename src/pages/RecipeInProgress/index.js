@@ -73,10 +73,22 @@ const renderIngredientsCheckList = (ingredients,
   );
 };
 
+const renderFinshRecipeBtn = (recipe, arrayOfChecked, finishRecipe) => {
+  const { ingredients } = recipe;
+  return (
+    <button
+      type="button"
+      data-testid="finish-recipe-btn"
+      disabled={arrayOfChecked.length !== ingredients.length}
+      onClick={() => finishRecipe()}
+    >
+      Finalizar Receita
+    </button>
+  );
+};
 export const RecipeDetailsInProgress = (props) => {
   const {
-    match, history, recipe,
-    recipeFetching, recipeFetch, recommendationsFetch,
+    match, history, recipe, recipeFetching, recipeFetch, recommendationsFetch,
     appLocation, locationChanger,
   } = props;
   const { id } = match.params; // Recipe ID
@@ -103,7 +115,7 @@ export const RecipeDetailsInProgress = (props) => {
    * Handle recipe start action
    */
   const finishRecipe = () => {
-    history.push(`/comidas/${id}/receitas-feitas`);
+    history.push('/receitas-feitas');
   };
 
   if (recipeFetching) return <p>loading...</p>;
@@ -126,14 +138,7 @@ export const RecipeDetailsInProgress = (props) => {
       {renderIngredientsCheckList(ingredients, arrayOfChecked, setArrayOfChecked, id, appLocation)}
       <h2>Instruction</h2>
       <p data-testid="instructions">{strInstructions}</p>
-      <button
-        type="button"
-        data-testid="finish-recipe-btn"
-        disabled={arrayOfChecked.length !== ingredients.length}
-        onClick={() => finishRecipe()}
-      >
-        Finalizar Receita
-      </button>
+      {renderFinshRecipeBtn(recipe, arrayOfChecked, finishRecipe)}
     </Recipe>
   );
 };
