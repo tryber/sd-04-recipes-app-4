@@ -21,7 +21,7 @@ const handleCategory = (categoryName, getData, setSelectedCategory, selectedCate
 };
 
 const Drinks = ({ getData, data, getCategories, categories }) => {
-  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [selectedCategory, setSelectedCategory] = useState('');
   useEffect(() => {
     getDrinksByName('').then((recipes) => getData(recipes.drinks));
   }, [getData]);
@@ -38,20 +38,34 @@ const Drinks = ({ getData, data, getCategories, categories }) => {
     </Link>
   ));
   const drinksCategories = categories.slice(0, 5).map(({ strCategory: categoryName }) => (
-    <button type="button" key={categoryName} data-testid={`${categoryName}-category-filter`} onClick={() => handleCategory(categoryName, getData, setSelectedCategory, selectedCategory)}>{categoryName}</button>
+    <button
+      type="button"
+      key={categoryName}
+      data-testid={`${categoryName}-category-filter`}
+      onClick={() => handleCategory(categoryName, getData, setSelectedCategory, selectedCategory)}
+    >
+      {categoryName}
+    </button>
   ));
-  return (data.length === 1) ? <Redirect to={`/bebidas/${data[0].idDrink}`} /> :
-    (
+  return data.length === 1 ? (
+    <Redirect to={`/bebidas/${data[0].idDrink}`} />
+  ) : (
+    <div>
+      <Header />
       <div>
-        <Header />
-        <div>
-          <button type="button" data-testid="All-category-filter" onClick={() => handleCategory('All', getData, setSelectedCategory, selectedCategory)}>All</button>
-          {drinksCategories}
-        </div>
-        {drinksRecipe}
-        <BottomMenu />
+        <button
+          type="button"
+          data-testid="All-category-filter"
+          onClick={() => handleCategory('All', getData, setSelectedCategory, selectedCategory)}
+        >
+          All
+        </button>
+        {drinksCategories}
       </div>
-    );
+      {drinksRecipe}
+      <BottomMenu />
+    </div>
+  );
 };
 
 Drinks.propTypes = {
@@ -69,7 +83,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   getData: (data) => dispatch(setDataAction(data)),
   getCategories: (category) => dispatch(getCategoryAction(category)),
-
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Drinks);
