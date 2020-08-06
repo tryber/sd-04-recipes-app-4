@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Login from './pages/Login';
 import RecipeDetails from './pages/RecipeDetails';
+import RecipeInProgress from './pages/RecipeInProgress';
 import NotFound from './pages/NotFound';
 
 function App() {
@@ -14,8 +15,8 @@ function App() {
         {/* <Route exact path="/bebidas" component={Bebidas} /> */}
         <Route exact path="/comidas/:id" component={RecipeDetails} />
         <Route exact path="/bebidas/:id" component={RecipeDetails} />
-        {/* <Route exact path="/comidas/:id/in-progress" component={Login} /> */}
-        {/* <Route exact path="/bebidas/:id/in-progress" component={Login} /> */}
+        <Route exact path="/comidas/:id/in-progress" component={RecipeInProgress} />
+        <Route exact path="/bebidas/:id/in-progress" component={RecipeInProgress} />
         {/* <Route exact path="/explorar" component={Login} /> */}
         {/* <Route exact path="/explorar/comidas" component={Login} /> */}
         {/* <Route exact path="/explorar/bebidas" component={Login} /> */}
