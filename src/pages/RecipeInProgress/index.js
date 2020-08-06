@@ -50,12 +50,11 @@ const renderIngredientsCheckList = (ingredients, arrayOfChecked, setArrayOfCheck
   // const enableButton = () => (arrayOfChecked.length === ingredients.length);
   return (
     <div>
-      {ingredients.map((data) => (
-        <label htmlFor={data.ingredient}>
+      {ingredients.map((data, index) => (
+        <label htmlFor={data.ingredient} data-testid={`${index}-ingredient-step`}>
           <input
             name={data.ingredient}
             key={data.ingredient}
-            data-testid="ingredient-step"
             type="checkbox"
             defaultChecked={(event) => (arrayOfChecked.indexOf(event.target.name) !== -1)}
             onChange={(event) => toggleCheckbox(event.target.name)}

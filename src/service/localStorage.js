@@ -9,13 +9,8 @@ export const saveToLocalStorage = (key, entry) => {
 };
 
 export const loadFromLocalStorage = (key) => {
-<<<<<<< HEAD
   if (key === 'ranking') return JSON.parse(localStorage.getItem(key));
   if (key === 'inProgressRecipe') return JSON.parse(localStorage.getItem(key));
-=======
-  if (key === 'user') return JSON.parse(localStorage.getItem(key));
-
->>>>>>> 5361d7e1b7eb928fcdbbfd0be6e5d55bfc60f360
   return localStorage.getItem(key);
 };
 
