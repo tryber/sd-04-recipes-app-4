@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { setLogin } from '../actions';
 import { saveToLocalStorage } from '../service/localStorage';
+import Logo from '../images/copo.svg';
 
 const renderForms = (setEmail, setSenha, handleLogin, disable) => (
   <form>
@@ -59,7 +60,14 @@ const Login = ({ sendUser }) => {
     }
   }, [email, password]);
 
-  return <div>{renderForms(setEmail, setSenha, handleLogin, disable)}</div>;
+  return (
+    <div>
+      <div id="meals">
+        <span>TRYBE</span>
+        <img src={Logo} alt="imageLogo" />
+      </div>
+      {renderForms(setEmail, setSenha, handleLogin, disable)}</div>
+  );
 };
 
 const mapDispatchToProps = (dispatch) => ({
