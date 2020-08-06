@@ -95,7 +95,7 @@ export const RecipeDetails = (props) => {
    * Handle recipe start action
    */
   const startRecipe = () => {
-    history.push(`/comidas/${id}/in-progress`);
+    history.push(`/${appLocation}/${id}/in-progress`);
   };
 
   if (recipeFetching) return <p>loading...</p>;

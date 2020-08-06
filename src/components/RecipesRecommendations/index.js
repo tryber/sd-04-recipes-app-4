@@ -4,31 +4,33 @@ import { connect } from 'react-redux';
 import { Card, Carroussel, CardsContainer } from './StyledComponents';
 
 const RecipesRecommendations = ({ recommendations, recommendationsFetching, appLocation }) => {
-  const [actualPosition, setactualPosition] = useState({ position: 0, card: 0 });
-  const [recommendationsState, setrecommendationsState] = useState([]);
+  const [actualPosition, setactualPosition] = useState({ card: 0 });
 
   useEffect(() => {
-    console.log(recommendations)
-    if (recommendations.legth > 0) {
-      setrecommendationsState(() => {
-        const state = recommendations.reduce((result, recommendation, index) => {
-          console.log(result)
+    if (recommendations.length > 0) {
+      setactualPosition((prevState) => {
+        const state = { ...prevState };
+        recommendations.forEach((recommendation, index) => {
           if (index < 2) {
-            result.push({ card: `${index}-recomendation-title`, visible: true });
+            state[`${index}-recomendation-card`] = true;
           } else {
-            result.push({ card: `${index}-recomendation-title`, visible: false });
+            state[`${index}-recomendation-card`] = false;
           }
-          return result;
-        }, []);
+        });
+        return state;
       });
     }
   }, [recommendations]);
 
   const handlePosition = () => {
-    setactualPosition((prevState) => ({
-      position: prevState.position + 50,
-      card: prevState.card + 1,
-    }));
+    if(actualPosition.card < recommendations.length - 1) {
+      setactualPosition((prevState) => ({
+        ...prevState,
+        card: prevState.card + 1,
+        [`${prevState.card + 2}-recomendation-card`]: true,
+        [`${prevState.card}-recomendation-card`]: false,
+      }));
+    }
   };
 
   if (recommendationsFetching) return null;
@@ -37,15 +39,19 @@ const RecipesRecommendations = ({ recommendations, recommendationsFetching, appL
     <div>
       <h2>Recomendadas</h2>
       <Carroussel>
-        <CardsContainer position={`-${actualPosition}%`}>
-          {recommendations.map((recipe, index) => (
-            <Card data-testid={`${index}-recomendation-card`}>
+        {recommendations.map((recipe, index) => {
+          console.log(`${index}-recomendation-card`);
+          return (
+            <Card
+              data-testid={`${index}-recomendation-card`}
+              hidden={actualPosition[`${index}-recomendation-card`] ? false : true}
+            >
               <span data-testid={`${index}-recomendation-title`}>
                 {appLocation === 'comidas' ? recipe.strDrink : recipe.strMeal}
               </span>
             </Card>
-          ))}
-        </CardsContainer>
+          );
+        })}
       </Carroussel>
       <button type="button" onClick={() => handlePosition()}>
         Proxima
@@ -59,5 +65,7 @@ const mapStateToProps = (state) => ({
   recommendationsFetching: state.recommendationsReducer.isFetching,
   appLocation: state.appReducers.location,
 });
+
+// setId: (id) => dispatch(setIdAtual(id)),
 
 export default connect(mapStateToProps)(RecipesRecommendations);

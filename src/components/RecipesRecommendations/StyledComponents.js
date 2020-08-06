@@ -6,6 +6,7 @@ export const Carroussel = styled.div`
   overflow: hidden;
   display: flex;
   height: 130px;
+  transition: all 2s linear;
 `;
 
 export const CardsContainer = styled.div`
@@ -22,6 +23,7 @@ export const Card = styled.div`
     0 2px 4px -1px rgba(0, 0, 0, 0.3);
   height: 120px;
   margin-left: 5px;
-  min-width: 43%;
+  min-width: 140px;
   margin-right: 20px;
+  transition: all 2s linear;
 `;
