@@ -7,6 +7,7 @@ import Meals from './pages/Meals';
 import Drinks from './pages/Drinks';
 import NotFound from './pages/NotFound';
 import Perfil from './pages/Perfil';
+import RecipeInProgress from './pages/RecipeInProgress';
 
 function App() {
   return (
@@ -17,8 +18,8 @@ function App() {
         <Route exact path="/bebidas" component={Drinks} />
         <Route exact path="/comidas/:id" component={RecipeDetails} />
         <Route exact path="/bebidas/:id" component={RecipeDetails} />
-        {/* <Route exact path="/comidas/:id/in-progress" component={Login} /> */}
-        {/* <Route exact path="/bebidas/:id/in-progress" component={Login} /> */}
+        <Route exact path="/comidas/:id/in-progress" component={RecipeInProgress} />
+        <Route exact path="/bebidas/:id/in-progress" component={RecipeInProgress} />
         {/* <Route exact path="/explorar" component={Login} /> */}
         {/* <Route exact path="/explorar/comidas" component={Login} /> */}
         {/* <Route exact path="/explorar/bebidas" component={Login} /> */}
