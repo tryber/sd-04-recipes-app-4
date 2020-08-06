@@ -26,7 +26,7 @@ const checkAppLocation = (path, appLocation, locationChanger) => {
 
 const renderIngredientsCheckList = (ingredients,
   arrayOfChecked, setArrayOfChecked, id, appLocation) => {
-  const changeLocalStorage = (option) => {
+  const changeLocalStorage(option) ({
     const progressMeals = { cocktails: {}, meals: { [id]: [...arrayOfChecked, option] } };
     const progressCocktails = { cocktails: { [id]: arrayOfChecked }, meals: {} };
     console.log(appLocation);
@@ -38,7 +38,7 @@ const renderIngredientsCheckList = (ingredients,
       default:
         break;
     }
-  };
+  });
 
   const toggleCheckbox = (option) => {
     if (arrayOfChecked.indexOf(option) === -1) {
