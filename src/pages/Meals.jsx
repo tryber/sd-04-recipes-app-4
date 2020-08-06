@@ -38,20 +38,34 @@ const Meals = ({ getData, data, getCategories, categories }) => {
     </Link>
   ));
   const mealsCategories = categories.slice(0, 5).map(({ strCategory: categoryName }) => (
-    <button type="button" key={categoryName} data-testid={`${categoryName}-category-filter`} onClick={() => handleCategory(categoryName, getData, setSelectedCategory, selectedCategory)}>{categoryName}</button>
+    <button
+      type="button"
+      key={categoryName}
+      data-testid={`${categoryName}-category-filter`}
+      onClick={() => handleCategory(categoryName, getData, setSelectedCategory, selectedCategory)}
+    >
+      {categoryName}
+    </button>
   ));
-  return (data.length === 1 && selectedCategory !== 'Goat' && selectedCategory !== 'All') ? <Redirect to={`/comidas/${data[0].idMeal}`} /> :
-    (
+  return data.length === 1 && selectedCategory !== 'Goat' && selectedCategory !== 'All' ? (
+    <Redirect to={`/comidas/${data[0].idMeal}`} />
+  ) : (
+    <div>
+      <Header />
       <div>
-        <Header />
-        <div>
-          <button type="button" data-testid="All-category-filter" onClick={() => handleCategory('All', getData, setSelectedCategory, selectedCategory)}>All</button>
-          {mealsCategories}
-        </div>
-        {mealsRecipe}
-        <BottomMenu />
+        <button
+          type="button"
+          data-testid="All-category-filter"
+          onClick={() => handleCategory('All', getData, setSelectedCategory, selectedCategory)}
+        >
+          All
+        </button>
+        {mealsCategories}
       </div>
-    );
+      {mealsRecipe}
+      <BottomMenu />
+    </div>
+  );
 };
 
 Meals.propTypes = {
