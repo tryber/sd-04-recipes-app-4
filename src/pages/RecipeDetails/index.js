@@ -1,23 +1,14 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-<<<<<<< HEAD
-import { fetchRecipe, fetchRecommendations } from '../../actions/detailsActions';
-import RecipesRecommendations from '../../components/RecipesRecommendations';
-import SocialMenu from '../../components/SocialMenu';
-=======
 import PropTypes from 'prop-types';
 import { fetchRecipe, fetchRecommendations } from '../../actions/detailsActions';
 import { loadFromLocalStorage } from '../../service/localStorage';
 import RecipesRecommendations from '../../components/RecipesRecommendations';
 // import SocialMenu from '../../components/SocialMenu';
->>>>>>> 15177bf170682a1124940c79186697d5169dadd9
 
 /**
  * Styled components
  */
-<<<<<<< HEAD
-import { Recipe, RecipeImage, RecipeHeader, RecipeTitle, RecipeVideo } from './StyledComponents';
-=======
 import {
   Recipe,
   RecipeImage,
@@ -80,7 +71,6 @@ const renderRecipeButton = (id, appLocation, startRecipe) => {
     </RecipeStartButtom>
   );
 };
->>>>>>> 15177bf170682a1124940c79186697d5169dadd9
 
 /**
  * Render the recipe ingredients list
@@ -88,37 +78,6 @@ const renderRecipeButton = (id, appLocation, startRecipe) => {
  * @param {array} ingredients Array with ingredients - from redux datailsReducer.ingredients
  */
 const renderIngredientsList = (ingredients) => (
-<<<<<<< HEAD
-  <ul>
-    {ingredients.map((data, index) => (
-      <li key={data.ingredient} data-testid={`${index}-ingredient-name-and-measure`}>
-        {`${data.ingredient} - ${data.measure}`}
-      </li>
-    ))}
-  </ul>
-);
-
-export const RecipeDetails = (props) => {
-  const {
-    match,
-    history,
-    recipeFetching,
-    recipeFetch,
-    recipe,
-    recommendationsFetch,
-    appLocation,
-  } = props;
-  const { id } = match.params; // Recipe ID
-  const { strMealThumb, strMeal, strCategory, strInstructions, strYoutube, ingredients } = recipe;
-
-  /**
-   * Fetch recipe and recommendations on mount
-   */
-  useEffect(() => {
-    recipeFetch(id, appLocation);
-    recommendationsFetch(appLocation);
-  }, []);
-=======
   <section>
     <h2>Ingredients</h2>
     <ul>
@@ -171,47 +130,18 @@ const RecipeDetails = (props) => {
       recommendationsFetch(appLocation);
     }
   }, [appLocation]);
->>>>>>> 15177bf170682a1124940c79186697d5169dadd9
 
   /**
    * Handle recipe start action
    */
   const startRecipe = () => {
-<<<<<<< HEAD
-    history.push(`/comidas/${id}/in-progress`);
-=======
     history.push(`/${appLocation}/${id}/in-progress`);
->>>>>>> 15177bf170682a1124940c79186697d5169dadd9
   };
 
   if (recipeFetching) return <p>loading...</p>;
 
   return (
     <Recipe>
-<<<<<<< HEAD
-      <RecipeImage imageSrc={strMealThumb} />
-      <RecipeHeader>
-        <RecipeTitle data-testid="recipe-title">{strMeal}</RecipeTitle>
-        <SocialMenu />
-      </RecipeHeader>
-      <span data-testid="recipe-category">{strCategory}</span>
-      <h2>Ingredients</h2>
-      {renderIngredientsList(ingredients)}
-      <h2>Instruction</h2>
-      <p data-testid="instructions">{strInstructions}</p>
-      <h2>Videos</h2>
-      <RecipeVideo
-        title="ytplayer"
-        type="text/html"
-        src={`https://www.youtube.com/embed/${strYoutube.slice(-11)}`}
-        frameBorder="0"
-      />
-      <h2>Recomendadas</h2>
-      <RecipesRecommendations />
-      <button type="button" data-testid="start-recipe-btn" onClick={() => startRecipe()}>
-        Iniciar Receita
-      </button>
-=======
       <RecipeImage
         data-testid="recipe-photo"
         src={appLocation === 'comidas' ? strMealThumb : strDrinkThumb}
@@ -231,7 +161,6 @@ const RecipeDetails = (props) => {
       {strYoutube && renderVideo(strYoutube)}
       <RecipesRecommendations />
       {renderRecipeButton(id, appLocation, startRecipe)}
->>>>>>> 15177bf170682a1124940c79186697d5169dadd9
     </Recipe>
   );
 };
@@ -245,10 +174,6 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   recipeFetch: (id, type) => dispatch(fetchRecipe(id, type)),
   recommendationsFetch: (type) => dispatch(fetchRecommendations(type)),
-<<<<<<< HEAD
-});
-
-=======
   locationChanger: (location) => dispatch(setAppLocation(location)),
 });
 
@@ -263,5 +188,4 @@ RecipeDetails.propTypes = {
   locationChanger: PropTypes.func.isRequired,
 };
 
->>>>>>> 15177bf170682a1124940c79186697d5169dadd9
 export default connect(mapStateToProps, mapDispatchToProps)(RecipeDetails);

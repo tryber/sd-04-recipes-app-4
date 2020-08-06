@@ -1,9 +1,3 @@
-<<<<<<< HEAD
-import React from 'react';
-import { connect } from 'react-redux';
-
-const RecipesRecommendations = ({ recommendations, recommendationsFetching }) => {
-=======
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
@@ -40,16 +34,10 @@ const RecipesRecommendations = ({ recommendations, recommendationsFetching, appL
     }
   };
 
->>>>>>> 15177bf170682a1124940c79186697d5169dadd9
   if (recommendationsFetching) return null;
 
   return (
     <div>
-<<<<<<< HEAD
-      {recommendations.map((recipe) => (
-        <span>{recipe.strTitle}</span>
-      ))}
-=======
       <h2>Recomendadas</h2>
       <Carroussel>
         {recommendations.map((recipe, index) => (
@@ -66,7 +54,6 @@ const RecipesRecommendations = ({ recommendations, recommendationsFetching, appL
       <button type="button" onClick={() => handlePosition()}>
         Proxima
       </button>
->>>>>>> 15177bf170682a1124940c79186697d5169dadd9
     </div>
   );
 };
@@ -74,10 +61,6 @@ const RecipesRecommendations = ({ recommendations, recommendationsFetching, appL
 const mapStateToProps = (state) => ({
   recommendations: state.recommendationsReducer.recommendations,
   recommendationsFetching: state.recommendationsReducer.isFetching,
-<<<<<<< HEAD
-});
-
-=======
   appLocation: state.appReducers.location,
 });
 
@@ -87,5 +70,4 @@ RecipesRecommendations.propTypes = {
   appLocation: PropTypes.string.isRequired,
 };
 
->>>>>>> 15177bf170682a1124940c79186697d5169dadd9
 export default connect(mapStateToProps)(RecipesRecommendations);
