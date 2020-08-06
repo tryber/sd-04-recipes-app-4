@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { Card, Carroussel, CardsContainer } from './StyledComponents';
@@ -8,10 +8,21 @@ const RecipesRecommendations = ({ recommendations, recommendationsFetching, appL
   const [recommendationsState, setrecommendationsState] = useState([]);
 
   useEffect(() => {
-    setrecommendationsState(() => {
-      return recommendations.reduce((result, recommendation) => {}, []);
-    });
-  }, []);
+    console.log(recommendations)
+    if (recommendations.legth > 0) {
+      setrecommendationsState(() => {
+        const state = recommendations.reduce((result, recommendation, index) => {
+          console.log(result)
+          if (index < 2) {
+            result.push({ card: `${index}-recomendation-title`, visible: true });
+          } else {
+            result.push({ card: `${index}-recomendation-title`, visible: false });
+          }
+          return result;
+        }, []);
+      });
+    }
+  }, [recommendations]);
 
   const handlePosition = () => {
     setactualPosition((prevState) => ({
