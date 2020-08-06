@@ -31,27 +31,24 @@ const BottomMenu = ({ changeAppLocation, appLocation }) => {
   return (
     <Menu data-testid="footer">
       <MenuItem
-        data-testid="drinks-bottom-btn"
         isSelected={appLocation === 'bebidas' && true}
         onClick={() => handleLocationChange('bebidas')}
       >
-        <MenuIcon src={DrinkIcon} />
+        <MenuIcon src={DrinkIcon} data-testid="drinks-bottom-btn" />
         <span>Bebidas</span>
       </MenuItem>
       <MenuItem
-        data-testid="explore-bottom-btn"
         isSelected={appLocation === 'explorar' && true}
         onClick={() => handleLocationChange('explorar')}
       >
-        <MenuIcon src={ExploreIcon} />
+        <MenuIcon src={ExploreIcon} data-testid="explore-bottom-btn" />
         <span>Explorar</span>
       </MenuItem>
       <MenuItem
-        data-testid="food-bottom-btn"
         isSelected={appLocation === 'comidas' && true}
         onClick={() => handleLocationChange('comidas')}
       >
-        <MenuIcon src={MealIcon} />
+        <MenuIcon src={MealIcon} data-testid="food-bottom-btn" />
         <span>Comidas</span>
       </MenuItem>
     </Menu>

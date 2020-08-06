@@ -6,6 +6,7 @@ import './perfil.css';
 import { loadFromLocalStorage, clearLocalStorage } from '../../service/localStorage';
 import Header from '../../components/Header/Header';
 import { setAppLocation } from '../../actions/appActions';
+import BottomMenu from '../../components/BottomMenu';
 
 const Perfil = ({ sendLocation }) => {
   const emailverifyLocalStorage = () => {
@@ -54,6 +55,7 @@ const Perfil = ({ sendLocation }) => {
             Sair
           </button>
         </Link>
+        <BottomMenu />
       </div>
     </div>
   );
