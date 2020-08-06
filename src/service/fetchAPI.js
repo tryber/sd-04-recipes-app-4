@@ -1,5 +1,5 @@
-const THE_MEAL_DB_API = 'https://www.themealdb.com/api/json/v1/1';
-const THE_COCKTAIL_DB_API = 'https://www.thecocktaildb.com/api/json/v1/1';
+const THE_MEAL_DB_API = 'https://www.themealdb.com/api/json/v1/1/';
+const THE_COCKTAIL_DB_API = 'https://www.thecocktaildb.com/api/json/v1/1/';
 //  separados por semelhança
 //  get by name
 export const getMealsByName = async (name) => {

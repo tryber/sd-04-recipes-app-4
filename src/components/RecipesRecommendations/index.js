@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
-import { Card, Carroussel, CardsContainer } from './StyledComponents';
+import { Card, Carroussel } from './StyledComponents';
 
 const RecipesRecommendations = ({ recommendations, recommendationsFetching, appLocation }) => {
   const [actualPosition, setactualPosition] = useState({ card: 0 });
@@ -23,7 +24,7 @@ const RecipesRecommendations = ({ recommendations, recommendationsFetching, appL
   }, [recommendations]);
 
   const handlePosition = () => {
-    if(actualPosition.card < recommendations.length - 1) {
+    if (actualPosition.card < recommendations.length - 1) {
       setactualPosition((prevState) => ({
         ...prevState,
         card: prevState.card + 1,
@@ -39,19 +40,16 @@ const RecipesRecommendations = ({ recommendations, recommendationsFetching, appL
     <div>
       <h2>Recomendadas</h2>
       <Carroussel>
-        {recommendations.map((recipe, index) => {
-          console.log(`${index}-recomendation-card`);
-          return (
-            <Card
-              data-testid={`${index}-recomendation-card`}
-              hidden={actualPosition[`${index}-recomendation-card`] ? false : true}
-            >
-              <span data-testid={`${index}-recomendation-title`}>
-                {appLocation === 'comidas' ? recipe.strDrink : recipe.strMeal}
-              </span>
-            </Card>
-          );
-        })}
+        {recommendations.map((recipe, index) => (
+          <Card
+            data-testid={`${index}-recomendation-card`}
+            hidden={!actualPosition[`${index}-recomendation-card`]}
+          >
+            <span data-testid={`${index}-recomendation-title`}>
+              {appLocation === 'comidas' ? recipe.strDrink : recipe.strMeal}
+            </span>
+          </Card>
+        ))}
       </Carroussel>
       <button type="button" onClick={() => handlePosition()}>
         Proxima
@@ -66,6 +64,10 @@ const mapStateToProps = (state) => ({
   appLocation: state.appReducers.location,
 });
 
-// setId: (id) => dispatch(setIdAtual(id)),
+RecipesRecommendations.propTypes = {
+  recommendations: PropTypes.objectOf(PropTypes.string).isRequired,
+  recommendationsFetching: PropTypes.func.isRequired,
+  appLocation: PropTypes.string.isRequired,
+};
 
 export default connect(mapStateToProps)(RecipesRecommendations);

@@ -1,13 +1,22 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { fetchRecipe, fetchRecommendations } from '../../actions/detailsActions';
+import { loadFromLocalStorage } from '../../service/localStorage';
 import RecipesRecommendations from '../../components/RecipesRecommendations';
 import SocialMenu from '../../components/SocialMenu';
 
 /**
  * Styled components
  */
-import { Recipe, RecipeImage, RecipeHeader, RecipeTitle, RecipeVideo, RecipeStartButtom } from './StyledComponents';
+import {
+  Recipe,
+  RecipeImage,
+  RecipeHeader,
+  RecipeTitle,
+  RecipeVideo,
+  RecipeStartButtom,
+} from './StyledComponents';
 import { setAppLocation } from '../../actions/appActions';
 
 /**
@@ -22,6 +31,38 @@ const checkAppLocation = (path, appLocation, locationChanger) => {
 
   appLocation === 'comidas' ? locationChanger('bebidas') : locationChanger('comidas');
   return false;
+};
+
+/**
+ * Render recipe button with correct text when it is necessary
+ * @param {string} id Recipe id
+ */
+const renderRecipeButton = (id, appLocation, startRecipe) => {
+  let recipesInProgress = {};
+  if (appLocation === 'comidas') {
+    recipesInProgress = loadFromLocalStorage('inProgressRecipes')
+      ? loadFromLocalStorage('inProgressRecipes').meals
+      : {};
+  } else {
+    recipesInProgress = loadFromLocalStorage('inProgressRecipes')
+      ? loadFromLocalStorage('inProgressRecipes').cocktails
+      : {};
+  }
+  const doneRecipes = loadFromLocalStorage('doneRecipes')
+    ? loadFromLocalStorage('doneRecipes')
+    : [];
+
+  // Recipe status
+  const inProgress = Object.keys(recipesInProgress).find((recipeId) => recipeId === id);
+  const done = doneRecipes.find((recipe) => recipe.id === id);
+
+  if (done) return null;
+
+  return (
+    <RecipeStartButtom type="button" data-testid="start-recipe-btn" onClick={() => startRecipe()}>
+      {inProgress ? 'Continuar Receita' : 'Iniciar Receita'}
+    </RecipeStartButtom>
+  );
 };
 
 /**
@@ -42,20 +83,23 @@ const renderIngredientsList = (ingredients) => (
   </section>
 );
 
-const renderVideo = (strYoutube) => {
-  return (
-    <section>
-      <h2>Videos</h2>
-      <RecipeVideo
-        data-testid="video"
-        title="ytplayer"
-        type="text/html"
-        src={`https://www.youtube.com/embed/${strYoutube.slice(-11)}`}
-        frameBorder="0"
-      />
-    </section>
-  );
-};
+/**
+ * Render the recipe video
+ *
+ * @param {string} strYoutube A url for youtube video
+ */
+const renderVideo = (strYoutube) => (
+  <section>
+    <h2>Videos</h2>
+    <RecipeVideo
+      data-testid="video"
+      title="ytplayer"
+      type="text/html"
+      src={`https://www.youtube.com/embed/${strYoutube.slice(-11)}`}
+      frameBorder="0"
+    />
+  </section>
+);
 
 export const RecipeDetails = (props) => {
   const {
@@ -120,9 +164,7 @@ export const RecipeDetails = (props) => {
       <p data-testid="instructions">{strInstructions}</p>
       {strYoutube && renderVideo(strYoutube)}
       <RecipesRecommendations />
-      <RecipeStartButtom type="button" data-testid="start-recipe-btn" onClick={() => startRecipe()}>
-        Iniciar Receita
-      </RecipeStartButtom>
+      {renderRecipeButton(id, appLocation, startRecipe)}
     </Recipe>
   );
 };
@@ -138,5 +180,16 @@ const mapDispatchToProps = (dispatch) => ({
   recommendationsFetch: (type) => dispatch(fetchRecommendations(type)),
   locationChanger: (location) => dispatch(setAppLocation(location)),
 });
+
+RecipeDetails.propTypes = {
+  match: PropTypes.objectOf(PropTypes.string).isRequired,
+  history: PropTypes.objectOf(PropTypes.string).isRequired,
+  recipeFetching: PropTypes.bool.isRequired,
+  recipeFetch: PropTypes.func.isRequired,
+  recipe: PropTypes.objectOf(PropTypes.string).isRequired,
+  recommendationsFetch: PropTypes.func.isRequired,
+  appLocation: PropTypes.string.isRequired,
+  locationChanger: PropTypes.func.isRequired,
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecipeDetails);

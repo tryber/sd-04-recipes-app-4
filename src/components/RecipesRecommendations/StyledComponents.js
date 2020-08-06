@@ -1,19 +1,19 @@
 import styled from 'styled-components';
 
 export const Carroussel = styled.div`
-  position: relative;
-  width: 100%;
-  overflow: hidden;
   display: flex;
   height: 130px;
+  overflow: hidden;
+  position: relative;
   transition: all 2s linear;
+  width: 100%;
 `;
 
 export const CardsContainer = styled.div`
-  position: absolute;
   display: felx;
   flex-flow: row;
   left: ${(props) => props.position};
+  position: absolute;
 `;
 
 export const Card = styled.div`
@@ -23,7 +23,7 @@ export const Card = styled.div`
     0 2px 4px -1px rgba(0, 0, 0, 0.3);
   height: 120px;
   margin-left: 5px;
-  min-width: 140px;
   margin-right: 20px;
+  min-width: 140px;
   transition: all 2s linear;
 `;
