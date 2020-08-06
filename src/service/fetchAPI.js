@@ -3,7 +3,7 @@ const THE_COCKTAIL_DB_API = 'https://www.thecocktaildb.com/api/json/v1/1';
 //  separados por semelhança
 //  get by name
 export const getMealsByName = async (name) => {
-  const fetchUrl = `${THE_MEAL_DB_API}/search.php?s=${name}`;
+  const fetchUrl = `${THE_MEAL_DB_API}search.php?s=${name}`;
   const response = await fetch(fetchUrl);
   const json = await response.json();
   const data = await (response.ok ? Promise.resolve(json) : Promise.reject(json));
@@ -11,7 +11,7 @@ export const getMealsByName = async (name) => {
 };
 
 export const getDrinksByName = async (name) => {
-  const fetchUrl = `${THE_COCKTAIL_DB_API}/search.php?s=${name}`;
+  const fetchUrl = `${THE_COCKTAIL_DB_API}search.php?s=${name}`;
   const response = await fetch(fetchUrl);
   const json = await response.json();
   const data = await (response.ok ? Promise.resolve(json) : Promise.reject(json));
@@ -21,7 +21,7 @@ export const getDrinksByName = async (name) => {
 //  listar categorias
 
 export const getMealsCategories = async () => {
-  const fetchUrl = `${THE_MEAL_DB_API}/list.php?c=list`;
+  const fetchUrl = `${THE_MEAL_DB_API}list.php?c=list`;
   const response = await fetch(fetchUrl);
   const json = await response.json();
   const data = await (response.ok ? Promise.resolve(json) : Promise.reject(json));
@@ -29,7 +29,7 @@ export const getMealsCategories = async () => {
 };
 
 export const getDrinksCategories = async () => {
-  const fetchUrl = `${THE_COCKTAIL_DB_API}/list.php?c=list`;
+  const fetchUrl = `${THE_COCKTAIL_DB_API}list.php?c=list`;
   const response = await fetch(fetchUrl);
   const json = await response.json();
   const data = await (response.ok ? Promise.resolve(json) : Promise.reject(json));
@@ -39,7 +39,7 @@ export const getDrinksCategories = async () => {
 //  filtar por categorias
 
 export const getMealsByCategory = async (category) => {
-  const fetchUrl = `${THE_MEAL_DB_API}/filter.php?c=${category}`;
+  const fetchUrl = `${THE_MEAL_DB_API}filter.php?c=${category}`;
   const response = await fetch(fetchUrl);
   const json = await response.json();
   const data = await (response.ok ? Promise.resolve(json) : Promise.reject(json));
@@ -47,7 +47,7 @@ export const getMealsByCategory = async (category) => {
 };
 
 export const getDrinksByCategory = async (category) => {
-  const fetchUrl = `${THE_COCKTAIL_DB_API}/filter.php?c=${category}`;
+  const fetchUrl = `${THE_COCKTAIL_DB_API}filter.php?c=${category}`;
   const response = await fetch(fetchUrl);
   const json = await response.json();
   const data = await (response.ok ? Promise.resolve(json) : Promise.reject(json));
@@ -57,7 +57,7 @@ export const getDrinksByCategory = async (category) => {
 //  filtro por primeira letra
 
 export const getMealsByFirstLetter = async (letter) => {
-  const fetchUrl = `${THE_MEAL_DB_API}/search.php?f=${letter}`;
+  const fetchUrl = `${THE_MEAL_DB_API}search.php?f=${letter}`;
   const response = await fetch(fetchUrl);
   const json = await response.json();
   const data = await (response.ok ? Promise.resolve(json) : Promise.reject(json));
@@ -65,7 +65,7 @@ export const getMealsByFirstLetter = async (letter) => {
 };
 
 export const getDrinksByFirstLetter = async (letter) => {
-  const fetchUrl = `${THE_COCKTAIL_DB_API}/search.php?f=${letter}`;
+  const fetchUrl = `${THE_COCKTAIL_DB_API}search.php?f=${letter}`;
   const response = await fetch(fetchUrl);
   const json = await response.json();
   const data = await (response.ok ? Promise.resolve(json) : Promise.reject(json));
@@ -75,7 +75,7 @@ export const getDrinksByFirstLetter = async (letter) => {
 //  get Random
 
 export const getRandomMeals = async () => {
-  const fetchUrl = `${THE_MEAL_DB_API}/random.php`;
+  const fetchUrl = `${THE_MEAL_DB_API}random.php`;
   const response = await fetch(fetchUrl);
   const json = await response.json();
   const data = await (response.ok ? Promise.resolve(json) : Promise.reject(json));
@@ -83,7 +83,7 @@ export const getRandomMeals = async () => {
 };
 
 export const getRandomDrinks = async () => {
-  const fetchUrl = `${THE_COCKTAIL_DB_API}/random.php`;
+  const fetchUrl = `${THE_COCKTAIL_DB_API}random.php`;
   const response = await fetch(fetchUrl);
   const json = await response.json();
   const data = await (response.ok ? Promise.resolve(json) : Promise.reject(json));
@@ -93,7 +93,7 @@ export const getRandomDrinks = async () => {
 //  get by ids
 
 export const getMealById = async (id) => {
-  const fetchUrl = `${THE_MEAL_DB_API}/lookup.php?i=${id}`;
+  const fetchUrl = `${THE_MEAL_DB_API}lookup.php?i=${id}`;
   const response = await fetch(fetchUrl);
   const json = await response.json();
   const data = await (response.ok ? Promise.resolve(json) : Promise.reject(json));
@@ -101,7 +101,7 @@ export const getMealById = async (id) => {
 };
 
 export const getDrinkById = async (id) => {
-  const fetchUrl = `${THE_COCKTAIL_DB_API}/lookup.php?i=${id}`;
+  const fetchUrl = `${THE_COCKTAIL_DB_API}lookup.php?i=${id}`;
   const response = await fetch(fetchUrl);
   const json = await response.json();
   const data = await (response.ok ? Promise.resolve(json) : Promise.reject(json));
@@ -111,7 +111,7 @@ export const getDrinkById = async (id) => {
 //  get by ingredients
 
 export const getMealsByIngredient = async (ingredient) => {
-  const fetchUrl = `${THE_MEAL_DB_API}/filter.php?i=${ingredient}`;
+  const fetchUrl = `${THE_MEAL_DB_API}filter.php?i=${ingredient}`;
   const response = await fetch(fetchUrl);
   const json = await response.json();
   const data = await (response.ok ? Promise.resolve(json) : Promise.reject(json));
@@ -119,7 +119,7 @@ export const getMealsByIngredient = async (ingredient) => {
 };
 
 export const getDrinksByIngredient = async (ingredient) => {
-  const fetchUrl = `${THE_COCKTAIL_DB_API}/filter.php?i=${ingredient}`;
+  const fetchUrl = `${THE_COCKTAIL_DB_API}filter.php?i=${ingredient}`;
   const response = await fetch(fetchUrl);
   const json = await response.json();
   const data = await (response.ok ? Promise.resolve(json) : Promise.reject(json));
@@ -129,7 +129,7 @@ export const getDrinksByIngredient = async (ingredient) => {
 //  get ingredients by id
 
 export const getIngredientMealById = async (id) => {
-  const fetchUrl = `${THE_MEAL_DB_API}/lookup.php?i=${id}`;
+  const fetchUrl = `${THE_MEAL_DB_API}lookup.php?i=${id}`;
   const response = await fetch(fetchUrl);
   const json = await response.json();
   const data = await (response.ok ? Promise.resolve(json) : Promise.reject(json));
@@ -137,7 +137,7 @@ export const getIngredientMealById = async (id) => {
 };
 
 export const getIngredientDrinkById = async (id) => {
-  const fetchUrl = `${THE_COCKTAIL_DB_API}/lookup.php?i=${id}`;
+  const fetchUrl = `${THE_COCKTAIL_DB_API}lookup.php?i=${id}`;
   const response = await fetch(fetchUrl);
   const json = await response.json();
   const data = await (response.ok ? Promise.resolve(json) : Promise.reject(json));
@@ -147,7 +147,7 @@ export const getIngredientDrinkById = async (id) => {
 //  get meal by area
 
 export const getMealsByArea = async (area) => {
-  const fetchUrl = `${THE_MEAL_DB_API}/filter.php?a=${area}`;
+  const fetchUrl = `${THE_MEAL_DB_API}filter.php?a=${area}`;
   const response = await fetch(fetchUrl);
   const json = await response.json();
   const data = await (response.ok ? Promise.resolve(json) : Promise.reject(json));

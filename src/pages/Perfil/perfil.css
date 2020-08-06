@@ -1,0 +1,21 @@
+.perfil-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  font-family: Roboto Condensed , Arial, Helvetica, sans-serif;
+  font-size: 25px;
+  font-style: normal;
+  font-weight: 400;
+  justify-content: center;
+  line-height: 29px;
+}
+
+.button-perfil {
+  background: #c4c4c4;
+  border-radius: 4px;
+  height: 53px;
+  left: 16px;
+  margin-top: 15px;
+  top: 328px;
+  width: 329px;
+}
