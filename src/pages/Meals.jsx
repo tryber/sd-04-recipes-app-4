@@ -40,7 +40,7 @@ const Meals = ({ getData, data, getCategories, categories }) => {
   const mealsCategories = categories.slice(0, 5).map(({ strCategory: categoryName }) => (
     <button
       type="button"
-      key={categoryName}
+      key={`${categoryName} melas`}
       data-testid={`${categoryName}-category-filter`}
       onClick={() => handleCategory(categoryName, getData, setSelectedCategory, selectedCategory)}
     >
