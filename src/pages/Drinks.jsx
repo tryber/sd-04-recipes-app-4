@@ -2,8 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Redirect, Link } from 'react-router-dom';
 import PropTypes from 'prop-types';
-
-import Header from '../components/Header/Header.jsx';
+import Header from '../components/Header/Header';
 import BottomMenu from '../components/BottomMenu';
 import { getDrinksByName, getDrinksCategories, getDrinksByCategory } from '../service/fetchAPI';
 import { setDataAction, getCategoryAction } from '../actions';
