@@ -31,10 +31,8 @@ const renderIngredientsCheckList = (ingredients, arrayOfChecked, setArrayOfCheck
     console.log(appLocation);
     switch (appLocation) {
       case 'comidas':
-
         return saveToLocalStorage('inProgressRecipe', progressMeals);
       case 'bebidas':
-
         return saveToLocalStorage('inProgressRecipe', progressCocktails);
       default:
         break;
