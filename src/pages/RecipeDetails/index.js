@@ -37,7 +37,7 @@ const checkAppLocation = (path, appLocation, locationChanger) => {
  * Render recipe button with correct text when it is necessary
  * @param {string} id Recipe id
  */
-const renderRecipeButton = (id, appLocation, startRecipe) => {
+const getRecipesInProgress = (appLocation) => {
   let recipesInProgress = {};
   if (appLocation === 'comidas') {
     recipesInProgress = loadFromLocalStorage('inProgressRecipes')
@@ -48,6 +48,10 @@ const renderRecipeButton = (id, appLocation, startRecipe) => {
       ? loadFromLocalStorage('inProgressRecipes').cocktails
       : {};
   }
+  return recipesInProgress;
+};
+const renderRecipeButton = (id, appLocation, startRecipe) => {
+  const recipesInProgress = getRecipesInProgress(appLocation);
   const doneRecipes = loadFromLocalStorage('doneRecipes')
     ? loadFromLocalStorage('doneRecipes')
     : [];
