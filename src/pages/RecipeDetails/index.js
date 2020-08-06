@@ -110,23 +110,12 @@ const renderVideo = (strYoutube) => (
 
 const RecipeDetails = (props) => {
   const {
-    match,
-    history,
-    recipeFetching,
-    recipeFetch,
-    recipe,
-    recommendationsFetch,
-    appLocation,
-    locationChanger,
+    match, history, recipeFetching, recipeFetch, recipe, recommendationsFetch,
+    appLocation, locationChanger,
   } = props;
   const { id } = match.params; // Recipe ID
   const {
-    strMealThumb,
-    strDrinkThumb,
-    strMeal,
-    strDrink,
-    strCategory,
-    strAlcoholic,
+    strMealThumb, strDrinkThumb, strMeal, strDrink, strCategory, strAlcoholic,
     strInstructions,
     strYoutube,
     ingredients,
