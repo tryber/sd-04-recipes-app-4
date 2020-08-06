@@ -20,11 +20,12 @@ import { saveToLocalStorage, loadFromLocalStorage } from '../../service/localSto
 const checkAppLocation = (path, appLocation, locationChanger) => {
   if (path.includes(appLocation)) return true;
 
-  appLocation === 'comidas' ? locationChanger('bebidas') : locationChanger('comidas');
+  appLocation === 'bebidas' ? locationChanger('comidas') : locationChanger('bebidas');
   return false;
 };
 
-const renderIngredientsCheckList = (ingredients, arrayOfChecked, setArrayOfChecked, id, appLocation) => {
+const renderIngredientsCheckList = (ingredients,
+  arrayOfChecked, setArrayOfChecked, id, appLocation) => {
   const changeLocalStorage = (option) => {
     const progressMeals = { cocktails: {}, meals: { [id]: [...arrayOfChecked, option] } };
     const progressCocktails = { cocktails: { [id]: arrayOfChecked }, meals: {} };
@@ -37,15 +38,8 @@ const renderIngredientsCheckList = (ingredients, arrayOfChecked, setArrayOfCheck
       default:
         break;
     }
-    /*     if (appLocation === 'comidas') {
-      const progress = { cocktails: {}, meals: { [id]: [...arrayOfChecked, option] } };
-      saveToLocalStorage('inProgressRecipe', progress);
-    }
-    if (appLocation === 'bebidas') {
-      const progress = { cocktails: { [id]: arrayOfChecked }, meals: {} };
-      saveToLocalStorage('inProgressRecipe', progress);
-    } */
   };
+
   const toggleCheckbox = (option) => {
     if (arrayOfChecked.indexOf(option) === -1) {
       changeLocalStorage(option);
@@ -85,16 +79,17 @@ export const RecipeDetails = (props) => {
   const {
     match,
     history,
+    recipe,
     recipeFetching,
     recipeFetch,
-    recipe,
     recommendationsFetch,
     appLocation,
     locationChanger,
   } = props;
   const { id } = match.params; // Recipe ID
   const {
-    strMealThumb, strMeal, strCategory, strInstructions, ingredients, strAlcoholic, strDrink, strDrinkThumb,
+    strMealThumb,
+    strMeal, strInstructions, ingredients, strAlcoholic, strDrink, strDrinkThumb, strCategory,
   } = recipe;
   const [arrayOfChecked, setArrayOfChecked] = useState([]);
 
