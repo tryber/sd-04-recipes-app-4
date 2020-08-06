@@ -28,7 +28,6 @@ const renderIngredientsCheckList = (ingredients,
   const changeLocalStorage = (option) => {
     const progressMeals = { cocktails: {}, meals: { [id]: [...arrayOfChecked, option] } };
     const progressCocktails = { cocktails: { [id]: arrayOfChecked }, meals: {} };
-    console.log(appLocation);
     switch (appLocation) {
       case 'comidas':
         return saveToLocalStorage('inProgressRecipe', progressMeals);
@@ -52,7 +51,6 @@ const renderIngredientsCheckList = (ingredients,
       );
     }
   };
-  // const enableButton = () => (arrayOfChecked.length === ingredients.length);
   return (
     <div>
       {ingredients.map((data, index) => (
