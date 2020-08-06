@@ -14,7 +14,7 @@ const handleCategory = (categoryName, getData, setSelectedCategory, selectedCate
     return getDrinksByCategory(categoryName).then((Drinks) => getData(Drinks.drinks));
   }
   if (categoryName === 'All' || selectedCategory === categoryName) {
-    setSelectedCategory(categoryName);
+    setSelectedCategory('All');
     return getDrinksByName('').then((Drinks) => getData(Drinks.drinks));
   }
   return false;

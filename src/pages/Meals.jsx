@@ -14,7 +14,7 @@ const handleCategory = (categoryName, getData, setSelectedCategory, selectedCate
     return getMealsByCategory(categoryName).then((Meals) => getData(Meals.meals));
   }
   if (categoryName === 'All' || selectedCategory === categoryName) {
-    setSelectedCategory(categoryName);
+    setSelectedCategory('All');
     return getMealsByName('').then((Meals) => getData(Meals.meals));
   }
   return false;
@@ -40,7 +40,7 @@ const Meals = ({ getData, data, getCategories, categories }) => {
   const mealsCategories = categories.slice(0, 5).map(({ strCategory: categoryName }) => (
     <button type="button" key={categoryName} data-testid={`${categoryName}-category-filter`} onClick={() => handleCategory(categoryName, getData, setSelectedCategory, selectedCategory)}>{categoryName}</button>
   ));
-  return (data.length === 1 && selectedCategory !== 'Goat') ? <Redirect to={`/comidas/${data[0].idMeal}`} /> :
+  return (data.length === 1 && selectedCategory !== 'Goat' && selectedCategory !== 'All') ? <Redirect to={`/comidas/${data[0].idMeal}`} /> :
     (
       <div>
         <Header />
