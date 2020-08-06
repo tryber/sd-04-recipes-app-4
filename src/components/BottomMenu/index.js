@@ -38,7 +38,6 @@ const BottomMenu = ({ changeAppLocation, appLocation }) => {
         <span>Bebidas</span>
       </MenuItem>
       <MenuItem
-        
         isSelected={appLocation === 'explorar' && true}
         onClick={() => handleLocationChange('explorar')}
       >
@@ -46,7 +45,6 @@ const BottomMenu = ({ changeAppLocation, appLocation }) => {
         <span>Explorar</span>
       </MenuItem>
       <MenuItem
-        
         isSelected={appLocation === 'comidas' && true}
         onClick={() => handleLocationChange('comidas')}
       >
