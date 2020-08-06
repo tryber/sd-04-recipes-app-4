@@ -6,7 +6,7 @@ const initialState = {
   idsFavorites: [],
 };
 
-export default (state = initialState, action) => {
+const appReducers = (state = initialState, action) => {
   switch (action.type) {
     case APP_LOCATION:
       return { ...state, location: action.location };
@@ -18,3 +18,5 @@ export default (state = initialState, action) => {
       return state;
   }
 };
+
+export default appReducers;

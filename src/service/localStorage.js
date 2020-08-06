@@ -10,6 +10,8 @@ export const saveToLocalStorage = (key, entry) => {
 
 export const loadFromLocalStorage = (key) => {
   if (key === 'user') return JSON.parse(localStorage.getItem(key));
+  if (key === 'inProgressRecipes') return JSON.parse(localStorage.getItem(key));
+  if (key === 'doneRecipes') return JSON.parse(localStorage.getItem(key));
 
   return localStorage.getItem(key);
 };

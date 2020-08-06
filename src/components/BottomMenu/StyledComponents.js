@@ -35,9 +35,9 @@ export const MenuItem = styled.div`
 `;
 
 export const MenuIcon = styled.img`
+  fill: green;
   height: 28px;
   width: 28px;
-  fill: green;
 `;
 
 export const AssistantIcon = styled.img`
