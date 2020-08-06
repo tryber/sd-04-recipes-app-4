@@ -21,7 +21,7 @@ const handleCategory = (categoryName, getData, setSelectedCategory, selectedCate
 };
 
 const Drinks = ({ getData, data, getCategories, categories }) => {
-  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [selectedCategory, setSelectedCategory] = useState('');
   useEffect(() => {
     getDrinksByName('').then((recipes) => getData(recipes.drinks));
   }, [getData]);
