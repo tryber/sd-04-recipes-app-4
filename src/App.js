@@ -16,30 +16,16 @@ function App() {
         <Route exact path="/" component={Login} />
         <Route exact path="/comidas" component={Meals} />
         <Route exact path="/bebidas" component={Drinks} />
-<<<<<<< HEAD
-        <Route exact path="/comidas/:id/in-progress" component={RecipeInProgress} />
-        <Route exact path="/bebidas/:id/in-progress" component={RecipeInProgress} />
-        {/* <Route exact path="/comidas/:id" component={Login} />
-      <Route exact path="/bebidas/:id" component={Login} />
-
-      <Route exact path="/explorar" component={Login} />
-      <Route exact path="/explorar/comidas" component={Login} />
-      <Route exact path="/explorar/bebidas" component={Login} />
-      <Route exact path="/explorar/comidas/ingredientes" component={Login} />
-      <Route exact path="/explorar/bebidas/ingredientes" component={Login} />
-      <Route exact path="/explorar/comidas/area" component={Login} /> */}
-=======
         <Route exact path="/comidas/:id" component={RecipeDetails} />
         <Route exact path="/bebidas/:id" component={RecipeDetails} />
-        {/* <Route exact path="/comidas/:id/in-progress" component={Login} /> */}
-        {/* <Route exact path="/bebidas/:id/in-progress" component={Login} /> */}
+        <Route exact path="/comidas/:id/in-progress" component={RecipeInProgress} />
+        <Route exact path="/bebidas/:id/in-progress" component={RecipeInProgress} />
         {/* <Route exact path="/explorar" component={Login} /> */}
         {/* <Route exact path="/explorar/comidas" component={Login} /> */}
         {/* <Route exact path="/explorar/bebidas" component={Login} /> */}
         {/* <Route exact path="/explorar/comidas/ingredientes" component={Login} /> */}
         {/* <Route exact path="/explorar/bebidas/ingredientes" component={Login} /> */}
         {/* <Route exact path="/explorar/comidas/area" component={Login} /> */}
->>>>>>> 15177bf170682a1124940c79186697d5169dadd9
         <Route exact path="/perfil" component={Perfil} />
         {/* <Route exact path="/receitas-feitas" component={Login} /> */}
         {/* <Route exact path="/receitas-favoritas" component={Login} /> */}
