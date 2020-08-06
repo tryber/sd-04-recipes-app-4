@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { fetchRecipe, fetchRecommendations } from '../../actions/detailsActions';
@@ -25,15 +26,27 @@ const checkAppLocation = (path, appLocation, locationChanger) => {
 
 const renderIngredientsCheckList = (ingredients, arrayOfChecked, setArrayOfChecked, id, appLocation) => {
   const changeLocalStorage = (option) => {
+    const progressMeals = { cocktails: {}, meals: { [id]: [...arrayOfChecked, option] } };
+    const progressCocktails = { cocktails: { [id]: arrayOfChecked }, meals: {} };
     console.log(appLocation);
-    if (appLocation === 'comidas') {
+    switch (appLocation) {
+      case 'comidas':
+
+        return saveToLocalStorage('inProgressRecipe', progressMeals);
+      case 'bebidas':
+
+        return saveToLocalStorage('inProgressRecipe', progressCocktails);
+      default:
+        break;
+    }
+    /*     if (appLocation === 'comidas') {
       const progress = { cocktails: {}, meals: { [id]: [...arrayOfChecked, option] } };
       saveToLocalStorage('inProgressRecipe', progress);
     }
     if (appLocation === 'bebidas') {
       const progress = { cocktails: { [id]: arrayOfChecked }, meals: {} };
       saveToLocalStorage('inProgressRecipe', progress);
-    }
+    } */
   };
   const toggleCheckbox = (option) => {
     if (arrayOfChecked.indexOf(option) === -1) {
@@ -148,3 +161,19 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(RecipeDetails);
+
+RecipeDetails.propTypes = {
+  appLocation: PropTypes.string.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func,
+  }).isRequired,
+  locationChanger: PropTypes.func.isRequired,
+  match: PropTypes.shape({
+    params: PropTypes.string,
+    path: PropTypes.string,
+  }).isRequired,
+  recipe: PropTypes.objectOf(PropTypes.string).isRequired,
+  recipeFetch: PropTypes.func.isRequired,
+  recipeFetching: PropTypes.func.isRequired,
+  recommendationsFetch: PropTypes.func.isRequired,
+};
