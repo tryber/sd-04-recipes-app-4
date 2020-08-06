@@ -4,7 +4,6 @@ import PropTypes from 'prop-types';
 import { fetchRecipe, fetchRecommendations } from '../../actions/detailsActions';
 import { loadFromLocalStorage } from '../../service/localStorage';
 import RecipesRecommendations from '../../components/RecipesRecommendations';
-import SocialMenu from '../../components/SocialMenu';
 
 /**
  * Styled components
