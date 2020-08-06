@@ -34,22 +34,25 @@ const checkAppLocation = (path, appLocation, locationChanger) => {
 };
 
 /**
- * Render recipe button with correct text when it is necessary
- * @param {string} id Recipe id
+ * Return all in progress recipes by type using app location
+ * @param {string} appLocation Actual app location
  */
 const getRecipesInProgress = (appLocation) => {
   let recipesInProgress = {};
-  if (appLocation === 'comidas') {
-    recipesInProgress = loadFromLocalStorage('inProgressRecipes')
-      ? loadFromLocalStorage('inProgressRecipes').meals
-      : {};
-  } else {
-    recipesInProgress = loadFromLocalStorage('inProgressRecipes')
-      ? loadFromLocalStorage('inProgressRecipes').cocktails
-      : {};
+  if (loadFromLocalStorage('inProgressRecipes')) {
+    if (appLocation === 'comidas') {
+      recipesInProgress = loadFromLocalStorage('inProgressRecipes').meals;
+    } else {
+      recipesInProgress = loadFromLocalStorage('inProgressRecipes').cocktails;
+    }
   }
   return recipesInProgress;
 };
+
+/**
+ * Render recipe button with correct text when it is necessary
+ * @param {string} id Recipe id
+ */
 const renderRecipeButton = (id, appLocation, startRecipe) => {
   const recipesInProgress = getRecipesInProgress(appLocation);
   const doneRecipes = loadFromLocalStorage('doneRecipes')
@@ -105,7 +108,7 @@ const renderVideo = (strYoutube) => (
   </section>
 );
 
-export const RecipeDetails = (props) => {
+const RecipeDetails = (props) => {
   const {
     match,
     history,
