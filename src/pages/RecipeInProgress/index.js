@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { fetchRecipe, fetchRecommendations } from '../../actions/detailsActions';
-import SocialMenu from '../../components/SocialMenu';
 import { setAppLocation } from '../../actions/appActions';
 /**
  * Styled components
@@ -38,6 +37,7 @@ const renderIngredientsCheckList = (ingredients,
       default:
         break;
     }
+    return null;
   };
 
   const toggleCheckbox = (option) => {
@@ -75,16 +75,11 @@ const renderIngredientsCheckList = (ingredients,
   );
 };
 
-export const RecipeDetails = (props) => {
+export const RecipeDetailsInProgress = (props) => {
   const {
-    match,
-    history,
-    recipe,
-    recipeFetching,
-    recipeFetch,
-    recommendationsFetch,
-    appLocation,
-    locationChanger,
+    match, history, recipe,
+    recipeFetching, recipeFetch, recommendationsFetch,
+    appLocation, locationChanger,
   } = props;
   const { id } = match.params; // Recipe ID
   const {
@@ -125,7 +120,6 @@ export const RecipeDetails = (props) => {
         <RecipeTitle data-testid="recipe-title">
           {appLocation === 'comidas' ? strMeal : strDrink}
         </RecipeTitle>
-        <SocialMenu />
       </RecipeHeader>
       <span data-testid="recipe-category">
         {appLocation === 'comidas' ? strCategory : strAlcoholic}
@@ -134,7 +128,12 @@ export const RecipeDetails = (props) => {
       {renderIngredientsCheckList(ingredients, arrayOfChecked, setArrayOfChecked, id, appLocation)}
       <h2>Instruction</h2>
       <p data-testid="instructions">{strInstructions}</p>
-      <button type="button" data-testid="finish-recipe-btn" disabled={arrayOfChecked.length !== ingredients.length} onClick={() => finishRecipe()}>
+      <button
+        type="button"
+        data-testid="finish-recipe-btn"
+        disabled={arrayOfChecked.length !== ingredients.length}
+        onClick={() => finishRecipe()}
+      >
         Finalizar Receita
       </button>
     </Recipe>
@@ -153,9 +152,9 @@ const mapDispatchToProps = (dispatch) => ({
   locationChanger: (location) => dispatch(setAppLocation(location)),
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(RecipeDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(RecipeDetailsInProgress);
 
-RecipeDetails.propTypes = {
+RecipeDetailsInProgress.propTypes = {
   appLocation: PropTypes.string.isRequired,
   history: PropTypes.shape({
     push: PropTypes.func,
