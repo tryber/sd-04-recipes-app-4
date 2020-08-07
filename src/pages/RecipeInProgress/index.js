@@ -95,10 +95,9 @@ const renderIngredientsCheckList = (ingredients,
   return (
     <div>
       {ingredients.map((data, index) => (
-        <label htmlFor={data.ingredient} data-testid={`${index}-ingredient-step`}>
+        <label htmlFor={data.ingredient} data-testid={`${index}-ingredient-step`} key={data.ingredient}>
           <input
             name={data.ingredient}
-            key={data.ingredient}
             type="checkbox"
             defaultChecked={(event) => (arrayOfChecked.indexOf(event.target.name) !== -1)}
             onChange={(event) => toggleCheckbox(event.target.name)}
@@ -183,12 +182,12 @@ RecipeDetailsInProgress.propTypes = {
     push: PropTypes.func,
   }).isRequired,
   locationChanger: PropTypes.func.isRequired,
-  match: PropTypes.shape({
+  match: PropTypes.objectOf({
     params: PropTypes.string,
     path: PropTypes.string,
   }).isRequired,
   recipe: PropTypes.objectOf(PropTypes.string).isRequired,
   recipeFetch: PropTypes.func.isRequired,
-  recipeFetching: PropTypes.func.isRequired,
+  recipeFetching: PropTypes.bool.isRequired,
   recommendationsFetch: PropTypes.func.isRequired,
 };

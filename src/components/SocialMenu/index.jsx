@@ -12,7 +12,6 @@ import NotFavoriteIcon from '../../images/whiteHeartIcon.svg';
 const SocialMenu = () => {
   const handleclick = () => {
     copyToClipboard(window.location.href);
-    console.log(window.location.href);
     document.getElementById('copyLink').innerHTML = 'Link copiado!';
   };
   return (

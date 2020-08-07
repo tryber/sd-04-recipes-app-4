@@ -179,12 +179,12 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 RecipeDetails.propTypes = {
-  match: PropTypes.objectOf(PropTypes.string).isRequired,
+  match: PropTypes.objectOf(PropTypes.boll).isRequired,
   history: PropTypes.objectOf(PropTypes.string).isRequired,
   recipeFetching: PropTypes.bool.isRequired,
   recipeFetch: PropTypes.func.isRequired,
   recipe: PropTypes.objectOf(PropTypes.string).isRequired,
-  recommendationsFetch: PropTypes.func.isRequired,
+  recommendationsFetch: PropTypes.bool.isRequired,
   appLocation: PropTypes.string.isRequired,
   locationChanger: PropTypes.func.isRequired,
 };
