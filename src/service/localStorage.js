@@ -1,7 +1,5 @@
 export const saveToLocalStorage = (key, entry) => {
   let formattedEntry = entry;
-  console.log(key, entry);
-
   if (typeof entry === 'object') {
     formattedEntry = JSON.stringify(entry);
   }

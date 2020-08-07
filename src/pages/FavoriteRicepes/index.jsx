@@ -8,12 +8,11 @@ import FavoriteIcon from '../../images/blackHeartIcon.svg';
 
 const SaveClipBoard = (type, id, index) => {
   copyToClipboard(`http://localhost:3000/${type}s/${id}`);
-  console.log(`http://localhost:3000/${type}/${id}`);
   document.getElementById(`copyLink-${index}`).innerHTML = 'Link copiado!';
 };
 
 const renderCardComidas = (recipe, index, removeItemOfFavorites) => (
-  <div>
+  <div key={recipe.id}>
     <Link to={`/${recipe.type}s/${recipe.id}`}>
       <img
         data-testid={`${index}-horizontal-image`}
@@ -43,7 +42,7 @@ const renderCardComidas = (recipe, index, removeItemOfFavorites) => (
 );
 
 const renderCardBebidas = (recipe, index, removeItemOfFavorites) => (
-  <div>
+  <div key={recipe.id}>
     <Link to={`/${recipe.type}s/${recipe.id}`}>
       <img
         data-testid={`${index}-horizontal-image`}
