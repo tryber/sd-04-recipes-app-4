@@ -65,8 +65,9 @@ const Login = ({ sendUser }) => {
       <div id="meals">
         <span>TRYBE</span>
         <img src={Logo} alt="imageLogo" />
+        {renderForms(setEmail, setSenha, handleLogin, disable)}
       </div>
-      {renderForms(setEmail, setSenha, handleLogin, disable)}</div>
+    </div>
   );
 };
 

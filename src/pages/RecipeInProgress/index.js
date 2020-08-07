@@ -10,6 +10,7 @@ import {
   Recipe, RecipeImage, RecipeHeader, RecipeTitle, IngridientsProgress,
 } from './StyledComponents';
 import { saveToLocalStorage, loadFromLocalStorage } from '../../service/localStorage';
+import SocialMenu from '../../components/SocialMenu';
 
 /**
  * Render the recipe ingredients list
@@ -126,6 +127,7 @@ export const RecipeDetailsInProgress = (props) => {
         data-testid="recipe-photo"
         src={appLocation === 'comidas' ? strMealThumb : strDrinkThumb}
       />
+      <SocialMenu />
       <RecipeHeader>
         <RecipeTitle data-testid="recipe-title">
           {appLocation === 'comidas' ? strMeal : strDrink}
