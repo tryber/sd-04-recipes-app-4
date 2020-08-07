@@ -1,5 +1,5 @@
 import PropTypes from 'prop-types';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import copyToClipboard from 'clipboard-copy';
 import { connect } from 'react-redux';
 import ShareIcon from '../../images/shareIcon.svg';
@@ -20,8 +20,8 @@ const setLocalStorageFood = (recipe, currentFavoriteRecipes) => {
     alcoholicOrNot: '',
     name: recipe.strMeal,
     image: recipe.strMealThumb,
-    doneDate: recipe.dateModified,
-    tags: recipe.strTags,
+    // doneDate: recipe.dateModified,
+    // tags: recipe.strTags,
   };
   const favoriteRecipes = [...currentFavoriteRecipes, objForFavorite];
   return localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
@@ -36,8 +36,8 @@ const setLocalStorageDrink = (recipe, currentFavoriteRecipes) => {
     alcoholicOrNot: recipe.strAlcoholic,
     name: recipe.strDrink,
     image: recipe.strDrinkThumb,
-    doneDate: recipe.dateModified,
-    tags: recipe.strTags,
+    // doneDate: recipe.dateModified,
+    // tags: recipe.strTags,
   };
   const favoriteRecipes = [...currentFavoriteRecipes, objForFavorite];
   localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
@@ -46,14 +46,23 @@ const setLocalStorageDrink = (recipe, currentFavoriteRecipes) => {
 const SocialMenu = ({ recipe }) => {
   const [favorite, setFavorite] = useState(false);
 
+  const currentFavoriteRecipes = localStorage.getItem('favoriteRecipes')
+    ? JSON.parse(localStorage.getItem('favoriteRecipes')) : [];
+
+  useEffect(() => {
+    const current = localStorage.getItem('favoriteRecipes')
+      ? JSON.parse(localStorage.getItem('favoriteRecipes')) : [];
+    if (recipe.idMeal) {
+      setFavorite(current.some((obj) => obj.id === recipe.idMeal));
+    } else {
+      setFavorite(current.some((obj) => obj.id === recipe.idDrink));
+    }
+  }, [recipe]);
+
   const handleShare = () => {
     copyToClipboard(window.location.href);
     document.getElementById('copyLink').innerHTML = 'Link copiado!';
   };
-
-  const currentFavoriteRecipes = localStorage.getItem('favoriteRecipes')
-    ? JSON.parse(localStorage.getItem('favoriteRecipes'))
-    : [];
 
   const handleFavorite = () => {
     if (recipe.idMeal) {
