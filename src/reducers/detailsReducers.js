@@ -22,7 +22,7 @@ const recommendationsInitialState = {
 export const detailsReducer = (state = recipeInitialState, action) => {
   switch (action.type) {
     case RECIPE_FETCH:
-      return { ...state, isFetching: !state.isFetching };
+      return { ...state, isFetching: false };
 
     case RECIPE_FETCH_SUCCESS:
       return {
