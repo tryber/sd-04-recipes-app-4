@@ -149,7 +149,10 @@ export const RecipeDetailsInProgress = (props) => {
     }
   }, [appLocation]);
   // Handle recipe start action
-  const finishRecipe = () => {
+  const finishRecipe = (props) => {
+    const { recipe } = props;
+    const doneRecipes = [{ id: { id } }];
+    saveToLocalStorage('doneRecipes', doneRecipes);
     history.push('/receitas-feitas');
   };
   if (recipeFetching) return <p>loading...</p>;
