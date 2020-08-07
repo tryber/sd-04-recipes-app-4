@@ -10,6 +10,7 @@ import {
   Recipe, RecipeImage, RecipeHeader, RecipeTitle, IngridientsProgress,
 } from './StyledComponents';
 import { saveToLocalStorage, loadFromLocalStorage } from '../../service/localStorage';
+import SocialMenu from '../../components/SocialMenu';
 
 /**
  * Render the recipe ingredients list
@@ -22,6 +23,46 @@ const checkAppLocation = (path, appLocation, locationChanger) => {
   appLocation === 'bebidas' ? locationChanger('comidas') : locationChanger('bebidas');
   return false;
 };
+
+const renderAllPage = (
+  appLocation,
+  strMealThumb,
+  strDrinkThumb,
+  strMeal,
+  strDrink,
+  strCategory,
+  strAlcoholic,
+  renderIngredientsCheckList,
+  ingredients,
+  arrayOfChecked,
+  setArrayOfChecked,
+  id,
+  strInstructions,
+  renderFinshRecipeBtn,
+  recipe,
+  finishRecipe,
+) => (
+  <Recipe>
+    <RecipeImage
+      data-testid="recipe-photo"
+      src={appLocation === 'comidas' ? strMealThumb : strDrinkThumb}
+    />
+    <SocialMenu />
+    <RecipeHeader>
+      <RecipeTitle data-testid="recipe-title">
+        {appLocation === 'comidas' ? strMeal : strDrink}
+      </RecipeTitle>
+    </RecipeHeader>
+    <span data-testid="recipe-category">
+      {appLocation === 'comidas' ? strCategory : strAlcoholic}
+    </span>
+    <h2>Ingredients</h2>
+    {renderIngredientsCheckList(ingredients, arrayOfChecked, setArrayOfChecked, id, appLocation)}
+    <h2>Instruction</h2>
+    <p data-testid="instructions">{strInstructions}</p>
+    {renderFinshRecipeBtn(recipe, arrayOfChecked, finishRecipe)}
+  </Recipe>
+);
 
 const renderIngredientsCheckList = (ingredients,
   arrayOfChecked, setArrayOfChecked, id, appLocation) => {
@@ -54,10 +95,9 @@ const renderIngredientsCheckList = (ingredients,
   return (
     <div>
       {ingredients.map((data, index) => (
-        <label htmlFor={data.ingredient} data-testid={`${index}-ingredient-step`}>
+        <label htmlFor={data.ingredient} data-testid={`${index}-ingredient-step`} key={data.ingredient}>
           <input
             name={data.ingredient}
-            key={data.ingredient}
             type="checkbox"
             defaultChecked={(event) => (arrayOfChecked.indexOf(event.target.name) !== -1)}
             onChange={(event) => toggleCheckbox(event.target.name)}
@@ -97,10 +137,7 @@ export const RecipeDetailsInProgress = (props) => {
     strMeal, strInstructions, ingredients, strAlcoholic, strDrink, strDrinkThumb, strCategory,
   } = recipe;
   const [arrayOfChecked, setArrayOfChecked] = useState([]);
-
-  /**
-   * Fetch recipe and recommendations on mount
-   */
+  // Fetch recipe and recommendations on mount
   useEffect(() => {
     if (loadFromLocalStorage('inProgressRecipe')) {
       if (appLocation === 'comidas' && arrayOfChecked.length > 0) setArrayOfChecked(loadFromLocalStorage('inProgressRecipe').meals[id]);
@@ -111,35 +148,17 @@ export const RecipeDetailsInProgress = (props) => {
       recommendationsFetch(appLocation);
     }
   }, [appLocation]);
-  /**
-   * Handle recipe start action
-   */
+  // Handle recipe start action
   const finishRecipe = () => {
     history.push('/receitas-feitas');
   };
-
   if (recipeFetching) return <p>loading...</p>;
-
   return (
-    <Recipe>
-      <RecipeImage
-        data-testid="recipe-photo"
-        src={appLocation === 'comidas' ? strMealThumb : strDrinkThumb}
-      />
-      <RecipeHeader>
-        <RecipeTitle data-testid="recipe-title">
-          {appLocation === 'comidas' ? strMeal : strDrink}
-        </RecipeTitle>
-      </RecipeHeader>
-      <span data-testid="recipe-category">
-        {appLocation === 'comidas' ? strCategory : strAlcoholic}
-      </span>
-      <h2>Ingredients</h2>
-      {renderIngredientsCheckList(ingredients, arrayOfChecked, setArrayOfChecked, id, appLocation)}
-      <h2>Instruction</h2>
-      <p data-testid="instructions">{strInstructions}</p>
-      {renderFinshRecipeBtn(recipe, arrayOfChecked, finishRecipe)}
-    </Recipe>
+    renderAllPage(
+      appLocation, strMealThumb, strDrinkThumb, strMeal, strDrink, strCategory, strAlcoholic,
+      renderIngredientsCheckList, ingredients, arrayOfChecked, setArrayOfChecked, id,
+      strInstructions, renderFinshRecipeBtn, recipe, finishRecipe,
+    )
   );
 };
 
@@ -163,12 +182,12 @@ RecipeDetailsInProgress.propTypes = {
     push: PropTypes.func,
   }).isRequired,
   locationChanger: PropTypes.func.isRequired,
-  match: PropTypes.shape({
+  match: PropTypes.objectOf({
     params: PropTypes.string,
     path: PropTypes.string,
   }).isRequired,
   recipe: PropTypes.objectOf(PropTypes.string).isRequired,
   recipeFetch: PropTypes.func.isRequired,
-  recipeFetching: PropTypes.func.isRequired,
+  recipeFetching: PropTypes.bool.isRequired,
   recommendationsFetch: PropTypes.func.isRequired,
 };

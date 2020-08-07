@@ -1,4 +1,6 @@
-import { getMealById, getDrinkById, getMealsByName, getDrinksByName } from '../service/fetchAPI';
+import {
+  getMealById, getDrinkById, getMealsByName, getDrinksByName,
+} from '../service/fetchAPI';
 
 export const RECIPE_FETCH = 'RECIPE_FETCH';
 export const RECIPE_FETCH_SUCCESS = 'RECIPE_FETCH_SUCESS';
@@ -43,7 +45,7 @@ export const fetchRecipe = (id, type) => (dispatch) => {
         dispatch(recipeFetchSuccess(recipe.drinks));
       }
     })
-    .then(() => dispatch(recipeFetch()))
+    .then(() => dispatch(recipeFetch(false)))
     .catch((error) => dispatch(recipeFetchErrored(error)));
 };
 

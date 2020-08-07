@@ -3,8 +3,8 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { fetchRecipe, fetchRecommendations } from '../../actions/detailsActions';
 import { loadFromLocalStorage } from '../../service/localStorage';
+import SocialMenu from '../../components/SocialMenu';
 import RecipesRecommendations from '../../components/RecipesRecommendations';
-// import SocialMenu from '../../components/SocialMenu';
 
 /**
  * Styled components
@@ -146,6 +146,7 @@ const RecipeDetails = (props) => {
         data-testid="recipe-photo"
         src={appLocation === 'comidas' ? strMealThumb : strDrinkThumb}
       />
+      <SocialMenu />
       <RecipeHeader>
         <RecipeTitle data-testid="recipe-title">
           {appLocation === 'comidas' ? strMeal : strDrink}
@@ -178,7 +179,7 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 RecipeDetails.propTypes = {
-  match: PropTypes.objectOf(PropTypes.string).isRequired,
+  match: PropTypes.objectOf(PropTypes.boll).isRequired,
   history: PropTypes.objectOf(PropTypes.string).isRequired,
   recipeFetching: PropTypes.bool.isRequired,
   recipeFetch: PropTypes.func.isRequired,

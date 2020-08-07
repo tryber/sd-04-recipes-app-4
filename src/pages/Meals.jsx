@@ -20,7 +20,9 @@ const handleCategory = (categoryName, getData, setSelectedCategory, selectedCate
   return false;
 };
 
-const Meals = ({ getData, data, getCategories, categories }) => {
+const Meals = ({
+  getData, data, getCategories, categories,
+}) => {
   const [selectedCategory, setSelectedCategory] = useState('');
   useEffect(() => {
     getMealsByName('').then((recipes) => getData(recipes.meals));

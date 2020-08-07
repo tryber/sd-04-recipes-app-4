@@ -573,6 +573,7 @@ describe('As receitas favoritas devem ser salvas em `localStorage` na chave `fav
 
     cy.get('[data-testid="favorite-btn"]').click().then(() => {
       const favoriteRecipes = JSON.parse(localStorage.getItem('favoriteRecipes'));
+      
       const expectedFavoriteRecipes = [
         {
           id: '52771',
