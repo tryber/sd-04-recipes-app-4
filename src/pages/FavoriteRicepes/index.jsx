@@ -80,28 +80,28 @@ const renderRecipes = (favorites, removeItemOfFavorites) => favorites.map((recip
 });
 
 const FavoriteRecipes = () => {
-  const [favorites, setFavorites] = useState(loadFromLocalStorage('favoriteRecipes'));
+  const [favorites, setFavorites] = useState(JSON.parse(loadFromLocalStorage('favoriteRecipes')));
 
   const filterAll = () => {
-    setFavorites(loadFromLocalStorage('favoriteRecipes'));
+    setFavorites(JSON.parse(loadFromLocalStorage('favoriteRecipes')));
   };
 
   const filterFood = () => {
-    const newFavorites = loadFromLocalStorage('favoriteRecipes').filter(
+    const newFavorites = JSON.parse(loadFromLocalStorage('favoriteRecipes')).filter(
       (recipe) => recipe.type === 'comida',
     );
     setFavorites(newFavorites);
   };
 
   const filterDrink = () => {
-    const newFavorites = loadFromLocalStorage('favoriteRecipes').filter(
+    const newFavorites = JSON.parse(loadFromLocalStorage('favoriteRecipes')).filter(
       (recipe) => recipe.type === 'bebida',
     );
     setFavorites(newFavorites);
   };
 
   const removeItemOfFavorites = (name) => {
-    const newFavorites = loadFromLocalStorage('favoriteRecipes').filter(
+    const newFavorites = JSON.parse(loadFromLocalStorage('favoriteRecipes')).filter(
       (recipe) => recipe.name !== name,
     );
     setFavorites(newFavorites);
