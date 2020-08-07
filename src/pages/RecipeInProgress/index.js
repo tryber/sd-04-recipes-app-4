@@ -24,6 +24,46 @@ const checkAppLocation = (path, appLocation, locationChanger) => {
   return false;
 };
 
+const renderAllPage = (
+  appLocation,
+  strMealThumb,
+  strDrinkThumb,
+  strMeal,
+  strDrink,
+  strCategory,
+  strAlcoholic,
+  renderIngredientsCheckList,
+  ingredients,
+  arrayOfChecked,
+  setArrayOfChecked,
+  id,
+  strInstructions,
+  renderFinshRecipeBtn,
+  recipe,
+  finishRecipe,
+) => (
+  <Recipe>
+    <RecipeImage
+      data-testid="recipe-photo"
+      src={appLocation === 'comidas' ? strMealThumb : strDrinkThumb}
+    />
+    <SocialMenu />
+    <RecipeHeader>
+      <RecipeTitle data-testid="recipe-title">
+        {appLocation === 'comidas' ? strMeal : strDrink}
+      </RecipeTitle>
+    </RecipeHeader>
+    <span data-testid="recipe-category">
+      {appLocation === 'comidas' ? strCategory : strAlcoholic}
+    </span>
+    <h2>Ingredients</h2>
+    {renderIngredientsCheckList(ingredients, arrayOfChecked, setArrayOfChecked, id, appLocation)}
+    <h2>Instruction</h2>
+    <p data-testid="instructions">{strInstructions}</p>
+    {renderFinshRecipeBtn(recipe, arrayOfChecked, finishRecipe)}
+  </Recipe>
+);
+
 const renderIngredientsCheckList = (ingredients,
   arrayOfChecked, setArrayOfChecked, id, appLocation) => {
   const changeLocalStorage = (option) => {
@@ -98,10 +138,7 @@ export const RecipeDetailsInProgress = (props) => {
     strMeal, strInstructions, ingredients, strAlcoholic, strDrink, strDrinkThumb, strCategory,
   } = recipe;
   const [arrayOfChecked, setArrayOfChecked] = useState([]);
-
-  /**
-   * Fetch recipe and recommendations on mount
-   */
+  // Fetch recipe and recommendations on mount
   useEffect(() => {
     if (loadFromLocalStorage('inProgressRecipe')) {
       if (appLocation === 'comidas' && arrayOfChecked.length > 0) setArrayOfChecked(loadFromLocalStorage('inProgressRecipe').meals[id]);
@@ -112,36 +149,17 @@ export const RecipeDetailsInProgress = (props) => {
       recommendationsFetch(appLocation);
     }
   }, [appLocation]);
-  /**
-   * Handle recipe start action
-   */
+  // Handle recipe start action
   const finishRecipe = () => {
     history.push('/receitas-feitas');
   };
-
   if (recipeFetching) return <p>loading...</p>;
-
   return (
-    <Recipe>
-      <RecipeImage
-        data-testid="recipe-photo"
-        src={appLocation === 'comidas' ? strMealThumb : strDrinkThumb}
-      />
-      <SocialMenu />
-      <RecipeHeader>
-        <RecipeTitle data-testid="recipe-title">
-          {appLocation === 'comidas' ? strMeal : strDrink}
-        </RecipeTitle>
-      </RecipeHeader>
-      <span data-testid="recipe-category">
-        {appLocation === 'comidas' ? strCategory : strAlcoholic}
-      </span>
-      <h2>Ingredients</h2>
-      {renderIngredientsCheckList(ingredients, arrayOfChecked, setArrayOfChecked, id, appLocation)}
-      <h2>Instruction</h2>
-      <p data-testid="instructions">{strInstructions}</p>
-      {renderFinshRecipeBtn(recipe, arrayOfChecked, finishRecipe)}
-    </Recipe>
+    renderAllPage(
+      appLocation, strMealThumb, strDrinkThumb, strMeal, strDrink, strCategory, strAlcoholic,
+      renderIngredientsCheckList, ingredients, arrayOfChecked, setArrayOfChecked, id,
+      strInstructions, renderFinshRecipeBtn, recipe, finishRecipe,
+    )
   );
 };
 
