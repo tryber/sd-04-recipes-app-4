@@ -18,7 +18,7 @@ const renderCardComidas = (recipe, index, removeItemOfFavorites) => (
       <img
         data-testid={`${index}-horizontal-image`}
         src={recipe.image}
-        alt="imageRecipe"
+        alt="imageRecipeFood"
         width="100px"
       />
     </Link>
@@ -27,14 +27,14 @@ const renderCardComidas = (recipe, index, removeItemOfFavorites) => (
     <input
       type="image"
       src={ShareIcon}
-      alt="bottonshare"
+      alt="bottonshareFood"
       data-testid={`${index}-horizontal-share-btn`}
       onClick={() => SaveClipBoard(recipe.type, recipe.id, index)}
     />
     <input
       type="image"
       src={FavoriteIcon}
-      alt="bottonshare"
+      alt="bottonshareFood"
       data-testid={`${index}-horizontal-favorite-btn`}
       onClick={() => removeItemOfFavorites(recipe.name)}
     />
@@ -48,7 +48,7 @@ const renderCardBebidas = (recipe, index, removeItemOfFavorites) => (
       <img
         data-testid={`${index}-horizontal-image`}
         src={recipe.image}
-        alt="imageRecipe"
+        alt="imageRecipeDrink"
         width="100px"
       />
       <h3 data-testid={`${index}-horizontal-name`}>{recipe.name}</h3>
@@ -57,14 +57,14 @@ const renderCardBebidas = (recipe, index, removeItemOfFavorites) => (
     <input
       type="image"
       src={ShareIcon}
-      alt="bottonshare"
+      alt="bottonshareDrink"
       data-testid={`${index}-horizontal-share-btn`}
       onClick={() => SaveClipBoard(recipe.type, recipe.id, index)}
     />
     <input
       type="image"
       src={FavoriteIcon}
-      alt="bottonshare"
+      alt="bottonshareDrink"
       data-testid={`${index}-horizontal-favorite-btn`}
       onClick={() => removeItemOfFavorites(recipe.name)}
     />
