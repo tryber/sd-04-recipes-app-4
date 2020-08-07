@@ -184,7 +184,7 @@ RecipeDetails.propTypes = {
   recipeFetching: PropTypes.bool.isRequired,
   recipeFetch: PropTypes.func.isRequired,
   recipe: PropTypes.objectOf(PropTypes.string).isRequired,
-  recommendationsFetch: PropTypes.bool.isRequired,
+  recommendationsFetch: PropTypes.func.isRequired,
   appLocation: PropTypes.string.isRequired,
   locationChanger: PropTypes.func.isRequired,
 };
