@@ -8,7 +8,12 @@ import HeaderSearch from './HeaderSearch';
 import './header.css';
 import { setAppLocation } from '../../actions/appActions';
 
-const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
+const capitalizeFirstLetter = (string) => {
+  if (string === 'receitas-favoritas') {
+    return 'Receitas Favoritas';
+  }
+  return string.charAt(0).toUpperCase() + string.slice(1);
+};
 
 const checkAppLocation = (path, appLocation, locationChanger) => {
   if (path.includes(appLocation)) return true;
