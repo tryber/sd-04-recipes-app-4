@@ -36,6 +36,34 @@ export const getDrinksCategories = async () => {
   return data;
 };
 
+//  listar areas
+
+export const getMealsAreas = async () => {
+  const fetchUrl = `${THE_MEAL_DB_API}list.php?a=list`;
+  const response = await fetch(fetchUrl);
+  const json = await response.json();
+  const data = await (response.ok ? Promise.resolve(json) : Promise.reject(json));
+  return data;
+};
+
+//  listar Ingredientes
+
+export const getMealsIngredients = async () => {
+  const fetchUrl = `${THE_MEAL_DB_API}list.php?i=list`;
+  const response = await fetch(fetchUrl);
+  const json = await response.json();
+  const data = await (response.ok ? Promise.resolve(json) : Promise.reject(json));
+  return data;
+};
+
+export const getDrinksIngredients = async () => {
+  const fetchUrl = `${THE_COCKTAIL_DB_API}list.php?i=list`;
+  const response = await fetch(fetchUrl);
+  const json = await response.json();
+  const data = await (response.ok ? Promise.resolve(json) : Promise.reject(json));
+  return data;
+};
+
 //  filtar por categorias
 
 export const getMealsByCategory = async (category) => {

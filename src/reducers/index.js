@@ -3,6 +3,7 @@ import userReducer from './userReducers';
 import appReducers from './appReducers';
 import { detailsReducer, recommendationsReducer } from './detailsReducers';
 import dataReducers from './dataReducers';
+import exploreReducer from './exploreReducers';
 
 const rootReducer = combineReducers({
   userReducer,
@@ -10,6 +11,7 @@ const rootReducer = combineReducers({
   detailsReducer,
   recommendationsReducer,
   dataReducers,
+  exploreReducer,
 });
 
 export default rootReducer;

@@ -8,8 +8,8 @@ const Explore = ({ history }) => {
       <Header />
       <button
         type="button"
-        data-testid="explore-foods"
-        onClick={() => history.push('/explorar/bebidas')}
+        data-testid="explore-food"
+        onClick={() => history.push('/explorar/comidas')}
       >
         Explorar Comidas
       </button>
