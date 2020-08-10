@@ -40,9 +40,9 @@ const renderCardComidas = (recipe, index) => (
     <div data-testid={`${index}-horizontal-top-text`}>{`${recipe.area} - ${recipe.category}`}</div>
     <input
       type="image"
+      alt="bottonshareFood"
       data-testid={`${index}-horizontal-share-btn`}
       src={ShareIcon}
-      alt="bottonshareFood"
       onClick={() => SaveClipBoard(recipe.type, recipe.id, index)}
     />
     <div id={`copyLink-${index}`} />
@@ -55,9 +55,9 @@ const renderCardBebidas = (recipe, index) => (
   <div key={recipe.id}>
     <Link to={`/${recipe.type}s/${recipe.id}`}>
       <img
+        alt="imageRecipeDrink"
         data-testid={`${index}-horizontal-image`}
         src={recipe.image}
-        alt="imageRecipeDrink"
         width="100px"
       />
       <h3 data-testid={`${index}-horizontal-name`}>{recipe.name}</h3>
