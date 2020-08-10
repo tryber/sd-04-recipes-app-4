@@ -3,6 +3,12 @@ import {
   getRandomDrinks,
   getMealsAreas,
   getMealsByArea,
+  getIngredientMealById,
+  getDrinkById,
+  getMealsByIngredient,
+  getDrinksByIngredient,
+  getMealsIngredients,
+  getDrinksIngredients,
 } from '../service/fetchAPI';
 
 export const RANDOM_RECIPE = 'RANDOM_RECIPE';
@@ -82,15 +88,16 @@ const ingredientsErrored = (error) => ({
  * @param {string} type recipe type
  */
 export const getIngredients = (type) => (dispatch) => {
-  const fetcher = type === 'comidas' ? getRandomMeals : getRandomDrinks;
+  const fetcher = type === 'Explorar Comidas' ? getMealsIngredients : getDrinksIngredients;
+  console.log(fetcher)
   dispatch(ingredientsFetching(true));
   fetcher()
     .then((ingre) => {
-      const data = type === 'comidas' ? ingre.meals : ingre.drinks;
+      const data = type === 'Explorar Comidas' ? ingre.meals : ingre.drinks;
       dispatch(ingredients(data));
     })
-    .then(() => dispatch(ingredientsFetching(false)))
-    .catch((error) => dispatch(ingredientsErrored(error)));
+    .then(() => dispatch(ingredientsFetching(false)));
+  // .catch((error) => dispatch(ingredientsErrored(error)));
 };
 
 /**
@@ -112,11 +119,11 @@ const recipesByIngredientErrored = (error) => ({
 });
 
 /**
- * Ingredients fetch function
+ * Recipes by ingredients
  * @param {string} type recipe type
  */
 export const getRecipesByingredient = (type) => (dispatch) => {
-  const fetcher = type === 'comidas' ? getRandomMeals : getRandomDrinks;
+  const fetcher = type === 'comidas' ? getMealsByIngredient : getDrinksByIngredient;
   dispatch(recipesByIngredientFetching(true));
   fetcher()
     .then((result) => {

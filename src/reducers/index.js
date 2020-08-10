@@ -3,7 +3,7 @@ import userReducer from './userReducers';
 import appReducers from './appReducers';
 import { detailsReducer, recommendationsReducer } from './detailsReducers';
 import dataReducers from './dataReducers';
-import exploreReducer from './exploreReducers';
+import { randomRecipeReducer, exploreIngredientsReducer, exploreRecipesByArea } from './exploreReducers';
 
 const rootReducer = combineReducers({
   userReducer,
@@ -11,7 +11,9 @@ const rootReducer = combineReducers({
   detailsReducer,
   recommendationsReducer,
   dataReducers,
-  exploreReducer,
+  randomRecipeReducer,
+  exploreIngredientsReducer,
+  exploreRecipesByArea,
 });
 
 export default rootReducer;

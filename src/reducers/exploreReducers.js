@@ -64,7 +64,7 @@ export const exploreIngredientsReducer = (state = ingredientsInitialState, actio
       return { ...state, isFetching: action.bool };
 
     case INGREDIENTS:
-      return { ...state, ingredients: [...action.ingredients] };
+      return { ...state, ingredients: [...action.ing] };
 
     case INGREDIENTS_ERROR:
       return { ...state, error: { ...state.error, status: true, msg: action.error } };

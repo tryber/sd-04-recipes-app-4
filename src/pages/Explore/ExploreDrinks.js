@@ -13,12 +13,12 @@ const ExploreDrinks = ({ history }) => {
       <button
         type="button"
         data-testid="explore-surprise"
-        onClick={() => history.push(`/explorar/bebidas/${'id-da-bebida'}`)}//  atenção
+        onClick={() => history.push(`/explorar/bebidas/${'id-da-bebida'}`)} //  atenção
       >
         Me Supreenda!
       </button>
     </div>
-);
+  );
 };
 
 export default ExploreDrinks;
