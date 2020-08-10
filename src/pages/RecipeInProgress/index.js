@@ -113,6 +113,38 @@ const renderIngredientsCheckList = (ingredients,
   );
 };
 
+const setLocalStorageFoodDone = (recipe, currentDoneRecipes) => {
+  const objForDone = {
+    id: recipe.idMeal,
+    type: 'comida',
+    area: recipe.strArea,
+    category: recipe.strCategory,
+    alcoholicOrNot: '',
+    name: recipe.strMeal,
+    image: recipe.strMealThumb,
+    doneDate: recipe.dateModified,
+    tags: recipe.strTags,
+  };
+  const doneRecipes = [...currentDoneRecipes, objForDone];
+  return localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
+};
+
+const setLocalStorageDrinkDone = (recipe, currentDoneRecipes) => {
+  const objForDone = {
+    id: recipe.idDrink,
+    type: 'bebida',
+    area: recipe.strArea,
+    category: recipe.strCategory,
+    alcoholicOrNot: recipe.strAlcoholic,
+    name: recipe.strDrink,
+    image: recipe.strDrinkThumb,
+    doneDate: recipe.dateModified,
+    tags: recipe.strTags,
+  };
+  const doneRecipes = [...currentDoneRecipes, objForDone];
+  localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
+};
+
 const renderFinshRecipeBtn = (recipe, arrayOfChecked, finishRecipe) => {
   const { ingredients } = recipe;
   return (
@@ -126,6 +158,7 @@ const renderFinshRecipeBtn = (recipe, arrayOfChecked, finishRecipe) => {
     </button>
   );
 };
+
 export const RecipeDetailsInProgress = (props) => {
   const {
     match, history, recipe, recipeFetching, recipeFetch, recommendationsFetch,
@@ -149,10 +182,11 @@ export const RecipeDetailsInProgress = (props) => {
     }
   }, [appLocation]);
   // Handle recipe start action
-  const finishRecipe = (props) => {
-    const { recipe } = props;
-    const doneRecipes = [{ id: { id } }];
-    saveToLocalStorage('doneRecipes', doneRecipes);
+  const finishRecipe = () => {
+    const currentDoneRecipes = localStorage.getItem('doneRecipes')
+      ? JSON.parse(localStorage.getItem('doneRecipes')) : [];
+    if (appLocation === 'comidas') setLocalStorageFoodDone(recipe, currentDoneRecipes);
+    if (appLocation === 'bebidas') setLocalStorageDrinkDone(recipe, currentDoneRecipes);
     history.push('/receitas-feitas');
   };
   if (recipeFetching) return <p>loading...</p>;
