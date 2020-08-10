@@ -37,7 +37,6 @@ const Perfil = ({ sendLocation }) => {
             type="button"
             data-testid="profile-favorite-btn"
             className="button-perfil"
-            onClick={() => sendLocation('Receitas Favoritas')}
           >
             Receitas Favoritas
           </button>
