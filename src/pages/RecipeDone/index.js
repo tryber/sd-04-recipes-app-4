@@ -12,10 +12,10 @@ const SaveClipBoard = (type, id, index) => {
 
 const renderTagName = (recipe, index) => {
   const { tags } = recipe;
-  const arrayOfTags = tags.split(',');
+
   return (
     <div>
-      {arrayOfTags.map((tagName) => (
+      {tags.map((tagName) => (
         <span
           data-testid={`${index}-${tagName}-horizontal-tag`}
         >
@@ -47,6 +47,7 @@ const renderCardComidas = (recipe, index) => (
     />
     <div id={`copyLink-${index}`} />
     <p data-testid={`${index}-horizontal-done-date`}>{`feita em: ${recipe.doneDate}`}</p>
+    {renderTagName(recipe, index)}
   </div>
 );
 
