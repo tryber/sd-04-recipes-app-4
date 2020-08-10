@@ -37,7 +37,7 @@ const renderCardComidas = (recipe, index) => (
       />
     </Link>
     <h3 data-testid={`${index}-horizontal-name`}>{recipe.name}</h3>
-    <div data-testid={`${index}-horizontal-top-text`}>{`${recipe.area} - ${recipe.category}`}</div>
+    <span data-testid={`${index}-horizontal-top-text`}>{`${recipe.area} - ${recipe.category}`}</span>
     <input
       type="image"
       alt="bottonshareFood"
