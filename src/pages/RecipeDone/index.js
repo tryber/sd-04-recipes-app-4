@@ -10,6 +10,22 @@ const SaveClipBoard = (type, id, index) => {
   document.getElementById(`copyLink-${index}`).innerHTML = 'Link copiado!';
 };
 
+const renderTagName = (recipe, index) => {
+  const { tags } = recipe;
+  const arrayOfTags = tags.split(',');
+  return (
+    <div>
+      {arrayOfTags.map((tagName) => (
+        <span
+          data-testid={`${index}-${tagName}-horizontal-tag`}
+        >
+          {`${tagName} `}
+        </span>
+      ))}
+    </div>
+  );
+};
+
 const renderCardComidas = (recipe, index) => (
   <div key={recipe.id}>
     <Link to={`/${recipe.type}s/${recipe.id}`}>
@@ -30,6 +46,7 @@ const renderCardComidas = (recipe, index) => (
       onClick={() => SaveClipBoard(recipe.type, recipe.id, index)}
     />
     <div id={`copyLink-${index}`} />
+    <p data-testid={`${index}-horizontal-done-date`}>{`feita em: ${recipe.doneDate}`}</p>
   </div>
 );
 
@@ -52,6 +69,7 @@ const renderCardBebidas = (recipe, index) => (
       data-testid={`${index}-horizontal-share-btn`}
       onClick={() => SaveClipBoard(recipe.type, recipe.id, index)}
     />
+    <p data-testid={`${index}-horizontal-done-date`}>{`feita em: ${recipe.doneDate}`}</p>
     <div id={`copyLink-${index}`} />
   </div>
 );
