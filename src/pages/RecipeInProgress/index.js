@@ -139,7 +139,7 @@ const setLocalStorageDrinkDone = (recipe, currentDoneRecipes) => {
     name: recipe.strDrink,
     image: recipe.strDrinkThumb,
     doneDate: recipe.dateModified,
-    tags: recipe.strTags.split(','),
+    tags: recipe.strTags ? recipe.strTags.split(',') : [],
   };
   const doneRecipes = [...currentDoneRecipes, objForDone];
   localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));

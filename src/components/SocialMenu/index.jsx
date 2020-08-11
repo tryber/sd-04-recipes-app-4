@@ -60,8 +60,15 @@ const SocialMenu = ({ recipe }) => {
   }, [recipe]);
 
   const handleShare = () => {
+    const windowHref = window.location.href;
+    if (windowHref.includes('in-progress')) {
+      const newHref = windowHref.substr(0, windowHref.length - 12);
+      document.getElementById('copyLink').innerHTML = 'Link copiado!';
+      return copyToClipboard(newHref);
+    }
     copyToClipboard(window.location.href);
     document.getElementById('copyLink').innerHTML = 'Link copiado!';
+    return null;
   };
 
   const handleFavorite = () => {
