@@ -5,9 +5,9 @@ import Header from '../../components/Header/Header';
 import { loadFromLocalStorage } from '../../service/localStorage';
 import ShareIcon from '../../images/shareIcon.svg';
 
-const SaveClipBoard = (type, id, index) => {
+const SaveTheClipBoard = (type, id, index) => {
   copyToClipboard(`http://localhost:3000/${type}s/${id}`);
-  document.getElementById(`copyLink-${index}`).innerHTML = 'Link copiado!';
+  document.getElementsByClassName(`copyThisLink-${index}`).innerHTML = 'Link copiado!';
 };
 
 const renderTagName = (recipe, index) => {
@@ -43,7 +43,7 @@ const renderCardComidas = (recipe, index) => (
       alt="bottonshareFood"
       data-testid={`${index}-horizontal-share-btn`}
       src={ShareIcon}
-      onClick={() => SaveClipBoard(recipe.type, recipe.id, index)}
+      onClick={() => SaveTheClipBoard(recipe.type, recipe.id, index)}
     />
     <div id={`copyLink-${index}`} />
     <p data-testid={`${index}-horizontal-done-date`}>{`feita em: ${recipe.doneDate}`}</p>
@@ -68,10 +68,10 @@ const renderCardBebidas = (recipe, index) => (
       src={ShareIcon}
       alt="bottonshareDrink"
       data-testid={`${index}-horizontal-share-btn`}
-      onClick={() => SaveClipBoard(recipe.type, recipe.id, index)}
+      onClick={() => SaveTheClipBoard(recipe.type, recipe.id, index)}
     />
     <p data-testid={`${index}-horizontal-done-date`}>{`feita em: ${recipe.doneDate}`}</p>
-    <div id={`copyLink-${index}`} />
+    <div className={`copyThisLink-${index}`} />
   </div>
 );
 

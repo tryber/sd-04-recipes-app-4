@@ -159,6 +159,24 @@ const renderFinshRecipeBtn = (recipe, arrayOfChecked, finishRecipe) => {
   );
 };
 
+const doUseEffect = (
+  appLocation, arrayOfChecked, setArrayOfChecked, id, match,
+  locationChanger, recipeFetch, recommendationsFetch,
+) => {
+  if (loadFromLocalStorage('inProgressRecipe')) {
+    if (appLocation === 'comidas' && arrayOfChecked.length > 0) {
+      setArrayOfChecked(loadFromLocalStorage('inProgressRecipe').meals[id]);
+    }
+    if (appLocation === 'bebidas' && arrayOfChecked.length > 0) {
+      setArrayOfChecked(loadFromLocalStorage('inProgressRecipe').cocktails[id]);
+    }
+  }
+  if (checkAppLocation(match.path, appLocation, locationChanger)) {
+    recipeFetch(id, appLocation);
+    recommendationsFetch(appLocation);
+  }
+};
+
 export const RecipeDetailsInProgress = (props) => {
   const {
     match, history, recipe, recipeFetching, recipeFetch, recommendationsFetch,
@@ -172,14 +190,10 @@ export const RecipeDetailsInProgress = (props) => {
   const [arrayOfChecked, setArrayOfChecked] = useState([]);
   // Fetch recipe and recommendations on mount
   useEffect(() => {
-    if (loadFromLocalStorage('inProgressRecipe')) {
-      if (appLocation === 'comidas' && arrayOfChecked.length > 0) setArrayOfChecked(loadFromLocalStorage('inProgressRecipe').meals[id]);
-      if (appLocation === 'bebidas' && arrayOfChecked.length > 0) setArrayOfChecked(loadFromLocalStorage('inProgressRecipe').cocktails[id]);
-    }
-    if (checkAppLocation(match.path, appLocation, locationChanger)) {
-      recipeFetch(id, appLocation);
-      recommendationsFetch(appLocation);
-    }
+    doUseEffect(
+      appLocation, arrayOfChecked, setArrayOfChecked, id, match,
+      locationChanger, recipeFetch, recommendationsFetch,
+    );
   }, [appLocation]);
   // Handle recipe start action
   const finishRecipe = () => {
