@@ -1,6 +1,12 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
+import { getRandomRecipe } from '../../actions/exploreActions';
 
-const ExploreDrinks = ({ history }) => {
+const ExploreDrinks = ({ history, recipe, randomRecipeFetcher }) => {
+  useEffect(() => {
+    if (recipe.length) history.push(`/bebidas/${recipe[0].idDrink}`);
+  }, [recipe]);
   return (
     <div>
       <button
@@ -13,7 +19,7 @@ const ExploreDrinks = ({ history }) => {
       <button
         type="button"
         data-testid="explore-surprise"
-        onClick={() => history.push(`/explorar/bebidas/${'id-da-bebida'}`)} //  atenção
+        onClick={() => randomRecipeFetcher('bebidas')}
       >
         Me Supreenda!
       </button>
@@ -21,4 +27,22 @@ const ExploreDrinks = ({ history }) => {
   );
 };
 
-export default ExploreDrinks;
+ExploreDrinks.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+  randomRecipeFetcher: PropTypes.func.isRequired,
+  recipe: PropTypes.shape({
+    length: PropTypes.number.isRequired,
+  }).isRequired,
+};
+
+const mapStateToProps = (state) => ({
+  recipe: state.randomRecipeReducer.recipe,
+});
+
+const mapDispatchToProps = (dispatch) => ({
+  randomRecipeFetcher: (type) => dispatch(getRandomRecipe(type)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(ExploreDrinks);

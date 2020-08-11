@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 import { getAreaRecipe, getRecipesByArea } from '../../actions/exploreActions';
 import { setAppLocation } from '../../actions/appActions';
 import { getMealsByName } from '../../service/fetchAPI';
 
 const ExploreByAreas = ({
-  history,
   isFetching,
   areas,
   recipes,
-  appLocation,
-  setAppLocationProps,
   areasFetcher,
   recipesByArea,
-  getMeals,
 }) => {
   const [areaSelector, setAreaSelector] = useState('All');
 
@@ -43,20 +40,33 @@ const ExploreByAreas = ({
       </select>
       {recipes.length
         ? recipes.slice(0, 12).map((recipe, index) => (
-            <Link to={`/comidas/${recipe.idMeal}`}>
-              <div key={recipe.idMeal} data-testid={`${index}-recipe-card`}>
-                <img
-                  src={recipe.strMealThumb}
-                  alt="foto receita"
-                  data-testid={`${index}-card-img`}
-                />
-                <span data-testid={`${index}-card-name`}>{recipe.strMeal}</span>
-              </div>
-            </Link>
-          ))
+          <Link to={`/comidas/${recipe.idMeal}`}>
+            <div key={recipe.idMeal} data-testid={`${index}-recipe-card`}>
+              <img
+                src={recipe.strMealThumb}
+                alt="foto receita"
+                data-testid={`${index}-card-img`}
+              />
+              <span data-testid={`${index}-card-name`}>{recipe.strMeal}</span>
+            </div>
+          </Link>
+        ))
         : null}
     </div>
   );
+};
+
+ExploreByAreas.propTypes = {
+  areas: PropTypes.shape({
+    map: PropTypes.func.isRequired,
+  }).isRequired,
+  areasFetcher: PropTypes.func.isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  recipes: PropTypes.shape({
+    length: PropTypes.number.isRequired,
+    slice: PropTypes.func.isRequired,
+  }).isRequired,
+  recipesByArea: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

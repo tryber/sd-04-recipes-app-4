@@ -34,7 +34,7 @@ export const randomRecipeReducer = (state = randomInitialState, action) => {
       return { ...state, isFetching: action.bool };
 
     case RANDOM_RECIPE:
-      return { ...state, recipe: [...action.ingredients] };
+      return { ...state, recipe: [...action.recipe] };
 
     case RANDOM_RECIPE_ERROR:
       return { ...state, error: { ...state.error, status: true, msg: action.error } };

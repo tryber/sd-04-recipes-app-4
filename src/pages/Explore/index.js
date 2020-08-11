@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React from 'react';
 import { connect } from 'react-redux';
 import { setAppLocation } from '../../actions/appActions';
@@ -31,6 +32,13 @@ const Explore = ({ history, appLocation }) => {
       <BottomMenu />
     </div>
   );
+};
+
+Explore.propTypes = {
+  appLocation: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
 };
 
 const mapDispathToProps = (dispatch) => ({

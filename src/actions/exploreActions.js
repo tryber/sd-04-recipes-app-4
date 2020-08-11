@@ -3,8 +3,6 @@ import {
   getRandomDrinks,
   getMealsAreas,
   getMealsByArea,
-  getIngredientMealById,
-  getDrinkById,
   getMealsByIngredient,
   getDrinksByIngredient,
   getMealsIngredients,
@@ -13,8 +11,8 @@ import {
 } from '../service/fetchAPI';
 
 export const RANDOM_RECIPE = 'RANDOM_RECIPE';
-export const RANDOM_RECIPE_FETCHING = 'RANDOM_RECIPE';
-export const RANDOM_RECIPE_ERROR = 'RANDOM_RECIPE';
+export const RANDOM_RECIPE_FETCHING = 'RANDOM_RECIPE_FETCHING';
+export const RANDOM_RECIPE_ERROR = 'RANDOM_RECIPE_ERROR';
 
 export const INGREDIENTS = 'INGREDIENTS';
 export const INGREDIENTS_FETCHING = 'INGREDIENT_FETCHINGS';
@@ -55,6 +53,7 @@ const randomRecipeErrored = (error) => ({
  * @param {string} type recipe type
  */
 export const getRandomRecipe = (type) => (dispatch) => {
+  console.log(type);
   const fetcher = type === 'comidas' ? getRandomMeals : getRandomDrinks;
   dispatch(radomRecipeFetching(true));
   fetcher()
@@ -79,10 +78,10 @@ const ingredientsFetching = (bool) => ({
   bool,
 });
 
-const ingredientsErrored = (error) => ({
-  type: INGREDIENTS_ERROR,
-  error,
-});
+// const ingredientsErrored = (error) => ({
+//   type: INGREDIENTS_ERROR,
+//   error,
+// });
 
 /**
  * Ingredients fetch function
@@ -114,10 +113,10 @@ const recipesByIngredientFetching = (bool) => ({
   bool,
 });
 
-const recipesByIngredientErrored = (error) => ({
-  type: RECIPES_BY_INGREDIENT_ERROR,
-  error,
-});
+// const recipesByIngredientErrored = (error) => ({
+//   type: RECIPES_BY_INGREDIENT_ERROR,
+//   error,
+// });
 
 /**
  * Recipes by ingredients
@@ -149,10 +148,10 @@ const areasFetching = (bool) => ({
   bool,
 });
 
-const areasError = (error) => ({
-  type: AREAS_ERROR,
-  error,
-});
+// const areasError = (error) => ({
+//   type: AREAS_ERROR,
+//   error,
+// });
 
 /**
  * Areas fetch function
@@ -181,10 +180,10 @@ const recipesByAreaFetching = (bool) => ({
   bool,
 });
 
-const RecipesByAreaError = (error) => ({
-  type: RECIPES_BY_AREA_ERROR,
-  error,
-});
+// const RecipesByAreaError = (error) => ({
+//   type: RECIPES_BY_AREA_ERROR,
+//   error,
+// });
 
 /**
  * Recipes by area fetch function

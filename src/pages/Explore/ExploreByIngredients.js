@@ -1,3 +1,4 @@
+import PropTypes from 'prop-types';
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import { getIngredients, getRecipesByingredient } from '../../actions/exploreActions';
@@ -90,13 +91,32 @@ const ExploreByIngredients = ({
     <div>
       {ingredients
         .slice(0, 12)
-        .map((ingredient, index) =>
-          appLocation === 'Explorar Comidas'
-            ? renderMealIngredient(ingredient, index, recipesFetcher, appLocation)
-            : renderDrinkIngredient(ingredient, index, recipesFetcher, appLocation)
-        )}
+        .map((ingredient, index) => (appLocation === 'Explorar Comidas'
+          ? renderMealIngredient(ingredient, index, recipesFetcher, appLocation)
+          : renderDrinkIngredient(ingredient, index, recipesFetcher, appLocation)))}
     </div>
   );
+};
+
+ExploreByIngredients.propTypes = {
+  appLocation: PropTypes.string.isRequired,
+  getData: PropTypes.func.isRequired,
+  history: PropTypes.shape({
+    location: PropTypes.shape({
+      pathname: PropTypes.string.isRequired,
+    }).isRequired,
+    push: PropTypes.func.isRequired,
+  }).isRequired,
+  ingredientesFetcher: PropTypes.func.isRequired,
+  ingredients: PropTypes.shape({
+    slice: PropTypes.func.isRequired,
+  }).isRequired,
+  isFetching: PropTypes.bool.isRequired,
+  recipes: PropTypes.shape({
+    length: PropTypes.number.isRequired,
+  }).isRequired,
+  recipesFetcher: PropTypes.func.isRequired,
+  setAppLocationProps: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -114,12 +134,3 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExploreByIngredients);
-
-// const recipes = data.slice(0, 12).map((recipe, index) => (
-//   <Link to={`/comidas/${data[index].idMeal}`} key={recipe.idMeal}>
-//     <div key={recipe.idMeal} data-testid={`${index}-recipe-card`}>
-//       <img src={recipe.strMealThumb} alt="foto receita" data-testid={`${index}-card-img`} />
-//       <span data-testid={`${index}-card-name`}>{recipe.strMeal}</span>
-//     </div>
-//   </Link>
-// ));
