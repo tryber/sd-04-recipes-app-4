@@ -123,7 +123,7 @@ const setLocalStorageFoodDone = (recipe, currentDoneRecipes) => {
     name: recipe.strMeal,
     image: recipe.strMealThumb,
     doneDate: recipe.dateModified,
-    tags: recipe.strTags,
+    tags: recipe.strTags.split(','),
   };
   const doneRecipes = [...currentDoneRecipes, objForDone];
   return localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
@@ -139,7 +139,7 @@ const setLocalStorageDrinkDone = (recipe, currentDoneRecipes) => {
     name: recipe.strDrink,
     image: recipe.strDrinkThumb,
     doneDate: recipe.dateModified,
-    tags: recipe.strTags,
+    tags: recipe.strTags.split(','),
   };
   const doneRecipes = [...currentDoneRecipes, objForDone];
   localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));

@@ -7,12 +7,11 @@ import ShareIcon from '../../images/shareIcon.svg';
 
 const SaveTheClipBoard = (type, id, index) => {
   copyToClipboard(`http://localhost:3000/${type}s/${id}`);
-  document.getElementsByClassName(`copyThisLink-${index}`).innerHTML = 'Link copiado!';
+  document.getElementsByClassName(`copyThisLink-${index}`)[0].innerHTML = 'Link copiado!';
 };
 
 const renderTagName = (recipe, index) => {
   const { tags } = recipe;
-
   return (
     <div>
       {tags.map((tagName) => (
@@ -45,7 +44,7 @@ const renderCardComidas = (recipe, index) => (
       src={ShareIcon}
       onClick={() => SaveTheClipBoard(recipe.type, recipe.id, index)}
     />
-    <div id={`copyLink-${index}`} />
+    <div className={`copyThisLink-${index}`} />
     <p data-testid={`${index}-horizontal-done-date`}>{`feita em: ${recipe.doneDate}`}</p>
     {renderTagName(recipe, index)}
   </div>
@@ -72,6 +71,7 @@ const renderCardBebidas = (recipe, index) => (
     />
     <p data-testid={`${index}-horizontal-done-date`}>{`feita em: ${recipe.doneDate}`}</p>
     <div className={`copyThisLink-${index}`} />
+    {renderTagName(recipe, index)}
   </div>
 );
 
