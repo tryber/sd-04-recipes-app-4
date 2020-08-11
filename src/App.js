@@ -9,6 +9,7 @@ import NotFound from './pages/NotFound';
 import Perfil from './pages/Perfil';
 import RecipeInProgress from './pages/RecipeInProgress';
 import FavoriteRicepes from './pages/FavoriteRicepes';
+import Loading from './components/Loading';
 
 function App() {
   return (
@@ -30,6 +31,7 @@ function App() {
         <Route exact path="/perfil" component={Perfil} />
         {/* <Route exact path="/receitas-feitas" component={Login} /> */}
         <Route exact path="/receitas-favoritas" component={FavoriteRicepes} />
+        <Route exact path="/loading" component={Loading} />
         <Route component={NotFound} />
       </Switch>
     </BrowserRouter>
