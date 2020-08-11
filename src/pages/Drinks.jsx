@@ -23,7 +23,7 @@ const handleCategory = (categoryName, getData, setSelectedCategory, selectedCate
 const Drinks = ({ getData, data, getCategories, categories }) => {
   const [selectedCategory, setSelectedCategory] = useState('');
   useEffect(() => {
-    getDrinksByName('').then((recipes) => getData(recipes.drinks));
+    if (!data.length) getDrinksByName('').then((recipes) => getData(recipes.drinks));
   }, [getData]);
   useEffect(() => {
     getDrinksCategories().then((recipesCategories) => getCategories(recipesCategories.drinks));

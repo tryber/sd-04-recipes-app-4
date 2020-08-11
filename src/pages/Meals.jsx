@@ -25,7 +25,7 @@ const Meals = ({
 }) => {
   const [selectedCategory, setSelectedCategory] = useState('');
   useEffect(() => {
-    getMealsByName('').then((recipes) => getData(recipes.meals));
+    if (!data.length) getMealsByName('').then((recipes) => getData(recipes.meals));
   }, [getData]);
   useEffect(() => {
     getMealsCategories().then((recipesCategories) => getCategories(recipesCategories.meals));
