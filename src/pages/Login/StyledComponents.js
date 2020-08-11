@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import LoginBackground from '../../images/login-bg.jpg';
 
 export const LoginPage = styled.div`
@@ -31,6 +31,16 @@ export const ColorBG = styled.div`
   z-index: -1;
 `;
 
+const showLogin = keyframes`
+  from {
+    transform: translateY(0vh);
+  }
+
+  to {
+    transform: translateY(-100vh);
+  }
+`;
+
 export const LoginContainer = styled.div`
   height: 100vh;
   display: flex;
@@ -40,11 +50,11 @@ export const LoginContainer = styled.div`
   position: absolute;
   width: 100%;
   bottom: -100vh;
-  transition: transform 0.5s ease-in-out;
+  /* transition: transform 0.5s ease-in-out; */
   ${({ visible }) =>
     visible &&
     css`
-      transform: translateY(-100vh);
+      animation: ${showLogin} 0.5s ease-out forwards;
     `}
 
   &:after {
