@@ -28,14 +28,14 @@ const ExploreMeals = ({
         data-testid="explore-by-area"
         onClick={() => history.push('/explorar/comidas/area')}
       >
-        Por Area
+        Por Local de Origem
       </button>
       <button
         type="button"
-        data-testid="explore-suprise"
+        data-testid="explore-surprise"
         onClick={() => randomRecipeFetcher('comidas')}
       >
-        Me Supreenda!
+        Me Surpreenda!
       </button>
     </div>
   );

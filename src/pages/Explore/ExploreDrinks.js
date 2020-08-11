@@ -21,7 +21,7 @@ const ExploreDrinks = ({ history, recipe, randomRecipeFetcher }) => {
         data-testid="explore-surprise"
         onClick={() => randomRecipeFetcher('bebidas')}
       >
-        Me Supreenda!
+        Me Surpreenda!
       </button>
     </div>
   );
