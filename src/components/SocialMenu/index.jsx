@@ -43,16 +43,6 @@ const setLocalStorageDrink = (recipe, currentFavoriteRecipes) => {
   localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
 };
 
-const windowHrefChecker = () => {
-  const windowHref = window.location.href;
-  if (windowHref.includes('in-progress')) {
-    const newHref = windowHref.substr(0, windowHref.length - 12);
-    document.getElementById('copyLink').innerHTML = 'Link copiado!';
-    return copyToClipboard(newHref);
-  }
-  return null;
-};
-
 const SocialMenu = ({ recipe }) => {
   const [favorite, setFavorite] = useState(false);
 
@@ -69,6 +59,15 @@ const SocialMenu = ({ recipe }) => {
     }
   }, [recipe]);
 
+  const windowHrefChecker = () => {
+    const windowHref = window.location.href;
+    if (windowHref.includes('in-progress')) {
+      const newHref = windowHref.substr(0, windowHref.length - 12);
+      document.getElementById('copyLink').innerHTML = 'Link copiado!';
+      return copyToClipboard(newHref);
+    }
+    return null;
+  };
   const handleShare = () => {
     copyToClipboard(window.location.href);
     document.getElementById('copyLink').innerHTML = 'Link copiado!';
