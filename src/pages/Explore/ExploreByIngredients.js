@@ -11,7 +11,7 @@ import { setAppLocation } from '../../actions/appActions';
  * @param {object} appLocation        appLocation State
  * @param {function} locationChanger  appLocation state set function
  */
-const checkAppLocation = (path, appLocation, locationChanger) => {
+const checkAppLocation = (path, locationChanger) => {
   // if (path.includes(appLocation.toLowerCase())) return true;
   path.includes('comidas')
     ? locationChanger('Explorar Comidas')
@@ -24,26 +24,36 @@ const checkAppLocation = (path, appLocation, locationChanger) => {
  * @param {array} ingredient -
  * @param {number} index
  */
-const renderMealIngredient = (ingredient, index) => (
-  <div key={ingredient.idIngredient} data-testid={`${index}-ingredient-card`}>
+const renderMealIngredient = (ingredient, index, recipesFetcher, appLocation) => (
+  <button
+    type="button"
+    key={ingredient.idIngredient}
+    data-testid={`${index}-ingredient-card`}
+    onClick={() => recipesFetcher(ingredient.strIngredient, appLocation)}
+  >
     <img
       src={`https://www.themealdb.com/images/ingredients/${ingredient.strIngredient}-Small.png`}
       alt="foto receita"
       data-testid={`${index}-card-img`}
     />
     <span data-testid={`${index}-card-name`}>{ingredient.strIngredient}</span>
-  </div>
+  </button>
 );
 
-const renderDrinkIngredient = (ingredient, index) => (
-  <div key={ingredient.strIngredient1} data-testid={`${index}-ingredient-card`}>
+const renderDrinkIngredient = (ingredient, index, recipesFetcher, appLocation) => (
+  <button
+    type="button"
+    key={ingredient.strIngredient1}
+    data-testid={`${index}-ingredient-card`}
+    onClick={() => recipesFetcher(ingredient.strIngredient1, appLocation)}
+  >
     <img
       src={`https://www.thecocktaildb.com/images/ingredients/${ingredient.strIngredient1}-Small.png`}
       alt="foto receita"
       data-testid={`${index}-card-img`}
     />
     <span data-testid={`${index}-card-name`}>{ingredient.strIngredient1}</span>
-  </div>
+  </button>
 );
 
 const ExploreByIngredients = ({
@@ -58,7 +68,7 @@ const ExploreByIngredients = ({
   history,
 }) => {
   useEffect(() => {
-    checkAppLocation(history.location.pathname, appLocation, setAppLocationProps);
+    checkAppLocation(history.location.pathname, setAppLocationProps);
   }, []);
 
   useEffect(() => {
@@ -68,15 +78,11 @@ const ExploreByIngredients = ({
   }, [appLocation]);
 
   useEffect(() => {
-    if (recipes.lenth > 0) {
+    if (recipes.length > 0) {
       getData(recipes);
       appLocation === 'Explorar Comidas' ? history.push('/comidas') : history.push('/bebidas');
     }
   }, [recipes]);
-
-  const handleIngredientSelection = (id) => {
-    recipesFetcher(id);
-  };
 
   if (isFetching) return <p>Loading...</p>;
 
@@ -86,8 +92,8 @@ const ExploreByIngredients = ({
         .slice(0, 12)
         .map((ingredient, index) =>
           appLocation === 'Explorar Comidas'
-            ? renderMealIngredient(ingredient, index)
-            : renderDrinkIngredient(ingredient, index)
+            ? renderMealIngredient(ingredient, index, recipesFetcher, appLocation)
+            : renderDrinkIngredient(ingredient, index, recipesFetcher, appLocation)
         )}
     </div>
   );
@@ -103,13 +109,13 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch) => ({
   getData: (data) => dispatch(setDataAction(data)),
   ingredientesFetcher: (type) => dispatch(getIngredients(type)),
-  recipesFetcher: (type) => dispatch(getRecipesByingredient(type)),
+  recipesFetcher: (id, type) => dispatch(getRecipesByingredient(id, type)),
   setAppLocationProps: (location) => dispatch(setAppLocation(location)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExploreByIngredients);
 
-// const ingredients = data.slice(0, 12).map((recipe, index) => (
+// const recipes = data.slice(0, 12).map((recipe, index) => (
 //   <Link to={`/comidas/${data[index].idMeal}`} key={recipe.idMeal}>
 //     <div key={recipe.idMeal} data-testid={`${index}-recipe-card`}>
 //       <img src={recipe.strMealThumb} alt="foto receita" data-testid={`${index}-card-img`} />

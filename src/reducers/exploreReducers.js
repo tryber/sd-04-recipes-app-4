@@ -73,7 +73,7 @@ export const exploreIngredientsReducer = (state = ingredientsInitialState, actio
       return { ...state, isFetching: action.bool };
 
     case RECIPES_BY_INGREDIENT:
-      return { ...state, recipes: [...action.ingredients] };
+      return { ...state, recipes: [...action.recipes] };
 
     case RECIPES_BY_INGREDIENT_ERROR:
       return { ...state, error: { ...state.error, status: true, msg: action.error } };
@@ -102,7 +102,7 @@ export const exploreRecipesByArea = (state = byAreaInitialState, action) => {
       return { ...state, isFetching: action.bool };
 
     case AREAS:
-      return { ...state, areas: [...action.areas] };
+      return { ...state, areas: [...action.area] };
 
     case AREAS_ERROR:
       return { ...state, error: { ...state.error, status: true, msg: action.error } };
@@ -111,7 +111,7 @@ export const exploreRecipesByArea = (state = byAreaInitialState, action) => {
       return { ...state, isFetching: action.bool };
 
     case RECIPES_BY_AREA:
-      return { ...state, recipes: [...action.recipes] };
+      return { ...state, recipes: [...action.recipe] };
 
     case RECIPES_BY_AREA_ERROR:
       return { ...state, error: { ...state.error, status: true, msg: action.error } };

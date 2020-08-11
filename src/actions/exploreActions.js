@@ -9,6 +9,7 @@ import {
   getDrinksByIngredient,
   getMealsIngredients,
   getDrinksIngredients,
+  getMealsByName,
 } from '../service/fetchAPI';
 
 export const RANDOM_RECIPE = 'RANDOM_RECIPE';
@@ -89,7 +90,7 @@ const ingredientsErrored = (error) => ({
  */
 export const getIngredients = (type) => (dispatch) => {
   const fetcher = type === 'Explorar Comidas' ? getMealsIngredients : getDrinksIngredients;
-  console.log(fetcher)
+
   dispatch(ingredientsFetching(true));
   fetcher()
     .then((ingre) => {
@@ -101,7 +102,7 @@ export const getIngredients = (type) => (dispatch) => {
 };
 
 /**
- * Ingredientes actions
+ * Recipes by ingredientes actions
  */
 const recipesByIngredient = (recipes) => ({
   type: RECIPES_BY_INGREDIENT,
@@ -122,16 +123,17 @@ const recipesByIngredientErrored = (error) => ({
  * Recipes by ingredients
  * @param {string} type recipe type
  */
-export const getRecipesByingredient = (type) => (dispatch) => {
-  const fetcher = type === 'comidas' ? getMealsByIngredient : getDrinksByIngredient;
+export const getRecipesByingredient = (id, type) => (dispatch) => {
+  const fetcher = type === 'Explorar Comidas' ? getMealsByIngredient : getDrinksByIngredient;
+
   dispatch(recipesByIngredientFetching(true));
-  fetcher()
+  fetcher(id)
     .then((result) => {
-      const data = type === 'comidas' ? result.meals : result.drinks;
+      const data = type === 'Explorar Comidas' ? result.meals : result.drinks;
       dispatch(recipesByIngredient(data));
     })
-    .then(() => dispatch(recipesByIngredientFetching(false)))
-    .catch((error) => dispatch(recipesByIngredientErrored(error)));
+    .then(() => dispatch(recipesByIngredientFetching(false)));
+  // .catch((error) => dispatch(recipesByIngredientErrored(error)));
 };
 
 /**
@@ -162,8 +164,8 @@ export const getAreaRecipe = () => (dispatch) => {
     .then((recipe) => {
       dispatch(areas(recipe.meals));
     })
-    .then(() => dispatch(areasFetching(false)))
-    .catch((error) => dispatch(areasError(error)));
+    .then(() => dispatch(areasFetching(false)));
+  // .catch((error) => dispatch(areasError(error)));
 };
 
 /**
@@ -188,12 +190,13 @@ const RecipesByAreaError = (error) => ({
  * Recipes by area fetch function
  * @param {string} type recipe by area
  */
-export const getRecipesByArea = () => (dispatch) => {
+export const getRecipesByArea = (area) => (dispatch) => {
+  const fetcher = area === 'All' ? getMealsByName : getMealsByArea;
   dispatch(areasFetching(true));
-  getMealsByArea()
+  fetcher(area)
     .then((recipe) => {
       dispatch(recipesByArea(recipe.meals));
     })
-    .then(() => dispatch(recipesByAreaFetching(false)))
-    .catch((error) => dispatch(RecipesByAreaError(error)));
+    .then(() => dispatch(recipesByAreaFetching(false)));
+  // .catch((error) => dispatch(RecipesByAreaError(error)));
 };

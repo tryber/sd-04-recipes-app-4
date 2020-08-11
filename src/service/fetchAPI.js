@@ -149,6 +149,7 @@ export const getMealsByIngredient = async (ingredient) => {
 export const getDrinksByIngredient = async (ingredient) => {
   const fetchUrl = `${THE_COCKTAIL_DB_API}filter.php?i=${ingredient}`;
   const response = await fetch(fetchUrl);
+  console.log(response)
   const json = await response.json();
   const data = await (response.ok ? Promise.resolve(json) : Promise.reject(json));
   return data;
