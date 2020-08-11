@@ -159,22 +159,42 @@ const renderFinshRecipeBtn = (recipe, arrayOfChecked, finishRecipe) => {
   );
 };
 
+const firstIf = (appLocation, arrayOfChecked, setArrayOfChecked, id) => {
+  if (appLocation === 'comidas' && arrayOfChecked.length > 0) {
+    setArrayOfChecked(loadFromLocalStorage('inProgressRecipe').meals[id]);
+  }
+};
+
+const secoundIf = (setArrayOfChecked, id) => {
+  setArrayOfChecked(loadFromLocalStorage('inProgressRecipe').cocktails[id]);
+};
+
+const insideSecoundIf = (appLocation, arrayOfChecked) => {
+  if (appLocation === 'bebidas' && arrayOfChecked.length > 0) {
+    return true;
+  }
+  return false;
+};
+
 const doUseEffect = (
   appLocation, arrayOfChecked, setArrayOfChecked, id, match,
   locationChanger, recipeFetch, recommendationsFetch,
 ) => {
   if (loadFromLocalStorage('inProgressRecipe')) {
-    if (appLocation === 'comidas' && arrayOfChecked.length > 0) {
-      setArrayOfChecked(loadFromLocalStorage('inProgressRecipe').meals[id]);
-    }
-    if (appLocation === 'bebidas' && arrayOfChecked.length > 0) {
-      setArrayOfChecked(loadFromLocalStorage('inProgressRecipe').cocktails[id]);
+    firstIf();
+    if (insideSecoundIf(appLocation, arrayOfChecked)) {
+      secoundIf(setArrayOfChecked, id);
     }
   }
   if (checkAppLocation(match.path, appLocation, locationChanger)) {
     recipeFetch(id, appLocation);
     recommendationsFetch(appLocation);
   }
+};
+
+const ifsFinishReceipes = (appLocation, recipe, currentDoneRecipes) => {
+  if (appLocation === 'comidas') setLocalStorageFoodDone(recipe, currentDoneRecipes);
+  if (appLocation === 'bebidas') setLocalStorageDrinkDone(recipe, currentDoneRecipes);
 };
 
 export const RecipeDetailsInProgress = (props) => {
@@ -199,8 +219,7 @@ export const RecipeDetailsInProgress = (props) => {
   const finishRecipe = () => {
     const currentDoneRecipes = localStorage.getItem('doneRecipes')
       ? JSON.parse(localStorage.getItem('doneRecipes')) : [];
-    if (appLocation === 'comidas') setLocalStorageFoodDone(recipe, currentDoneRecipes);
-    if (appLocation === 'bebidas') setLocalStorageDrinkDone(recipe, currentDoneRecipes);
+    ifsFinishReceipes(appLocation, recipe, currentDoneRecipes);
     history.push('/receitas-feitas');
   };
   if (recipeFetching) return <p>loading...</p>;
