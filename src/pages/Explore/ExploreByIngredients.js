@@ -94,7 +94,7 @@ const ExploreByIngredients = ({
       <Header />
       {ingredients
         .slice(0, 12)
-        .map((ingredient, index) => (appLocation === 'Explorar Comidas'
+        .map((ingredient, index) => (appLocation === 'explorar/comidas/ingredientes'
           ? renderMealIngredient(ingredient, index, recipesFetcher, appLocation)
           : renderDrinkIngredient(ingredient, index, recipesFetcher, appLocation)))}
       <BottomMenu />
