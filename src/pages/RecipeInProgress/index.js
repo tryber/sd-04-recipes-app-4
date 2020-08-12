@@ -11,6 +11,7 @@ import {
 } from './StyledComponents';
 import { saveToLocalStorage, loadFromLocalStorage } from '../../service/localStorage';
 import SocialMenu from '../../components/SocialMenu';
+import Loading from '../../components/Loading';
 
 /**
  * Render the recipe ingredients list
@@ -152,7 +153,7 @@ export const RecipeDetailsInProgress = (props) => {
   const finishRecipe = () => {
     history.push('/receitas-feitas');
   };
-  if (recipeFetching) return <p>loading...</p>;
+  if (recipeFetching) return <Loading />;
   return (
     renderAllPage(
       appLocation, strMealThumb, strDrinkThumb, strMeal, strDrink, strCategory, strAlcoholic,
