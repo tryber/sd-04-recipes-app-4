@@ -42,6 +42,15 @@ const setLocalStorageDrink = (recipe, currentFavoriteRecipes) => {
   const favoriteRecipes = [...currentFavoriteRecipes, objForFavorite];
   localStorage.setItem('favoriteRecipes', JSON.stringify(favoriteRecipes));
 };
+const checkWindowHef = () => {
+  const windowHref = window.location.href;
+  if (windowHref.includes('in-progress')) {
+    const newHref = windowHref.substr(0, windowHref.length - 12);
+    document.getElementById('copyLink').innerHTML = 'Link copiado!';
+    return copyToClipboard(newHref);
+  }
+  return null;
+};
 
 const SocialMenu = ({ recipe }) => {
   const [favorite, setFavorite] = useState(false);
@@ -62,6 +71,7 @@ const SocialMenu = ({ recipe }) => {
   const handleShare = () => {
     copyToClipboard(window.location.href);
     document.getElementById('copyLink').innerHTML = 'Link copiado!';
+    checkWindowHef();
   };
 
   const handleFavorite = () => {

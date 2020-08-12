@@ -8,7 +8,8 @@ import Drinks from './pages/Drinks';
 import NotFound from './pages/NotFound';
 import Perfil from './pages/Perfil';
 import RecipeInProgress from './pages/RecipeInProgress';
-import FavoriteRicepes from './pages/FavoriteRicepes';
+import FavoriteRecipes from './pages/FavoriteRecipes';
+import DoneRecipes from './pages/RecipeDone';
 
 function App() {
   return (
@@ -28,8 +29,8 @@ function App() {
         {/* <Route exact path="/explorar/bebidas/ingredientes" component={Login} /> */}
         {/* <Route exact path="/explorar/comidas/area" component={Login} /> */}
         <Route exact path="/perfil" component={Perfil} />
-        {/* <Route exact path="/receitas-feitas" component={Login} /> */}
-        <Route exact path="/receitas-favoritas" component={FavoriteRicepes} />
+        <Route exact path="/receitas-feitas" component={DoneRecipes} />
+        <Route exact path="/receitas-favoritas" component={FavoriteRecipes} />
         <Route component={NotFound} />
       </Switch>
     </BrowserRouter>
