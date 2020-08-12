@@ -1,9 +1,12 @@
-import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
 import copyToClipboard from 'clipboard-copy';
 import { Link } from 'react-router-dom';
 import Header from '../../components/Header/Header';
 import { loadFromLocalStorage } from '../../service/localStorage';
 import ShareIcon from '../../images/shareIcon.svg';
+import { setAppLocation } from '../../actions/appActions';
 
 const SaveTheClipBoard = (type, id, index) => {
   copyToClipboard(`http://localhost:3000/${type}s/${id}`);
@@ -11,15 +14,11 @@ const SaveTheClipBoard = (type, id, index) => {
 };
 
 const renderTagName = (recipe, index) => {
-  const { tags } = recipe;
+  const { tags = [] } = recipe;
   return (
     <div>
       {tags.map((tagName) => (
-        <span
-          data-testid={`${index}-${tagName}-horizontal-tag`}
-        >
-          {`${tagName} `}
-        </span>
+        <span data-testid={`${index}-${tagName}-horizontal-tag`}>{`${tagName} `}</span>
       ))}
     </div>
   );
@@ -36,7 +35,11 @@ const renderCardComidas = (recipe, index) => (
       />
     </Link>
     <h3 data-testid={`${index}-horizontal-name`}>{recipe.name}</h3>
-    <span data-testid={`${index}-horizontal-top-text`}>{`${recipe.area} - ${recipe.category}`}</span>
+    <span
+      data-testid={`${index}-horizontal-top-text`}
+    >
+      {`${recipe.area} - ${recipe.category}`}
+    </span>
     <input
       type="image"
       alt="bottonshareFood"
@@ -75,15 +78,19 @@ const renderCardBebidas = (recipe, index) => (
   </div>
 );
 
-const renderRecipes = (done) => done.map((recipe, index) => {
+const renderRecipes = (done = []) => done.map((recipe, index) => {
   if (recipe.type === 'comida') {
     return renderCardComidas(recipe, index);
   }
   return renderCardBebidas(recipe, index);
 });
 
-const DoneRecipes = () => {
+const DoneRecipes = ({ setAppLocationProps }) => {
   const [done, setDone] = useState(loadFromLocalStorage('doneRecipes'));
+
+  useEffect(() => {
+    setAppLocationProps('Receitas Feitas');
+  }, []);
 
   const filterAll = () => {
     setDone(loadFromLocalStorage('doneRecipes'));
@@ -115,9 +122,17 @@ const DoneRecipes = () => {
       <button type="button" data-testid="filter-by-drink-btn" onClick={() => filterDrink()}>
         Drinks
       </button>
-      {renderRecipes(done)}
+      {renderRecipes(done || [])}
     </div>
   );
 };
 
-export default DoneRecipes;
+DoneRecipes.propTypes = {
+  setAppLocationProps: PropTypes.func.isRequired,
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  setAppLocationProps: (location) => dispatch(setAppLocation(location)),
+});
+
+export default connect(null, mapDispatchToProps)(DoneRecipes);

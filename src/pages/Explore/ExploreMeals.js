@@ -3,12 +3,19 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getRandomRecipe } from '../../actions/exploreActions';
 import BottomMenu from '../../components/BottomMenu';
+import Header from '../../components/Header/Header';
+import { setAppLocation } from '../../actions/appActions';
 
 const ExploreMeals = ({
   history,
   recipe,
   randomRecipeFetcher,
+  changeAppLocation,
 }) => {
+  useEffect(() => {
+    changeAppLocation('Explorar Comidas');
+  }, []);
+
   useEffect(() => {
     if (recipe.length) {
       history.push(`/comidas/${recipe[0].idMeal}`);
@@ -17,6 +24,7 @@ const ExploreMeals = ({
 
   return (
     <div>
+      <Header />
       <button
         type="button"
         data-testid="explore-by-ingredient"
@@ -51,6 +59,7 @@ ExploreMeals.propTypes = {
   recipe: PropTypes.shape({
     length: PropTypes.number.isRequired,
   }).isRequired,
+  changeAppLocation: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -59,6 +68,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   randomRecipeFetcher: (type) => dispatch(getRandomRecipe(type)),
+  changeAppLocation: (location) => dispatch(setAppLocation(location)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExploreMeals);

@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 import { getIngredients, getRecipesByingredient } from '../../actions/exploreActions';
 import { setDataAction } from '../../actions';
 import { setAppLocation } from '../../actions/appActions';
+import BottomMenu from '../../components/BottomMenu';
+import Header from '../../components/Header/Header';
 
 /**
  * Gambiarra necessária para passar nos testes =(
@@ -89,11 +91,13 @@ const ExploreByIngredients = ({
 
   return (
     <div>
+      <Header />
       {ingredients
         .slice(0, 12)
         .map((ingredient, index) => (appLocation === 'Explorar Comidas'
           ? renderMealIngredient(ingredient, index, recipesFetcher, appLocation)
           : renderDrinkIngredient(ingredient, index, recipesFetcher, appLocation)))}
+      <BottomMenu />
     </div>
   );
 };
