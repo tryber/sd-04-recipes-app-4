@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import PropTypes from 'prop-types';
+import React, { useEffect, useState } from 'react';
+import { connect } from 'react-redux';
 import copyToClipboard from 'clipboard-copy';
 import { Link } from 'react-router-dom';
 import Header from '../../components/Header/Header';
 import { loadFromLocalStorage, saveToLocalStorage } from '../../service/localStorage';
 import ShareIcon from '../../images/shareIcon.svg';
 import FavoriteIcon from '../../images/blackHeartIcon.svg';
+import { setAppLocation } from '../../actions/appActions';
 
 const SaveClipBoard = (type, id, index) => {
   copyToClipboard(`http://localhost:3000/${type}s/${id}`);
@@ -78,8 +81,12 @@ const renderRecipes = (favorites, removeItemOfFavorites) => favorites.map((recip
   return renderCardBebidas(recipe, index, removeItemOfFavorites);
 });
 
-const FavoriteRecipes = () => {
+const FavoriteRecipes = ({ setAppLocationProps }) => {
   const [favorites, setFavorites] = useState(JSON.parse(loadFromLocalStorage('favoriteRecipes')));
+
+  useEffect(() => {
+    setAppLocationProps('Receitas Favoritas');
+  }, []);
 
   const filterAll = () => {
     setFavorites(JSON.parse(loadFromLocalStorage('favoriteRecipes')));
@@ -119,9 +126,17 @@ const FavoriteRecipes = () => {
       <button type="button" data-testid="filter-by-drink-btn" onClick={() => filterDrink()}>
         Drinks
       </button>
-      {renderRecipes(favorites, removeItemOfFavorites)}
+      {renderRecipes(favorites || [], removeItemOfFavorites)}
     </div>
   );
 };
 
-export default FavoriteRecipes;
+FavoriteRecipes.propTypes = {
+  setAppLocationProps: PropTypes.func.isRequired,
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  setAppLocationProps: (location) => dispatch(setAppLocation(location)),
+});
+
+export default connect(null, mapDispatchToProps)(FavoriteRecipes);
