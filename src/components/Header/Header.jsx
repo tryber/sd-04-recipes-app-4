@@ -9,10 +9,33 @@ import './header.css';
 import { setAppLocation } from '../../actions/appActions';
 
 const capitalizeFirstLetter = (string) => {
-  if (string === 'receitas-favoritas') {
-    return 'Receitas Favoritas';
-  }
-  return string.charAt(0).toUpperCase() + string.slice(1);
+  const titles = {
+    comidas: 'Comidas',
+    bebidas: 'Bebidas',
+    'receitas-favoritas': 'Receitas Favoritas',
+    explorar: 'Explorar',
+    'explorar/comidas': 'Explorar Comidas',
+    'explorar/bebidas': 'Explorar Bebidas',
+    'explorar/comidas/ingredientes': 'Explorar Ingredientes',
+    'explorar/bebidas/ingredientes': 'Explorar Ingredientes',
+    'explorar/comidas/area': 'Explorar Origem',
+    'explorar/bebidas/area': 'Explorar Origem',
+    'receitas-feitas': 'Receitas Feitas',
+    perfil: 'Perfil',
+  };
+
+  // if (string === 'receitas-favoritas') {
+  //   return 'Receitas Favoritas';
+  // }
+  // if (string === 'explorar/comidas') {
+  //   return 'Explorar Comidas';
+  // }
+
+  // if (string === 'explorar/bebidas') {
+  //   return 'Explorar Bebidas';
+  // }
+  return titles[string];
+  // return string.charAt(0).toUpperCase() + string.slice(1);
 };
 
 const checkAppLocation = (path, appLocation, locationChanger) => {
@@ -30,7 +53,7 @@ const Header = ({ title, sendLocation }) => {
   };
 
   const renderSearch = () => {
-    if (title === 'comidas' || title === 'bebidas') {
+    if (title === 'comidas' || title === 'bebidas' || title === 'explorar/comidas/area') {
       return (
         <input
           type="image"

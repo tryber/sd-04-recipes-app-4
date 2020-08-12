@@ -5,6 +5,8 @@ import { getIngredients, getRecipesByingredient } from '../../actions/exploreAct
 import { setDataAction } from '../../actions';
 import { setAppLocation } from '../../actions/appActions';
 import Loading from '../../components/Loading';
+import BottomMenu from '../../components/BottomMenu';
+import Header from '../../components/Header/Header';
 
 /**
  * Gambiarra necessária para passar nos testes =(
@@ -16,8 +18,8 @@ import Loading from '../../components/Loading';
 const checkAppLocation = (path, locationChanger) => {
   // if (path.includes(appLocation.toLowerCase())) return true;
   path.includes('comidas')
-    ? locationChanger('Explorar Comidas')
-    : locationChanger('Explorar Bebidas');
+    ? locationChanger('explorar/comidas/ingredientes')
+    : locationChanger('explorar/bebidas/ingredientes');
   return false;
 };
 
@@ -74,7 +76,7 @@ const ExploreByIngredients = ({
   }, []);
 
   useEffect(() => {
-    if (appLocation === 'Explorar Comidas' || appLocation === 'Explorar Bebidas') {
+    if (appLocation === 'explorar/comidas/ingredientes' || appLocation === 'explorar/bebidas/ingredientes') {
       ingredientesFetcher(appLocation);
     }
   }, [appLocation]);
@@ -82,7 +84,7 @@ const ExploreByIngredients = ({
   useEffect(() => {
     if (recipes.length > 0) {
       getData(recipes);
-      appLocation === 'Explorar Comidas' ? history.push('/comidas') : history.push('/bebidas');
+      appLocation === 'explorar/comidas/ingredientes' ? history.push('/comidas') : history.push('/bebidas');
     }
   }, [recipes]);
 
@@ -90,11 +92,13 @@ const ExploreByIngredients = ({
 
   return (
     <div>
+      <Header />
       {ingredients
         .slice(0, 12)
-        .map((ingredient, index) => (appLocation === 'Explorar Comidas'
+        .map((ingredient, index) => (appLocation === 'explorar/comidas/ingredientes'
           ? renderMealIngredient(ingredient, index, recipesFetcher, appLocation)
           : renderDrinkIngredient(ingredient, index, recipesFetcher, appLocation)))}
+      <BottomMenu />
     </div>
   );
 };

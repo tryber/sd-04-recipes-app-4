@@ -2,13 +2,25 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getRandomRecipe } from '../../actions/exploreActions';
+import BottomMenu from '../../components/BottomMenu';
+import Header from '../../components/Header/Header';
+import { setAppLocation } from '../../actions/appActions';
 
-const ExploreDrinks = ({ history, recipe, randomRecipeFetcher }) => {
+const ExploreDrinks = ({
+  history,
+  recipe,
+  randomRecipeFetcher,
+  changeAppLocation,
+}) => {
+  useEffect(() => {
+    changeAppLocation('Explorar Comidas');
+  }, []);
   useEffect(() => {
     if (recipe.length) history.push(`/bebidas/${recipe[0].idDrink}`);
   }, [recipe]);
   return (
     <div>
+      <Header />
       <button
         type="button"
         data-testid="explore-by-ingredient"
@@ -23,6 +35,7 @@ const ExploreDrinks = ({ history, recipe, randomRecipeFetcher }) => {
       >
         Me Surpreenda!
       </button>
+      <BottomMenu />
     </div>
   );
 };
@@ -35,6 +48,7 @@ ExploreDrinks.propTypes = {
   recipe: PropTypes.shape({
     length: PropTypes.number.isRequired,
   }).isRequired,
+  changeAppLocation: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({
@@ -43,6 +57,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
   randomRecipeFetcher: (type) => dispatch(getRandomRecipe(type)),
+  changeAppLocation: (location) => dispatch(setAppLocation(location)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(ExploreDrinks);

@@ -114,6 +114,38 @@ const renderIngredientsCheckList = (ingredients,
   );
 };
 
+const setLocalStorageFoodDone = (recipe, currentDoneRecipes) => {
+  const objForDone = {
+    id: recipe.idMeal,
+    type: 'comida',
+    area: recipe.strArea,
+    category: recipe.strCategory,
+    alcoholicOrNot: '',
+    name: recipe.strMeal,
+    image: recipe.strMealThumb,
+    doneDate: recipe.dateModified,
+    tags: recipe.strTags.split(','),
+  };
+  const doneRecipes = [...currentDoneRecipes, objForDone];
+  return localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
+};
+
+const setLocalStorageDrinkDone = (recipe, currentDoneRecipes) => {
+  const objForDone = {
+    id: recipe.idDrink,
+    type: 'bebida',
+    area: recipe.strArea,
+    category: recipe.strCategory,
+    alcoholicOrNot: recipe.strAlcoholic,
+    name: recipe.strDrink,
+    image: recipe.strDrinkThumb,
+    doneDate: recipe.dateModified,
+    tags: recipe.strTags ? recipe.strTags.split(',') : [],
+  };
+  const doneRecipes = [...currentDoneRecipes, objForDone];
+  localStorage.setItem('doneRecipes', JSON.stringify(doneRecipes));
+};
+
 const renderFinshRecipeBtn = (recipe, arrayOfChecked, finishRecipe) => {
   const { ingredients } = recipe;
   return (
@@ -127,6 +159,45 @@ const renderFinshRecipeBtn = (recipe, arrayOfChecked, finishRecipe) => {
     </button>
   );
 };
+
+const firstIf = (appLocation, arrayOfChecked, setArrayOfChecked, id) => {
+  if (appLocation === 'comidas' && arrayOfChecked.length > 0) {
+    setArrayOfChecked(loadFromLocalStorage('inProgressRecipe').meals[id]);
+  }
+};
+
+const secoundIf = (setArrayOfChecked, id) => {
+  setArrayOfChecked(loadFromLocalStorage('inProgressRecipe').cocktails[id]);
+};
+
+const insideSecoundIf = (appLocation, arrayOfChecked) => {
+  if (appLocation === 'bebidas' && arrayOfChecked.length > 0) {
+    return true;
+  }
+  return false;
+};
+
+const doUseEffect = (
+  appLocation, arrayOfChecked, setArrayOfChecked, id, match,
+  locationChanger, recipeFetch, recommendationsFetch,
+) => {
+  if (loadFromLocalStorage('inProgressRecipe')) {
+    firstIf();
+    if (insideSecoundIf(appLocation, arrayOfChecked)) {
+      secoundIf(setArrayOfChecked, id);
+    }
+  }
+  if (checkAppLocation(match.path, appLocation, locationChanger)) {
+    recipeFetch(id, appLocation);
+    recommendationsFetch(appLocation);
+  }
+};
+
+const ifsFinishReceipes = (appLocation, recipe, currentDoneRecipes) => {
+  if (appLocation === 'comidas') setLocalStorageFoodDone(recipe, currentDoneRecipes);
+  if (appLocation === 'bebidas') setLocalStorageDrinkDone(recipe, currentDoneRecipes);
+};
+
 export const RecipeDetailsInProgress = (props) => {
   const {
     match, history, recipe, recipeFetching, recipeFetch, recommendationsFetch,
@@ -140,17 +211,16 @@ export const RecipeDetailsInProgress = (props) => {
   const [arrayOfChecked, setArrayOfChecked] = useState([]);
   // Fetch recipe and recommendations on mount
   useEffect(() => {
-    if (loadFromLocalStorage('inProgressRecipe')) {
-      if (appLocation === 'comidas' && arrayOfChecked.length > 0) setArrayOfChecked(loadFromLocalStorage('inProgressRecipe').meals[id]);
-      if (appLocation === 'bebidas' && arrayOfChecked.length > 0) setArrayOfChecked(loadFromLocalStorage('inProgressRecipe').cocktails[id]);
-    }
-    if (checkAppLocation(match.path, appLocation, locationChanger)) {
-      recipeFetch(id, appLocation);
-      recommendationsFetch(appLocation);
-    }
+    doUseEffect(
+      appLocation, arrayOfChecked, setArrayOfChecked, id, match,
+      locationChanger, recipeFetch, recommendationsFetch,
+    );
   }, [appLocation]);
   // Handle recipe start action
   const finishRecipe = () => {
+    const currentDoneRecipes = localStorage.getItem('doneRecipes')
+      ? JSON.parse(localStorage.getItem('doneRecipes')) : [];
+    ifsFinishReceipes(appLocation, recipe, currentDoneRecipes);
     history.push('/receitas-feitas');
   };
   if (recipeFetching) return <Loading />;

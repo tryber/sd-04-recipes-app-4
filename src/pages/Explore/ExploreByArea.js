@@ -6,6 +6,8 @@ import { getAreaRecipe, getRecipesByArea } from '../../actions/exploreActions';
 import { setAppLocation } from '../../actions/appActions';
 import { getMealsByName } from '../../service/fetchAPI';
 import Loading from '../../components/Loading';
+import BottomMenu from '../../components/BottomMenu';
+import Header from '../../components/Header/Header';
 
 const ExploreByAreas = ({
   isFetching,
@@ -13,10 +15,12 @@ const ExploreByAreas = ({
   recipes,
   areasFetcher,
   recipesByArea,
+  setAppLocationProps,
 }) => {
   const [areaSelector, setAreaSelector] = useState('All');
 
   useEffect(() => {
+    setAppLocationProps('Explorar Origem');
     areasFetcher();
   }, []);
 
@@ -30,6 +34,7 @@ const ExploreByAreas = ({
 
   return (
     <div>
+      <Header />
       <select
         data-testid="explore-by-area-dropdown"
         onChange={(event) => setAreaSelector(event.target.value)}
@@ -53,6 +58,7 @@ const ExploreByAreas = ({
           </Link>
         ))
         : null}
+      <BottomMenu />
     </div>
   );
 };
@@ -68,6 +74,7 @@ ExploreByAreas.propTypes = {
     slice: PropTypes.func.isRequired,
   }).isRequired,
   recipesByArea: PropTypes.func.isRequired,
+  setAppLocationProps: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = (state) => ({

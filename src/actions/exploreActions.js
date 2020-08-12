@@ -88,12 +88,12 @@ const ingredientsFetching = (bool) => ({
  * @param {string} type recipe type
  */
 export const getIngredients = (type) => (dispatch) => {
-  const fetcher = type === 'Explorar Comidas' ? getMealsIngredients : getDrinksIngredients;
+  const fetcher = type === 'explorar/comidas/ingredientes' ? getMealsIngredients : getDrinksIngredients;
 
   dispatch(ingredientsFetching(true));
   fetcher()
     .then((ingre) => {
-      const data = type === 'Explorar Comidas' ? ingre.meals : ingre.drinks;
+      const data = type === 'explorar/comidas/ingredientes' ? ingre.meals : ingre.drinks;
       dispatch(ingredients(data));
     })
     .then(() => dispatch(ingredientsFetching(false)));
@@ -123,12 +123,12 @@ const recipesByIngredientFetching = (bool) => ({
  * @param {string} type recipe type
  */
 export const getRecipesByingredient = (id, type) => (dispatch) => {
-  const fetcher = type === 'Explorar Comidas' ? getMealsByIngredient : getDrinksByIngredient;
+  const fetcher = type === 'explorar/comidas/ingredientes' ? getMealsByIngredient : getDrinksByIngredient;
 
   dispatch(recipesByIngredientFetching(true));
   fetcher(id)
     .then((result) => {
-      const data = type === 'Explorar Comidas' ? result.meals : result.drinks;
+      const data = type === 'explorar/comidas/ingredientes' ? result.meals : result.drinks;
       dispatch(recipesByIngredient(data));
     })
     .then(() => dispatch(recipesByIngredientFetching(false)));
