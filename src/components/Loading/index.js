@@ -1,24 +1,18 @@
-import React, { useState, useEffect } from 'react';
+import PropTypes from 'prop-types';
+import React from 'react';
 import Lottie from 'react-lottie';
-import animationData from '../../images/plate-animation.json';
+import animationData1 from '../../images/plate-animation.json';
+import animationData2 from '../../images/burguer-animation.json';
+
 import { LoadingContainer, LoadingText } from './StyledComponents';
-// import './loading.css';
+
+const loadingTypes = [animationData1, animationData2];
 
 const Loading = ({ loadingText = 'Carregando' }) => {
-  const [animationWidth, setAnimationWidth] = useState(333);
-  const [animationHeight, setAnimationHeight] = useState(333);
-
-  // useEffect(() => {
-  //   if (window.innerWidth > 800) {
-  //     setAnimationHeight(500);
-  //     setAnimationWidth(500);
-  //   }
-  // }, []);
-
   const defaultOptions = {
     loop: true,
     autoplay: true,
-    animationData,
+    animationData: loadingTypes[Math.floor(Math.random() * 2)],
     rendererSettings: {
       preserveAspectRatio: 'xMidYMid slice',
     },
@@ -26,12 +20,18 @@ const Loading = ({ loadingText = 'Carregando' }) => {
 
   return (
     <LoadingContainer>
-      <Lottie options={defaultOptions} height={animationHeight} width={animationWidth} />
-      <LoadingText>
-        {loadingText}
-      </LoadingText>
+      <Lottie options={defaultOptions} height="333" width="333" />
+      <LoadingText>{loadingText}</LoadingText>
     </LoadingContainer>
   );
+};
+
+Loading.propTypes = {
+  loadingText: PropTypes.string,
+};
+
+Loading.defaultProps = {
+  loadingText: 'Carregando',
 };
 
 export default Loading;
