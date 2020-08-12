@@ -17,8 +17,8 @@ import Header from '../../components/Header/Header';
 const checkAppLocation = (path, locationChanger) => {
   // if (path.includes(appLocation.toLowerCase())) return true;
   path.includes('comidas')
-    ? locationChanger('Explorar Comidas')
-    : locationChanger('Explorar Bebidas');
+    ? locationChanger('explorar/comidas/ingredientes')
+    : locationChanger('explorar/bebidas/ingredientes');
   return false;
 };
 
@@ -75,7 +75,7 @@ const ExploreByIngredients = ({
   }, []);
 
   useEffect(() => {
-    if (appLocation === 'Explorar Comidas' || appLocation === 'Explorar Bebidas') {
+    if (appLocation === 'explorar/comidas/ingredientes' || appLocation === 'explorar/bebidas/ingredientes') {
       ingredientesFetcher(appLocation);
     }
   }, [appLocation]);
@@ -83,7 +83,7 @@ const ExploreByIngredients = ({
   useEffect(() => {
     if (recipes.length > 0) {
       getData(recipes);
-      appLocation === 'Explorar Comidas' ? history.push('/comidas') : history.push('/bebidas');
+      appLocation === 'explorar/comidas/ingredientes' ? history.push('/comidas') : history.push('/bebidas');
     }
   }, [recipes]);
 
