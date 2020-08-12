@@ -2,6 +2,7 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getRandomRecipe } from '../../actions/exploreActions';
+import BottomMenu from '../../components/BottomMenu';
 
 const ExploreMeals = ({
   history,
@@ -37,6 +38,7 @@ const ExploreMeals = ({
       >
         Me Surpreenda!
       </button>
+      <BottomMenu />
     </div>
   );
 };
