@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
-import Login from './pages/Login';
+import Login from './pages/Login/index';
 import RecipeDetails from './pages/RecipeDetails';
 import Meals from './pages/Meals';
 import Drinks from './pages/Drinks';

@@ -4,7 +4,6 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { setLogin } from '../../actions';
 import { saveToLocalStorage } from '../../service/localStorage';
-import Logo from '../../images/copo.svg';
 import Video from '../../images/video-bg.webm';
 
 /** Styled Components */
@@ -34,13 +33,13 @@ const renderForms = (setEmail, setSenha, handleLogin, disable) => (
       placeholder="E-mail"
       onChange={(e) => setEmail(e.target.value)}
     />
-    <input
+    <LoginInput
       type="password"
       data-testid="password-input"
       placeholder="Senha"
       onChange={(e) => setSenha(e.target.value)}
     />
-    <Link to="/comidas">
+    <Link to="/comidas" style={{ opacity: '0', width: '0', height: '0' }}>
       <button
         type="button"
         data-testid="login-submit-btn"
@@ -54,7 +53,7 @@ const renderForms = (setEmail, setSenha, handleLogin, disable) => (
   </>
 );
 
-const Login = ({ sendUser }) => {
+const Login = ({ sendUser, history }) => {
   const [disable, setDissable] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setSenha] = useState('');
@@ -65,6 +64,7 @@ const Login = ({ sendUser }) => {
     saveToLocalStorage('cocktailsToken', 1);
     saveToLocalStorage('user', { email });
     sendUser(email, password);
+    history.push('/comidas');
   };
 
   const validateEmail = (emailAdress) => {
@@ -76,9 +76,7 @@ const Login = ({ sendUser }) => {
   };
 
   useEffect(() => {
-    if (validateEmail(email) && password.length > 6) {
-      setDissable(false);
-    }
+    validateEmail(email) && password.length > 6 ? setDissable(false) : setDissable(true);
   }, [email, password]);
 
   return (
@@ -86,12 +84,17 @@ const Login = ({ sendUser }) => {
       <VideoBG autoPlay muted loop id="myVideo">
         <source src={Video} type="video/webm" />
       </VideoBG>
-      <AppLogo>Ratatouille</AppLogo>
-      {/* <ColorBG /> */}
+      <AppLogo login={loginVisibility}>Ratatouille</AppLogo>
       <LoginContainer visible={loginVisibility}>
         <LoginForm>{renderForms(setEmail, setSenha, handleLogin, disable)}</LoginForm>
       </LoginContainer>
-      <LoginButton type="button" onClick={() => setloginVisibility(true)}>{loginVisibility ? 'OKAY' : 'LOGIN'}</LoginButton>
+      <LoginButton
+        type="button"
+        onClick={() => (loginVisibility ? handleLogin() : setloginVisibility(true))}
+        disabled={loginVisibility ? disable : false}
+      >
+        {loginVisibility ? 'OKAY' : 'LOGIN'}
+      </LoginButton>
     </LoginPage>
   );
 };
@@ -101,6 +104,10 @@ const mapDispatchToProps = (dispatch) => ({
 });
 
 Login.propTypes = {
+  history: PropTypes.shape({
+    push: PropTypes.func.isRequired,
+  }).isRequired,
   sendUser: PropTypes.func.isRequired,
 };
+
 export default connect(null, mapDispatchToProps)(Login);

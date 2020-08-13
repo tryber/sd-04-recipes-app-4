@@ -1,5 +1,4 @@
 import styled, { css, keyframes } from 'styled-components';
-import LoginBackground from '../../images/login-bg.jpg';
 
 export const LoginPage = styled.div`
   height: 100vh;
@@ -51,10 +50,9 @@ export const LoginContainer = styled.div`
   width: 100%;
   bottom: -100vh;
   /* transition: transform 0.5s ease-in-out; */
-  ${({ visible }) =>
-    visible &&
-    css`
-      animation: ${showLogin} 0.5s ease-out forwards;
+  ${({ visible }) => visible
+  && css`
+      animation: ${showLogin} 0.4s ease-out forwards;
     `}
 
   &:after {
@@ -67,9 +65,8 @@ export const LoginContainer = styled.div`
     left: 0;
     opacity: 0.6;
     z-index: -2;
-    ${({ visible }) =>
-      !visible &&
-      css`
+    ${({ visible }) => !visible
+    && css`
         border-top-right-radius: 25px;
         border-top-left-radius: 25px;
       `}
@@ -83,6 +80,8 @@ export const AppLogo = styled.div`
   color: white;
   margin-top: 10vh;
   z-index: 999;
+  transition: transform 0.5s ease-in;
+  ${({ login }) => login && css`transform: scale(1.15)`};
 `;
 
 export const LoginForm = styled.div`
@@ -96,33 +95,34 @@ export const LoginForm = styled.div`
     border-radius: 15px;
     content: '';
     background-color: #000000;
-    opacity: 0.85;
+    opacity: 0.55;
     width: 300px;
-    height: 300px;
+    height: 220px;
     position: absolute;
     z-index: -1;
   }
 `;
 export const LoginInput = styled.input`
   background-color: rgb(241, 241, 241);
-  border: 1px solid rgb(32, 33, 36);
-  border-radius: 3px;
+  border: 2px solid rgb(32, 33, 36);
+  border-radius: 8px;
   font-size: 20px;
   font-weight: 800;
   padding: 10px;
-  transition: background-color 0.3s ease-in;
-  width: 200px;
+  transition: border 0.3s ease-in;
+  width: 100%;
+  margin-bottom: 10px;
 
   &:hover {
     background-color: rgb(249, 249, 249);
   }
   &:focus {
-    background-color: #9e70f7;
-    color: white;
+    border: solid 2px #9e70f7;
+    color: #9e70f7;
     outline: none;
   }
   &:focus::placeholder {
-    color: crimson;
+    color: #9e70f7;
   }
 `;
 
@@ -132,6 +132,7 @@ export const LoginButton = styled.button`
   border-radius: 22px;
   border: 0;
   color: white;
+  opacity: ${(props) => (props.disabled ? '0.3' : '1')};
   background-color: blueviolet;
   font-weight: 900;
   font-size: 1.4em;
