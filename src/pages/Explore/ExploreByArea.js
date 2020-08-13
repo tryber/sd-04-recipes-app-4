@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 import { getAreaRecipe, getRecipesByArea } from '../../actions/exploreActions';
 import { setAppLocation } from '../../actions/appActions';
 import { getMealsByName } from '../../service/fetchAPI';
+import Loading from '../../components/Loading';
 import BottomMenu from '../../components/BottomMenu';
 import Header from '../../components/Header/Header';
 
@@ -29,7 +30,7 @@ const ExploreByAreas = ({
     }
   }, [areaSelector]);
 
-  if (isFetching) return <p>Loading...</p>;
+  if (isFetching) return <Loading />;
 
   return (
     <div>

@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { getIngredients, getRecipesByingredient } from '../../actions/exploreActions';
 import { setDataAction } from '../../actions';
 import { setAppLocation } from '../../actions/appActions';
+import Loading from '../../components/Loading';
 import BottomMenu from '../../components/BottomMenu';
 import Header from '../../components/Header/Header';
 
@@ -87,7 +88,7 @@ const ExploreByIngredients = ({
     }
   }, [recipes]);
 
-  if (isFetching) return <p>Loading...</p>;
+  if (isFetching) return <Loading />;
 
   return (
     <div>

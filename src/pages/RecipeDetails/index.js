@@ -5,6 +5,7 @@ import { fetchRecipe, fetchRecommendations } from '../../actions/detailsActions'
 import { loadFromLocalStorage } from '../../service/localStorage';
 import SocialMenu from '../../components/SocialMenu';
 import RecipesRecommendations from '../../components/RecipesRecommendations';
+import Loading from '../../components/Loading';
 
 /**
  * Styled components
@@ -138,7 +139,7 @@ const RecipeDetails = (props) => {
     history.push(`/${appLocation}/${id}/in-progress`);
   };
 
-  if (recipeFetching) return <p>loading...</p>;
+  if (recipeFetching) return <Loading />;
 
   return (
     <Recipe>
