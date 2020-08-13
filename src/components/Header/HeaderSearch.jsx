@@ -4,6 +4,9 @@ import PropTypes from 'prop-types';
 import { setDataAction, setFetchingAction } from '../../actions';
 import { getFetchFoods, getFetchDrinks } from './functionsFetchHeader';
 
+/** Styled Components */
+import { SearchBar } from './StyledComponents';
+
 const renderRadioInput = (htmlFor, value, dataTestId, label, handleChange) => (
   <label htmlFor={htmlFor}>
     <input
@@ -28,7 +31,7 @@ const HeaderSearch = ({ title, sendDataReducer, sendFetchingReducer }) => {
   return (
     <div className="container-inputs">
       <div>
-        <input
+        <SearchBar
           type="text"
           placeholder=""
           data-testid="search-input"
