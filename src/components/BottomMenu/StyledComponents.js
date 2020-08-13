@@ -7,7 +7,7 @@ import styled from 'styled-components';
 
 export const Menu = styled.div`
   align-items: center;
-  background-color: #202124;
+  background-color: #f6f6f6;
   bottom: 0;
   display: flex;
   flex-flow: row;
@@ -19,28 +19,27 @@ export const Menu = styled.div`
   position: fixed;
   width: 100%;
   z-index: 999;
-`;
+  font-size: 1.3em;
+  `;
 
 export const MenuItem = styled.div`
   align-items: center;
-  color: ${(props) => (props.isSelected ? '#5aaf50' : '#fff')};
+  color: ${(props) => (props.isSelected ? '#8d29b3' : '#161616')};
   display: flex;
   flex-flow: column;
   flex: 1;
   font-weight: 800;
   justify-content: center;
   max-width: 168 dp;
-  transition: color 0.7s;
   user-select: none;
+  transition: color 3s;
 `;
 
-export const MenuIcon = styled.img`
-  fill: green;
+export const MenuIcon = styled.div`
+  background-color: ${(props) => (props.isSelected ? '#8d29b3' : '#161616')};
   height: 28px;
   width: 28px;
-`;
-
-export const AssistantIcon = styled.img`
-  margin-bottom: 3px;
-  width: 28px;
+  margin-bottom: 5px;
+  mask: url(${(props) => props.src}) no-repeat center;
+  mask-size: contain;
 `;
