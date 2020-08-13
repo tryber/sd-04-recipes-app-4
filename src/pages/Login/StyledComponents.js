@@ -40,10 +40,20 @@ const showLogin = keyframes`
   }
 `;
 
+const showLoginBg = keyframes`
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 0.6;
+  }
+`;
+
 export const LoginContainer = styled.div`
   height: 100vh;
   display: flex;
-  justify-content: center;
+  justify-content: flex-end;
   align-items: center;
   flex-flow: column;
   position: absolute;
@@ -54,23 +64,21 @@ export const LoginContainer = styled.div`
   && css`
       animation: ${showLogin} 0.4s ease-out forwards;
     `}
+`;
 
-  &:after {
-    content: '';
-    background-color: #3e2a5e;
+export const LoginContainerBg = styled.div`
+  background-color: #3e2a5e;
     height: 100vh;
     width: 100%;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
-    opacity: 0.6;
+    opacity: 0;
     z-index: -2;
-    ${({ visible }) => !visible
+    ${({ visible }) => visible
     && css`
-        border-top-right-radius: 25px;
-        border-top-left-radius: 25px;
+        animation: ${showLoginBg} 0.4s ease-out forwards;
       `}
-  }
 `;
 
 export const AppLogo = styled.div`
@@ -86,12 +94,17 @@ export const AppLogo = styled.div`
 
 export const LoginForm = styled.div`
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
   flex-flow: column;
-  padding: 65px;
+  padding: 8% 30px;
+  background-color: white;
+  width: 100%;
+  height: 60vh;
+  border-top-right-radius: 25px;
+  border-top-left-radius: 25px;
 
-  &:after {
+  /* &:after {
     border-radius: 15px;
     content: '';
     background-color: #000000;
@@ -100,11 +113,16 @@ export const LoginForm = styled.div`
     height: 220px;
     position: absolute;
     z-index: -1;
-  }
+  } */
 `;
+export const LoginHeader = styled.h2`
+  color: #393939;
+  align-self: flex-start;
+`;
+
 export const LoginInput = styled.input`
   background-color: rgb(241, 241, 241);
-  border: 2px solid rgb(32, 33, 36);
+  border: 1px solid #393939;
   border-radius: 8px;
   font-size: 20px;
   font-weight: 800;
@@ -128,7 +146,7 @@ export const LoginInput = styled.input`
 
 export const LoginButton = styled.button`
   padding: 8px 25px;
-  width: 37vh;
+  width: 43vh;
   border-radius: 22px;
   border: 0;
   color: white;

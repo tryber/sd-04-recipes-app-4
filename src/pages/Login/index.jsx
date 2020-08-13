@@ -15,6 +15,8 @@ import {
   LoginInput,
   VideoBG,
   LoginButton,
+  LoginHeader,
+  LoginContainerBg,
 } from './StyledComponents';
 
 /**
@@ -85,8 +87,12 @@ const Login = ({ sendUser, history }) => {
         <source src={Video} type="video/webm" />
       </VideoBG>
       <AppLogo login={loginVisibility}>Ratatouille</AppLogo>
+      <LoginContainerBg visible={loginVisibility} />
       <LoginContainer visible={loginVisibility}>
-        <LoginForm>{renderForms(setEmail, setSenha, handleLogin, disable)}</LoginForm>
+        <LoginForm>
+          <LoginHeader>Login</LoginHeader>
+          {renderForms(setEmail, setSenha, handleLogin, disable)}
+        </LoginForm>
       </LoginContainer>
       <LoginButton
         type="button"
