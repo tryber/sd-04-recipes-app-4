@@ -40,7 +40,7 @@ const validateEmail = (emailAdress) => {
  */
 
 const renderForms = (setEmail, setSenha, handleLogin, disable) => (
-  <>
+  <div>
     <LoginInput
       type="email"
       data-testid="email-input"
@@ -64,7 +64,7 @@ const renderForms = (setEmail, setSenha, handleLogin, disable) => (
         LOGIN
       </button>
     </Link>
-  </>
+  </div>
 );
 
 /** Login Component */
