@@ -1,4 +1,5 @@
 import styled, { keyframes, css } from 'styled-components';
+import { zdepth1, zdepth2 } from '../../Assets/Style';
 
 export const HeaderContainer = styled.div`
   box-sizing: border-box;
@@ -85,12 +86,17 @@ export const SearchButton = styled.button`
   font-weight: 800;
   border: 0;
   background-color: #8504a6;
-  box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12),
-    0 2px 4px -1px rgba(0, 0, 0, 0.3);
+  ${zdepth1}
   animation: ${SearchButtonAnimation} 0.7s ease-out forwards;
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
 
   &:focus {
     outline: 0;
+  }
+  
+  &:active {
+    ${zdepth2}
+    transform: scale(1.1);
   }
 `;
 
@@ -100,15 +106,16 @@ export const SearchType = styled.button`
   border-radius: 20px;
   border: 0;
   margin: 10px;
+  ${zdepth1}
   transition: all 0.3s ease-out;
 
   ${(props) => (props.selected
     ? css`
           outline: 0;
           background-color: #8504a6;
-          box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12),
-            0 2px 4px -1px rgba(0, 0, 0, 0.3);
           color: white;
+          ${zdepth2}
+          transform: scale(1.05);
         `
     : null)}
 
