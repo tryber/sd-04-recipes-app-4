@@ -5,70 +5,67 @@ import { setDataAction, setFetchingAction } from '../../actions';
 import { getFetchFoods, getFetchDrinks } from './functionsFetchHeader';
 
 /** Styled Components */
-import { SearchBar } from './StyledComponents';
+import { SearchBar, SearchButton, SearchContainer, SearchType } from './StyledComponents';
 
-const renderRadioInput = (htmlFor, value, dataTestId, label, handleChange) => (
-  <label htmlFor={htmlFor}>
-    <input
-      type="radio"
-      name="searchParam"
-      value={value}
-      data-testid={dataTestId}
-      onClick={(e) => handleChange(e)}
-    />
+const renderRadioInput = (param, value, dataTestId, label, handleChange) => (
+  <SearchType
+    data-testid={dataTestId}
+    selected={param === value}
+    onClick={() => handleChange(value)}
+  >
     {label}
-  </label>
+  </SearchType>
 );
 
 const HeaderSearch = ({ title, sendDataReducer, sendFetchingReducer }) => {
   const [nameSearch, setNameSearch] = useState('');
   const [params, setParams] = useState('name');
 
-  const handleChange = (e) => {
-    setParams(e.target.value);
+  const handleChange = (value) => {
+    setParams(value);
   };
 
   return (
-    <div className="container-inputs">
-      <div>
-        <SearchBar
-          type="text"
-          placeholder=""
-          data-testid="search-input"
-          onChange={(e) => setNameSearch(e.target.value)}
-        />
-      </div>
+    <SearchContainer className="container-inputs">
       <div>
         {renderRadioInput(
-          'ingredient',
+          params,
           'ingredients',
           'ingredient-search-radio',
           'Ingredientes',
-          handleChange,
+          handleChange
         )}
-        {renderRadioInput('name', 'name', 'name-search-radio', 'Nome', handleChange)}
+        {renderRadioInput(params, 'name', 'name-search-radio', 'Nome', handleChange)}
         {renderRadioInput(
-          'firstLetter',
+          params,
           'firstLetter',
           'first-letter-search-radio',
           'Primeira letra',
-          handleChange,
+          handleChange
         )}
       </div>
-      <button
-        type="button"
-        name="search"
-        data-testid="exec-search-btn"
-        onClick={() => {
-          if (title === 'comidas') {
-            return getFetchFoods(nameSearch, params, sendDataReducer, sendFetchingReducer);
-          }
-          return getFetchDrinks(nameSearch, params, sendDataReducer, sendFetchingReducer);
-        }}
-      >
-        Buscar
-      </button>
-    </div>
+      <div>
+        <SearchBar
+          type="text"
+          placeholder="Digite sua busca"
+          data-testid="search-input"
+          onChange={(e) => setNameSearch(e.target.value)}
+        />
+        <SearchButton
+          type="button"
+          name="search"
+          data-testid="exec-search-btn"
+          onClick={() => {
+            if (title === 'comidas') {
+              return getFetchFoods(nameSearch, params, sendDataReducer, sendFetchingReducer);
+            }
+            return getFetchDrinks(nameSearch, params, sendDataReducer, sendFetchingReducer);
+          }}
+        >
+          Buscar
+        </SearchButton>
+      </div>
+    </SearchContainer>
   );
 };
 
