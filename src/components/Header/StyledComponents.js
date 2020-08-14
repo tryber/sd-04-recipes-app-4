@@ -1,5 +1,22 @@
 import styled, { keyframes, css } from 'styled-components';
 
+export const HeaderContainer = styled.div`
+  box-sizing: border-box;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  background-color: #f6f6f6;
+  padding: 15px 25px;
+  position: fixed;
+  min-width: 100%;
+  top: 0;
+  left: 0;
+`;
+
+export const HeaderTitle = styled.h1`
+  margin: 0 auto;
+`;
+
 const SearchContainerAnim = keyframes`
   from {
     height: 0vh;
@@ -87,12 +104,12 @@ export const SearchType = styled.button`
 
   ${(props) => (props.selected
     ? css`
-      outline: 0;
-      background-color: #8504a6;
-      box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12),
-        0 2px 4px -1px rgba(0, 0, 0, 0.3);
-      color: white;
-    `
+          outline: 0;
+          background-color: #8504a6;
+          box-shadow: 0 4px 5px 0 rgba(0, 0, 0, 0.14), 0 1px 10px 0 rgba(0, 0, 0, 0.12),
+            0 2px 4px -1px rgba(0, 0, 0, 0.3);
+          color: white;
+        `
     : null)}
 
   &:focus {

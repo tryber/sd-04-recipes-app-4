@@ -5,8 +5,9 @@ import { Link } from 'react-router-dom';
 import profileIcon from '../../images/profileIcon.svg';
 import searchIcon from '../../images/searchIcon.svg';
 import HeaderSearch from './HeaderSearch';
-import './header.css';
+// import './header.css';
 import { setAppLocation } from '../../actions/appActions';
+import { HeaderContainer, HeaderTitle } from './StyledComponents';
 
 const capitalizeFirstLetter = (string) => {
   const titles = {
@@ -69,7 +70,7 @@ const Header = ({ title, sendLocation }) => {
 
   return (
     <div className="container">
-      <div className="containerHeader">
+      <HeaderContainer>
         <Link to="/perfil">
           <input
             type="image"
@@ -79,11 +80,11 @@ const Header = ({ title, sendLocation }) => {
             onClick={() => sendLocation('perfil')}
           />
         </Link>
-        <h1 className="header-title" data-testid="page-title">
+        <HeaderTitle data-testid="page-title">
           {capitalizeFirstLetter(title)}
-        </h1>
+        </HeaderTitle>
         {renderSearch()}
-      </div>
+      </HeaderContainer>
       {displayInputShow && <HeaderSearch />}
     </div>
   );
