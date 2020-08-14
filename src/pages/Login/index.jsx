@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 import { setLogin } from '../../actions';
 import { saveToLocalStorage } from '../../service/localStorage';
 import Video from '../../images/video-bg.webm';
@@ -18,6 +18,18 @@ import {
   LoginHeader,
   LoginContainerBg,
 } from './StyledComponents';
+
+/**
+ * Validate user email using Regex
+ * @param {string} emailAdress - User email address
+ */
+const validateEmail = (emailAdress) => {
+  const regexEmail = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
+  if (emailAdress.match(regexEmail)) {
+    return true;
+  }
+  return false;
+};
 
 /**
  * Render the user login form
@@ -55,12 +67,19 @@ const renderForms = (setEmail, setSenha, handleLogin, disable) => (
   </>
 );
 
+/** Login Component */
 const Login = ({ sendUser, history }) => {
   const [disable, setDissable] = useState(true);
   const [email, setEmail] = useState('');
   const [password, setSenha] = useState('');
   const [loginVisibility, setloginVisibility] = useState(false);
 
+  /**
+   * Handle user login on login button click
+   * Save tokens to LocalStorage
+   * Dispatch user info to userReducer
+   * Redirect user to default page
+   */
   const handleLogin = () => {
     saveToLocalStorage('mealsToken', 1);
     saveToLocalStorage('cocktailsToken', 1);
@@ -69,14 +88,7 @@ const Login = ({ sendUser, history }) => {
     history.push('/comidas');
   };
 
-  const validateEmail = (emailAdress) => {
-    const regexEmail = /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/;
-    if (emailAdress.match(regexEmail)) {
-      return true;
-    }
-    return false;
-  };
-
+  /** Validade user email and password on state update */
   useEffect(() => {
     validateEmail(email) && password.length > 6 ? setDissable(false) : setDissable(true);
   }, [email, password]);
