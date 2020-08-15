@@ -19,6 +19,7 @@
     "redux": "^4.0.5",
     "redux-devtools-extension": "^2.13.8",
     "redux-thunk": "^2.3.0",
+    "sanitize.css": "^11.0.1",
     "styled-components": "^5.1.1",
     "websocket-extensions": ">=0.1.4"
   },
