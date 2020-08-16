@@ -1,4 +1,6 @@
+import PropTypes from 'prop-types';
 import React from 'react';
+import { useHistory } from 'react-router-dom';
 
 /** Styled Components */
 import { CardContainer, CardImage } from './StyledComponents';
@@ -20,13 +22,29 @@ const inf = {
   },
 };
 
-const Card = ({ type, data = [], index }) => {
+const Card = ({ type, data, index }) => {
+  const { push } = useHistory();
+
   return (
-    <CardContainer key={data[inf[type].id]} data-testid={`${index}${inf[type].testId}`}>
+    <CardContainer
+      key={data[inf[type].id]}
+      data-testid={`${index}${inf[type].testId}`}
+      onClick={() => {
+        setTimeout(() => {
+          push(`${inf[type].path}/${data[inf[type].id]}`);
+        }, 300);
+      }}
+    >
       <CardImage src={data[inf[type].image]} />
       <span>{data[inf[type].desc]}</span>
     </CardContainer>
   );
+};
+
+Card.propTypes = {
+  data: PropTypes.objectOf(PropTypes.string).isRequired,
+  index: PropTypes.number.isRequired,
+  type: PropTypes.string.isRequired,
 };
 
 export default Card;

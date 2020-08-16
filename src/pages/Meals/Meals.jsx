@@ -7,6 +7,7 @@ import BottomMenu from '../../components/BottomMenu';
 import { getMealsByName, getMealsCategories, getMealsByCategory } from '../../service/fetchAPI';
 import { setDataAction, getCategoryAction } from '../../actions';
 import Card from '../../components/Card';
+import { Recipes } from './StyledComponets';
 
 const handleCategory = (categoryName, getData, setSelectedCategory, selectedCategory) => {
   // console.log(categoryName, getData);
@@ -59,7 +60,7 @@ const Meals = ({ getData, data, getCategories, categories }) => {
         </button>
         {mealsCategories}
       </div>
-      {mealsRecipe}
+      <Recipes>{mealsRecipe}</Recipes>
       <BottomMenu />
     </div>
   );

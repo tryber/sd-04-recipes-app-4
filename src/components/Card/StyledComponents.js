@@ -1,12 +1,33 @@
-import styled from 'styled-components';
-import { zdepth1 } from '../../Assets/Style';
+import styled, { keyframes } from 'styled-components';
+import { zdepth1, zdepth3 } from '../../Assets/Style';
+
+export const CardClickAnimation = keyframes`
+  from {
+    transform: scale(1);
+    ${zdepth1}
+  }
+
+  to {
+    transform: scale(1.1);
+    ${zdepth3}
+  }
+`;
+
+export const CardDisplayAnimation = keyframes`
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+`;
 
 export const CardContainer = styled.button`
   display: flex;
   flex-flow: column;
   justify-content: flex-start;
   align-items: center;
-  width: 40%;
   padding: 0;
   border: 0;
   padding-bottom: 15px;
@@ -14,6 +35,14 @@ export const CardContainer = styled.button`
   margin-bottom: 20px;
   border-radius: 10px;
   ${zdepth1};
+  width: 47%;
+  overflow: hidden;
+  animation: ${CardDisplayAnimation} ease-out 0.3s forwards;
+
+  &:focus {
+    outline: 0;
+    animation: ${CardClickAnimation} ease-out 0.3s forwards;
+  }
 `;
 
 export const CardImage = styled.img`
