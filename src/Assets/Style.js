@@ -31,6 +31,7 @@ export const SectionTitle = styled.h2`
   margin: 0;
   font-weight: 800;
   font-size: 2em;
+  color: #303030;
 `;
 
 export const FadeInKeyframes = keyframes`

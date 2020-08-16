@@ -3,7 +3,7 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 
 /** Styled Components */
-import { CardContainer, CardImage } from './StyledComponents';
+import { CardContainer, CardImage, CardTitle } from './StyledComponents';
 
 const inf = {
   meal: {
@@ -36,7 +36,7 @@ const Card = ({ type, data, index }) => {
       }}
     >
       <CardImage src={data[inf[type].image]} />
-      <span>{data[inf[type].desc]}</span>
+      <CardTitle>{data[inf[type].desc]}</CardTitle>
     </CardContainer>
   );
 };

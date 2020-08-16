@@ -51,3 +51,8 @@ export const CardImage = styled.img`
   border-top-left-radius: 10px;
   border-top-right-radius: 10px;
 `;
+
+export const CardTitle = styled.span`
+  font-size: 1.2em;
+  font-weight: 800;
+`;
