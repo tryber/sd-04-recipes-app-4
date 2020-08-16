@@ -41,7 +41,7 @@ export const CardContainer = styled.button`
 
   &:focus {
     outline: 0;
-    animation: ${CardClickAnimation} ease-out 0.3s forwards;
+    animation: ${CardClickAnimation} ease-out 0.2s forwards;
   }
 `;
 
