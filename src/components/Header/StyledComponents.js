@@ -7,7 +7,7 @@ export const HeaderContainer = styled.div`
   display: flex;
   justify-content: center;
   background-color: #f6f6f6;
-  padding: 15px 25px;
+  padding: 0 25px;
   position: fixed;
   min-width: 100%;
   top: 0;
@@ -53,6 +53,7 @@ export const SearchBar = styled.input`
   width: 58%;
   margin: 10px;
   color: #8504a6;
+  flex: 1;
   animation: ${SearchBarAnimation} 0.2s ease-out forwards;
 
   &:hover {
@@ -80,7 +81,8 @@ const SearchButtonAnimation = keyframes`
 `;
 
 export const SearchButton = styled.button`
-  padding: 15px 20px;
+  padding: 10px 20px;
+  margin: 10px;
   border-radius: 22px;
   color: white;
   font-weight: 800;
@@ -100,9 +102,16 @@ export const SearchButton = styled.button`
   }
 `;
 
+export const SearchSection = styled.div`
+  display: flex;
+  flex-flow: row;
+  justify-content: space-between;
+`;
+
 export const SearchType = styled.button`
   background-color: #e5e5e5;
-  padding: 10px 2.5vh;
+  flex: 1;
+  padding: 10px 0;
   border-radius: 20px;
   border: 0;
   margin: 10px;

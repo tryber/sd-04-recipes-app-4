@@ -2,11 +2,14 @@ import styled, { css, keyframes } from 'styled-components';
 
 export const LoginPage = styled.div`
   height: 100vh;
+  width: 100%;
   display: flex;
   align-items: center;
   flex-flow: column;
   overflow: hidden;
-  position: relative;
+  position: absolute;
+  top: 0;
+  left: 0;
 `;
 
 export const VideoBG = styled.video`

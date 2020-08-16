@@ -5,7 +5,7 @@ import { setDataAction, setFetchingAction } from '../../actions';
 import { getFetchFoods, getFetchDrinks } from './functionsFetchHeader';
 
 /** Styled Components */
-import { SearchBar, SearchButton, SearchContainer, SearchType } from './StyledComponents';
+import { SearchBar, SearchButton, SearchContainer, SearchType, SearchSection } from './StyledComponents';
 
 const renderRadioInput = (param, value, dataTestId, label, handleChange) => (
   <SearchType
@@ -27,7 +27,7 @@ const HeaderSearch = ({ title, sendDataReducer, sendFetchingReducer }) => {
 
   return (
     <SearchContainer className="container-inputs">
-      <div>
+      <SearchSection>
         {renderRadioInput(
           params,
           'ingredients',
@@ -43,8 +43,8 @@ const HeaderSearch = ({ title, sendDataReducer, sendFetchingReducer }) => {
           'Primeira letra',
           handleChange
         )}
-      </div>
-      <div>
+      </SearchSection>
+      <SearchSection>
         <SearchBar
           type="text"
           placeholder="Digite sua busca"
@@ -64,7 +64,7 @@ const HeaderSearch = ({ title, sendDataReducer, sendFetchingReducer }) => {
         >
           Buscar
         </SearchButton>
-      </div>
+      </SearchSection>
     </SearchContainer>
   );
 };
