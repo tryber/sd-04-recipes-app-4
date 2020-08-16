@@ -7,7 +7,11 @@ import BottomMenu from '../../components/BottomMenu';
 import { getMealsByName, getMealsCategories, getMealsByCategory } from '../../service/fetchAPI';
 import { setDataAction, getCategoryAction } from '../../actions';
 import Card from '../../components/Card';
+import RecipesShowcase from '../../components/RecipesShowcase';
+
+/** Styled Component */
 import { Recipes } from './StyledComponets';
+import { SectionTitle } from '../../Assets/Style';
 
 const handleCategory = (categoryName, getData, setSelectedCategory, selectedCategory) => {
   // console.log(categoryName, getData);
@@ -60,6 +64,8 @@ const Meals = ({ getData, data, getCategories, categories }) => {
         </button>
         {mealsCategories}
       </div>
+      <RecipesShowcase type="meal" data={data} />
+      <SectionTitle>Receitas</SectionTitle>
       <Recipes>{mealsRecipe}</Recipes>
       <BottomMenu />
     </div>

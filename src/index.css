@@ -8,6 +8,14 @@ body {
   padding-top: 70px;
 }
 
+::-webkit-scrollbar {
+  display: none;
+}
+
+scrollbar {
+  display: none;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
