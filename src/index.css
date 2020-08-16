@@ -6,6 +6,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: #f6f6f6;
   padding-top: 70px;
+  padding-bottom: 65px;
 }
 
 ::-webkit-scrollbar {
