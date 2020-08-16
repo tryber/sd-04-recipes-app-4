@@ -11,7 +11,7 @@ export const Menu = styled.div`
   bottom: 0;
   display: flex;
   flex-flow: row;
-  height: 60px;
+  height: 65px;
   justify-content: center;
   left: 0;
   padding-bottom: 8px;
