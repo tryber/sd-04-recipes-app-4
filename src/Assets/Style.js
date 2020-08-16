@@ -1,4 +1,4 @@
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 
 /** Drop Shadows */
 export const zdepth1 = css`
@@ -31,4 +31,18 @@ export const SectionTitle = styled.h2`
   margin: 0;
   font-weight: 800;
   font-size: 2em;
+`;
+
+export const FadeInKeyframes = keyframes`
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+`;
+
+export const fadeInAnim = css`
+  animation: ${FadeInKeyframes} ease-out 0.3s forwards;
 `;

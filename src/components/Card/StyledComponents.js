@@ -1,5 +1,5 @@
 import styled, { keyframes } from 'styled-components';
-import { zdepth1, zdepth3 } from '../../Assets/Style';
+import { zdepth1, zdepth3, fadeInAnim } from '../../Assets/Style';
 
 export const CardClickAnimation = keyframes`
   from {
@@ -37,7 +37,7 @@ export const CardContainer = styled.button`
   ${zdepth1};
   width: 47%;
   overflow: hidden;
-  animation: ${CardDisplayAnimation} ease-out 0.3s forwards;
+  ${fadeInAnim};
 
   &:focus {
     outline: 0;

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { zdepth2 } from '../../Assets/Style';
+import { zdepth2, fadeInAnim } from '../../Assets/Style';
 
 export const Showcase = styled.div`
   width: 100%;
@@ -10,7 +10,10 @@ export const Showcase = styled.div`
   padding: 15px 20px;
 `;
 
-export const RecipeCase = styled.div`
+export const RecipeCase = styled.button`
+  /** Animations */
+  ${fadeInAnim}
+
   min-width: 78%;
   height: 150px;
   margin-right: 15px;
@@ -22,11 +25,16 @@ export const RecipeCase = styled.div`
   background-repeat: no-repeat;
   display: flex;
   padding: 10px 25px;
+  border: 0;
+  
+  &:focus {
+    outline: 0;
+  }
 `;
 
 export const RecipeCaseTitle = styled.span`
   color: white;
   font-weight: 800;
-  font-size: 1.6em;
+  font-size: 2em;
   align-self: flex-end;
 `;
