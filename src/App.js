@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import './App.css';
 import Login from './pages/Login/index';
 import RecipeDetails from './pages/RecipeDetails';
-import Meals from './pages/Meals';
+import Meals from './pages/Meals/Meals';
 import Drinks from './pages/Drinks';
 import NotFound from './pages/NotFound';
 import Perfil from './pages/Perfil';
